@@ -10,7 +10,7 @@ body {
 }
 body.light {
  
-  background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.8)), url('../img/back-img.webp'); 
+  background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.8)); 
 
   background-size: cover;
   background-position: center;
@@ -38,7 +38,7 @@ body.light a:hover {
 /* index page backgroung image in light mode  */
 body#index-page-body.light {
 
-  background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.6)),url('../img/background.webp'); 
+  background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.6)); 
   background-size: cover; /* Ensures the image covers the entire background */
   background-position: center; /* Centers the image */
   background-repeat: no-repeat; /* Prevents the image from repeating */
@@ -66,6 +66,7 @@ body, html {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  height: 100vh;
 }
 
 .center-screen {
@@ -74,6 +75,7 @@ body, html {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 100vh;
 
   opacity: 0;
   transform: translateY(20px);
@@ -205,14 +207,6 @@ body.light .nav-right a:hover {
 
 
 /* === Hero Section === */
-.center-screen {
-  height: 80vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
 .hero-title {
   font-size: 2rem;
   margin-bottom: 1rem;

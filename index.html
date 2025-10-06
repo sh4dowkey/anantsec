@@ -6,79 +6,380 @@
   <meta name="description" content="Cybersecurity portfolio of Anant Pandey, showcasing red teaming, labs, and bug bounty work." />
   <title>anantsec – Cybersecurity Portfolio</title>
 
-  <!-- ✅ Main Stylesheet -->
   <link rel="stylesheet" href="assets/css/style.css" />
-
-  <!-- ✅ Working Font Awesome CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+
+  <style>
+    /* ========== ENHANCED HERO STYLES ========== */
+    
+    body, html {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .page-wrapper {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Particles Canvas */
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      opacity: 0;
+      animation: fadeInParticles 2s ease-in forwards;
+    }
+
+    @keyframes fadeInParticles {
+      to { opacity: 1; }
+    }
+
+    /* Hero Container */
+    .center-screen {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    /* Enhanced Title with Gradient - SMALLER SIZE */
+    .hero-title {
+      font-size: clamp(1.4rem, 4vw, 2.3rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #66ccff 0%, #a9a9b3 50%, #66ccff 100%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientShift 8s ease infinite, fadeInUp 1s ease-out;
+    }
+
+    body.light .hero-title {
+      background: linear-gradient(135deg, #0066aa 0%, #333 50%, #0066aa 100%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Enhanced Cursor */
+    .cursor {
+      display: inline-block;
+      width: 3px;
+      background: #66ccff;
+      margin-left: 4px;
+      animation: blink 1s infinite;
+      box-shadow: 0 0 8px rgba(102, 204, 255, 0.5);
+    }
+
+    body.light .cursor {
+      background: #0066aa;
+      box-shadow: 0 0 8px rgba(0, 102, 170, 0.5);
+    }
+
+    @keyframes blink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+
+    /* Subtitle Enhancement */
+    .hero-subtitle {
+      font-size: clamp(0.9rem, 2.2vw, 1.15rem);
+      color: #a9a9b3;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeInUp 1s ease-out 0.3s forwards;
+      letter-spacing: 0.5px;
+    }
+
+    body.light .hero-subtitle {
+      color: #555;
+    }
+
+    /* Modern Social Icons - Cleaner Design */
+    .social-icons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      opacity: 0;
+      animation: fadeInUp 1s ease-out 0.6s forwards;
+    }
+
+    .social-icons a {
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      background: transparent;
+      border: 1px solid rgba(169, 169, 179, 0.2);
+      color: #a9a9b3;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .social-icons a:hover {
+      transform: translateY(-3px);
+      border-color: rgba(102, 204, 255, 0.4);
+      background: rgba(102, 204, 255, 0.05);
+      color: #66ccff;
+    }
+
+    body.light .social-icons a {
+      border-color: rgba(85, 85, 85, 0.2);
+      color: #555;
+    }
+
+    body.light .social-icons a:hover {
+      border-color: rgba(0, 102, 170, 0.4);
+      background: rgba(0, 102, 170, 0.05);
+      color: #0066aa;
+    }
+
+    /* Scroll Indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      animation: fadeInUp 1s ease-out 1s forwards, float 2s ease-in-out infinite;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(-50%, 0); }
+      50% { transform: translate(-50%, 10px); }
+    }
+
+    .scroll-indicator span {
+      font-size: 0.75rem;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .scroll-indicator i {
+      font-size: 1.5rem;
+      color: #66ccff;
+    }
+
+    body.light .scroll-indicator i {
+      color: #0066aa;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .social-icons a {
+        width: 38px;
+        height: 38px;
+        font-size: 1.1rem;
+      }
+      
+      .hero-title {
+        font-size: 1.3rem;
+      }
+      
+      .hero-subtitle {
+        font-size: 0.85rem;
+      }
+
+      .scroll-indicator {
+        bottom: 1rem;
+      }
+    }
+  </style>
 </head>
 
-<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+<body id="index-page-body">
 
-
-<body id="index-page-body" >
-
-  
   <div class="page-wrapper">
-     <!-- ✅ Navigation Bar -->
- <nav>
-  <div class="nav-left">
-    <a href="index.html" id="home_page" style="font-family: monospace; display: flex; align-items: center; gap: 6px;">
-      <span>>anantSec</span>
-      <span id="svg-icon" class="flicker"></span>
-    </a>
+    <nav>
+      <div class="nav-left">
+        <a href="index.html" id="home_page" style="font-family: monospace; display: flex; align-items: center; gap: 6px;">
+          <span>>anantSec</span>
+          <span id="svg-icon" class="flicker"></span>
+        </a>
+      </div>
+
+      <input type="checkbox" id="menu-toggle" />
+      <label for="menu-toggle" class="menu-icon">&#9776;</label>
+
+      <div class="nav-right">
+        <a href="about.html">About</a>
+        <a href="notes.html">Notes</a>
+        <a href="resume.html">Resume</a>
+        <a href="certificates.html">Certificates</a>
+        <a href="writeups.html">Writeups</a>
+        <div class="theme-icon">◐</div>
+      </div>
+    </nav>
+
+    <main class="center-screen">
+      <div id="particles-js"></div>
+
+      <h1 class="hero-title">
+        <span class="typed-text"></span><span class="cursor">|</span>
+      </h1>
+      <p class="hero-subtitle">&gt; A Cybersecurity Enthusiast  .  Learning Cybersecurity  .  Experiencing The World</p>
+
+      <div class="social-icons">
+        <a href="mailto:anant.pandey017@gmail.com" aria-label="Email"><i class="uil uil-envelope"></i></a>
+        <a href="https://github.com/sh4dowkey" aria-label="GitHub"><i class="uil uil-github"></i></a>
+        <a href="https://linkedin.com/in/anant-ku-pandey" aria-label="LinkedIn"><i class="uil uil-linkedin"></i></a>
+        <a href="https://twitter.com/" aria-label="Twitter"><i class="uil uil-twitter"></i></a>
+        <a href="https://discord.com/" aria-label="Discord"><i class="uil uil-discord"></i></a>
+        <a href="https://youtube.com/" aria-label="YouTube"><i class="uil uil-youtube"></i></a>
+      </div>
+
+      <div class="scroll-indicator" onclick="window.location.href='about.html'">
+        <span>Explore</span>
+        <i class="uil uil-angle-down"></i>
+      </div>
+    </main>
   </div>
 
-  <!-- Hamburger Toggle -->
-  <input type="checkbox" id="menu-toggle" />
-  <label for="menu-toggle" class="menu-icon">&#9776;</label>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
 
-  <div class="nav-right">
-    <a href="about.html">About</a>
-    <a href="notes.html">Notes</a>
-    <a href="resume.html">Resume</a>
-    <a href="certificates.html">Certificates</a>
-    <a href="writeups.html">Writeups</a>
-    <div class="theme-icon">◐</div>
-  </div>
-</nav>
-
-
-  <!-- ✅ Hero Section -->
-  <main class="center-screen">
-    <h1 class="hero-title">
-      <span class="typed-text"></span><span class="cursor">|</span>
-    </h1>
-    <p class="hero-subtitle">&gt; A Cybersecurity Enthusiast  .  Learning Cybersecurity  .  Experiencing The World</p>
-
-    <!-- ✅ Social Icons -->
-    <div class="social-icons">
-      <a href="mailto:anant.pandey017@gmail.com"><i class="uil uil-envelope"></i></a>
-      <a href="https://github.com/sh4dowkey"><i class="uil uil-github"></i></a>
-      <a href="https://linkedin.com/in/anant-ku-pandey"><i class="uil uil-linkedin"></i></a>
-      <a href="https://twitter.com/"><i class="uil uil-twitter"></i></a>
-      <a href="https://discord.com/"><i class="uil uil-discord"></i></a>
-      <a href="https://youtube.com/"><i class="uil uil-youtube"></i></a>
-    </div>
-
-
-
-  </main>
-
-  <!-- ✅ Footer -->
- <footer class="site-footer">
-  <p class="footer-title"><code>// crafted with 0x1337 logic & curiosity</code></p>
-  <p class="footer-sub"><code>&lt;/&gt; © 2025 anantsec – by Anant Ku. Pandey</code></p>
-</footer>
-
-
-  <!-- ✅ Main JS -->
   <script>
-    function toggleTheme() {
-      document.body.classList.toggle("light");
+    particlesJS('particles-js', {
+      particles: {
+        number: {
+          value: 60,
+          density: {
+            enable: true,
+            value_area: 800
+          }
+        },
+        color: {
+          value: '#66ccff'
+        },
+        shape: {
+          type: 'circle',
+          stroke: {
+            width: 0,
+            color: '#000000'
+          }
+        },
+        opacity: {
+          value: 0.4,
+          random: true,
+          anim: {
+            enable: true,
+            speed: 1,
+            opacity_min: 0.15,
+            sync: false
+          }
+        },
+        size: {
+          value: 2.5,
+          random: true,
+          anim: {
+            enable: true,
+            speed: 2,
+            size_min: 0.1,
+            sync: false
+          }
+        },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: '#66ccff',
+          opacity: 0.25,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 1,
+          direction: 'none',
+          random: true,
+          straight: false,
+          out_mode: 'out',
+          bounce: false
+        }
+      },
+      interactivity: {
+        detect_on: 'canvas',
+        events: {
+          onhover: {
+            enable: true,
+            mode: 'grab'
+          },
+          onclick: {
+            enable: true,
+            mode: 'push'
+          },
+          resize: true
+        },
+        modes: {
+          grab: {
+            distance: 140,
+            line_linked: {
+              opacity: 0.4
+            }
+          },
+          push: {
+            particles_nb: 3
+          }
+        }
+      },
+      retina_detect: true
+    });
+
+    function updateParticlesTheme() {
+      if (document.body.classList.contains('light')) {
+        pJSDom[0].pJS.particles.color.value = '#555555';
+        pJSDom[0].pJS.particles.line_linked.color = '#555555';
+        pJSDom[0].pJS.particles.opacity.value = 0.5;
+        pJSDom[0].pJS.particles.line_linked.opacity = 0.35;
+        pJSDom[0].pJS.fn.particlesRefresh();
+      } else {
+        pJSDom[0].pJS.particles.color.value = '#66ccff';
+        pJSDom[0].pJS.particles.line_linked.color = '#66ccff';
+        pJSDom[0].pJS.particles.opacity.value = 0.4;
+        pJSDom[0].pJS.particles.line_linked.opacity = 0.25;
+        pJSDom[0].pJS.fn.particlesRefresh();
+      }
     }
+
+    const observer = new MutationObserver(updateParticlesTheme);
+    observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
   </script>
+
   <script src="assets/js/main.js"></script>
 </body>
-
 </html>
