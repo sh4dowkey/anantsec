@@ -55,32 +55,6 @@ body#index-page-body.light nav {
 
 
 
-/* == Index page change== */
-
-body, html {
-  height: 100%;
-  margin: 0;
-}
-
-.page-wrapper {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  height: 100vh;
-}
-
-.center-screen {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.1s ease forwards;
-}
 
 
 /* === Navbar === */
@@ -216,27 +190,7 @@ body.light .nav-right a:hover {
   margin-bottom: 2rem;
 }
 
-/* === Social Icons === */
-.social-icons {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.social-icons a {
-  font-size: 1.5rem;
-  color: #a9a9b3;
-  transition: color 0.3s ease;
-}
-body.light .social-icons a {
-  color: #333;
-}
-.social-icons a:hover {
-  color: #fff;
-}
-body.light .social-icons a:hover {
-  color: #555;
-}
+
 
 /* === Footer === */
 footer {
@@ -279,61 +233,6 @@ body.light .footer-sub {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-/* === Writeups Grid === */
-.writeups-container {
-  padding: 3rem 2rem;
-  text-align: center;
-
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 1.5s ease forwards;
-}
-.writeups-container h1 {
-  margin-bottom: 2rem;
-  font-size: 2rem;
-}
-
-.writeup-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.writeup-card {
-  background-color: #1e1f22;
-  padding: 1.5rem;
-  border-radius: 10px;
-  text-align: left;
-  transition: background-color 0.3s ease;
-  box-shadow: 0 0 8px rgba(0,0,0,0.3);
-}
-.writeup-card h2 {
-  color: #ffffff;
-  margin-bottom: 0.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-.writeup-card p {
-  color: #a9a9b3;
-}
-.writeup-card:hover {
-  background-color: #2a2b2e;
-}
 
 
 
