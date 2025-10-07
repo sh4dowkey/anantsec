@@ -7,42 +7,42 @@
   <title>About – anantsec</title>
   <link rel="stylesheet" href="assets/css/style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
-  
   <style>
-    /* Keep original background colors */
-    body {
-      background-color: #292a2d;
-    }
-
     body.light {
-      background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.8)), url('assets/img/back-img.webp'); 
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
+      background: linear-gradient(180deg, #e8f0f7 0%, #f5f8fa 50%, #e8f0f7 100%);
     }
 
-    /* Main Content Wrapper */
+    body.light::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        linear-gradient(30deg, rgba(0, 102, 170, 0.02) 12%, transparent 12.5%, transparent 87%, rgba(0, 102, 170, 0.02) 87.5%);
+      background-size: 80px 140px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
     main.about-wrapper {
-      max-width: 1200px;
+      max-width: 900px;
       margin: 4rem auto;
       padding: 0 2rem;
+      position: relative;
+      z-index: 1;
       opacity: 0;
-      animation: fadeInUp 1s ease forwards;
+      animation: fadeInUp 0.8s ease forwards;
     }
 
     @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
       to {
         opacity: 1;
-        transform: translateY(0);
       }
     }
 
-    /* Terminal Quote Section */
+    /* Terminal Quote */
     .about-terminal-section {
       margin-bottom: 3rem;
     }
@@ -52,373 +52,151 @@
       font-size: 0.9rem;
       color: #888;
       margin-bottom: 0.5rem;
-      letter-spacing: 1px;
     }
 
     body.light .terminal-subtitle {
-      color: #555;
+      color: #666;
     }
 
     .about-terminal {
-      background-color: #1e1f22;
-      border-left: 4px solid #66ccff;
-      padding: 1.5rem 2rem;
-      font-size: 1.2rem;
+      background: rgba(30, 31, 34, 0.6);
+      border-left: 3px solid #66ccff;
+      padding: 1.2rem 1.5rem;
+      font-size: 1.05rem;
       font-family: 'Courier New', monospace;
       border-radius: 8px;
       color: #66ccff;
-      box-shadow: 0 4px 20px rgba(102, 204, 255, 0.15);
       min-height: 60px;
       display: flex;
       align-items: center;
-      position: relative;
-      overflow: hidden;
     }
 
     body.light .about-terminal {
-      background-color: #f0f0f0;
+      background: rgba(255, 255, 255, 0.8);
       color: #0066aa;
       border-color: #0066aa;
-      box-shadow: 0 4px 20px rgba(0, 102, 170, 0.1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
     }
 
-    /* Scan line effect */
-    .about-terminal::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, #66ccff, transparent);
-      animation: scan 4s linear infinite;
-    }
-
-    @keyframes scan {
-      0% { left: -100%; }
-      100% { left: 100%; }
-    }
-
-    /* Hero Section with Grid */
-    .about-hero-grid {
-      display: grid;
-      grid-template-columns: 1.3fr 1fr;
-      gap: 3rem;
-      margin-bottom: 4rem;
-      align-items: start;
+    /* About Section */
+    .about-hero {
+      margin-bottom: 3rem;
     }
 
     .about-text h1 {
       font-size: 2.5rem;
-      margin-bottom: 1.5rem;
-      background: linear-gradient(135deg, #66ccff 0%, #a9a9b3 50%, #66ccff 100%);
-      background-size: 200% 200%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: gradientFlow 6s ease infinite;
-    }
-
-    @keyframes gradientFlow {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
+      margin-bottom: 1rem;
+      color: #d5d5d5;
+      font-weight: 700;
     }
 
     body.light .about-text h1 {
-      background: linear-gradient(135deg, #0066aa 0%, #333 50%, #0066aa 100%);
-      background-size: 200% 200%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: #1a1a1a;
     }
 
     .about-text p {
       line-height: 1.8;
-      font-size: 1.1rem;
-      color: #b8b8c0;
-      margin-bottom: 1.2rem;
+      font-size: 1.05rem;
+      color: #b0b0b0;
     }
 
     body.light .about-text p {
-      color: #555;
+      color: #444;
     }
 
-    .about-text strong {
-      color: #66ccff;
-    }
-
-    body.light .about-text strong {
-      color: #0066aa;
-    }
-
-    /* Stats Cards */
-    .stats-container {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-
-    .stat-card {
-      background: rgba(30, 31, 34, 0.8);
-      border: 1px solid rgba(102, 204, 255, 0.2);
-      border-radius: 12px;
-      padding: 1.8rem 1.5rem;
-      text-align: center;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    body.light .stat-card {
-      background: rgba(255, 255, 255, 0.9);
-      border-color: rgba(0, 102, 170, 0.2);
-    }
-
-    .stat-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(102, 204, 255, 0.1), transparent);
-      transition: left 0.5s ease;
-    }
-
-    .stat-card:hover::before {
-      left: 100%;
-    }
-
-    .stat-card:hover {
-      transform: translateY(-5px);
-      border-color: #66ccff;
-      box-shadow: 0 8px 25px rgba(102, 204, 255, 0.3);
-    }
-
-    body.light .stat-card:hover {
-      border-color: #0066aa;
-      box-shadow: 0 8px 25px rgba(0, 102, 170, 0.2);
-    }
-
-    .stat-number {
-      font-size: 2.8rem;
-      font-weight: 700;
-      color: #66ccff;
-      margin-bottom: 0.5rem;
-    }
-
-    body.light .stat-number {
-      color: #0066aa;
-    }
-
-    .stat-label {
-      font-size: 0.95rem;
-      color: #888;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-    }
-
-    /* Profile Card */
-    .profile-card {
-      background: rgba(30, 31, 34, 0.8);
-      border: 1px solid rgba(102, 204, 255, 0.2);
-      border-radius: 16px;
-      padding: 2.5rem 2rem;
-      text-align: center;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-    }
-
-    body.light .profile-card {
-      background: rgba(255, 255, 255, 0.9);
-      border-color: rgba(0, 102, 170, 0.2);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-    }
-
-    .profile-icon {
-      width: 150px;
-      height: 150px;
-      background: linear-gradient(135deg, #66ccff 0%, #a9a9b3 100%);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 1.5rem;
-      font-size: 4rem;
-      color: #1e1f22;
-      box-shadow: 0 10px 30px rgba(102, 204, 255, 0.4);
-      animation: pulse 3s ease infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% {
-        transform: scale(1);
-        box-shadow: 0 10px 30px rgba(102, 204, 255, 0.4);
-      }
-      50% {
-        transform: scale(1.05);
-        box-shadow: 0 15px 40px rgba(102, 204, 255, 0.6);
-      }
-    }
-
-    body.light .profile-icon {
-      background: linear-gradient(135deg, #0066aa 0%, #555 100%);
-      color: #fff;
-    }
-
-    .profile-card h3 {
-      font-size: 1.6rem;
-      color: #fff;
-      margin-bottom: 0.5rem;
-    }
-
-    body.light .profile-card h3 {
-      color: #111;
-    }
-
-    .profile-card .role {
-      color: #888;
-      font-size: 1rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .profile-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      justify-content: center;
-    }
-
-    .tag {
-      background: rgba(102, 204, 255, 0.1);
-      border: 1px solid rgba(102, 204, 255, 0.3);
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      color: #66ccff;
-    }
-
-    body.light .tag {
-      background: rgba(0, 102, 170, 0.1);
-      border-color: rgba(0, 102, 170, 0.3);
-      color: #0066aa;
-    }
-
-    /* Content Sections */
+    /* Sections */
     .about-section {
-      margin-bottom: 4rem;
-      padding: 2rem;
-      background: rgba(30, 31, 34, 0.4);
-      border-radius: 12px;
-      border: 1px solid rgba(102, 204, 255, 0.1);
-    }
-
-    body.light .about-section {
-      background: rgba(255, 255, 255, 0.6);
-      border-color: rgba(0, 102, 170, 0.1);
+      margin-bottom: 3rem;
     }
 
     .about-section h2 {
-      font-size: 1.8rem;
-      margin-bottom: 1.5rem;
-      color: #66ccff;
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
+      font-size: 1.6rem;
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 2px solid rgba(102, 204, 255, 0.2);
+      color: #d5d5d5;
+      font-weight: 600;
     }
 
     body.light .about-section h2 {
-      color: #0066aa;
-    }
-
-    .about-section p {
-      line-height: 1.8;
-      font-size: 1.05rem;
-      color: #b8b8c0;
-      margin-bottom: 1rem;
-    }
-
-    body.light .about-section p {
-      color: #555;
-    }
-
-    /* Contact Links */
-    .contact-links {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1.5rem;
-    }
-
-    .contact-link {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 1.2rem 1.5rem;
-      background: rgba(30, 31, 34, 0.6);
-      border: 1px solid rgba(102, 204, 255, 0.2);
-      border-radius: 10px;
-      text-decoration: none;
-      color: #a9a9b3;
-      transition: all 0.3s ease;
-      font-size: 1rem;
-    }
-
-    body.light .contact-link {
-      background: rgba(255, 255, 255, 0.8);
-      color: #333;
+      color: #1a1a1a;
       border-color: rgba(0, 102, 170, 0.2);
     }
 
-    .contact-link i {
-      font-size: 1.8rem;
-      color: #66ccff;
+    .about-section p,
+    .about-section li {
+      font-size: 1.02rem;
+      line-height: 1.8;
+      color: #b0b0b0;
     }
 
-    body.light .contact-link i {
+    body.light .about-section p,
+    body.light .about-section li {
+      color: #444;
+    }
+
+    .about-section ul {
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .about-section ul li {
+      margin-bottom: 0.8rem;
+      position: relative;
+      padding-left: 1.8rem;
+      transition: all 0.2s ease;
+    }
+
+    .about-section ul li::before {
+      content: "▹";
+      position: absolute;
+      left: 0;
+      color: #66ccff;
+      font-size: 1.2rem;
+    }
+
+    body.light .about-section ul li::before {
       color: #0066aa;
     }
 
-    .contact-link:hover {
-      background: rgba(102, 204, 255, 0.1);
-      border-color: #66ccff;
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(102, 204, 255, 0.3);
+    .about-section ul li:hover {
+      padding-left: 2.2rem;
+      color: #66ccff;
     }
 
-    body.light .contact-link:hover {
-      background: rgba(0, 102, 170, 0.1);
-      border-color: #0066aa;
-      box-shadow: 0 8px 20px rgba(0, 102, 170, 0.2);
+    body.light .about-section ul li:hover {
+      color: #0066aa;
     }
 
-    /* Footer */
+    .about-section a {
+      color: #66ccff;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease;
+    }
+
+    body.light .about-section a {
+      color: #0066aa;
+    }
+
+    .about-section a:hover {
+      border-bottom-color: #66ccff;
+    }
+
+    body.light .about-section a:hover {
+      border-bottom-color: #0066aa;
+    }
+
     footer {
       text-align: center;
       padding: 2rem 0;
       font-size: 0.9rem;
       color: #666;
-      margin-top: 3rem;
-    }
-
-    body.light footer {
-      color: #777;
-    }
-
-    /* Responsive */
-    @media (max-width: 1024px) {
-      .about-hero-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-
-      .stats-container {
-        grid-template-columns: repeat(3, 1fr);
-      }
     }
 
     @media (max-width: 768px) {
       main.about-wrapper {
         padding: 0 1.5rem;
-        margin: 3rem auto;
       }
 
       .about-text h1 {
@@ -426,28 +204,13 @@
       }
 
       .about-terminal {
-        font-size: 1rem;
-        padding: 1.2rem 1.5rem;
-      }
-
-      .stats-container {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-      }
-
-      .about-section {
-        padding: 1.5rem;
-      }
-
-      .contact-links {
-        grid-template-columns: 1fr;
+        font-size: 0.95rem;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navigation (uses style.css) -->
   <nav>
     <div class="nav-left">
       <a href="index.html" id="home_page" style="font-family: monospace; display: flex; align-items: center; gap: 6px;">
@@ -469,120 +232,62 @@
     </div>
   </nav>
 
-  <!-- Main Content -->
   <main class="about-wrapper">
 
     <!-- Terminal Quote -->
     <section class="about-terminal-section">
-      <p class="terminal-subtitle">$ cat /var/log/hacker_thoughts.txt</p>
+      <p class="terminal-subtitle">_Some thoughts from the shell...</p>
       <div class="about-terminal">
         <code id="terminal-text">_</code>
       </div>
     </section>
 
-    <!-- Hero Section with Stats -->
-    <section class="about-hero-grid">
+    <!-- About Me -->
+    <section class="about-hero">
       <div class="about-text">
         <h1>About Me</h1>
         <p>
-          Hi there! I'm <strong>Anant Kumar Pandey</strong>, a passionate cybersecurity enthusiast on a journey to master the art of ethical hacking, penetration testing, and security research.
+          Hi there. I'm Anant Kumar Pandey, a Cybersecurity Enthusiast currently learning the ropes of security, Active Directory attacks, and bug bounty.
+          This blog mostly contains Hack The Box walkthroughs, bug bounty writeups, personal notes, and red team projects.
         </p>
-        <p>
-          My journey started with <strong>curiosity</strong> - random searches about how systems work and how they break. That curiosity evolved into a <strong>passion</strong> for understanding security vulnerabilities, exploiting weaknesses ethically, and building defensive strategies.
-        </p>
-        <p>
-          Currently diving deep into <strong>Active Directory exploitation</strong>, <strong>bug bounty hunting</strong>, and <strong>red team operations</strong>. I learn by doing - every CTF challenge solved, every machine rooted, and every vulnerability discovered teaches me something new.
-        </p>
-
-        <!-- Auto-populated Stats -->
-        <div class="stats-container">
-          <div class="stat-card">
-            <div class="stat-number" id="writeup-count">0</div>
-            <div class="stat-label">Writeups</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-number" id="cert-count">0</div>
-            <div class="stat-label">Certificates</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-number" id="notes-count">0</div>
-            <div class="stat-label">Notes</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Profile Card -->
-      <div class="profile-showcase">
-        <div class="profile-card">
-          <div class="profile-icon">
-            <i class="fas fa-user-shield"></i>
-          </div>
-          <h3>Anant Kumar Pandey</h3>
-          <p class="role">Cybersecurity Enthusiast</p>
-          <div class="profile-tags">
-            <span class="tag">🛡️ Red Teaming</span>
-            <span class="tag">🐞 Bug Bounty</span>
-            <span class="tag">💻 CTF Player</span>
-            <span class="tag">🔐 Pentester</span>
-          </div>
-        </div>
       </div>
     </section>
 
-    <!-- Journey Section -->
+    <!-- My Journey -->
     <section class="about-section">
-      <h2><i class="fas fa-route"></i> My Journey</h2>
+      <h2>My Journey</h2>
       <p>
-        <strong>Started with curiosity</strong> → Random searches about computers and networks → <strong>Fell in love with cybersecurity</strong> → Discovered the world of ethical hacking and CTFs.
-      </p>
-      <p style="margin-top: 1rem;">
-        <strong>Currently exploring:</strong> Hack The Box machines, bug bounty programs, Active Directory attacks, and building this portfolio to document my learning journey. Always eager to learn new techniques, collaborate on projects, and share knowledge with the community.
+        <strong>Started with curiosity</strong> → Random Searches and then <strong>fell in love with this</strong> → Exploring <strong>CTFs</strong> → Now <strong>diving deep into Security and Breaking things</strong>.<br><br>
+        I enjoy <strong>learning new things</strong> and am always happy for <strong>projects or knowledge</strong>.
       </p>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Let's Connect -->
     <section class="about-section">
-      <h2><i class="fas fa-envelope-open-text"></i> Let's Connect</h2>
-      <p>
-        Interested in collaborating on security projects, discussing new techniques, or just having a good conversation about cybersecurity? Feel free to reach out!
-      </p>
-      <div class="contact-links">
-        <a href="mailto:anant.pandey017@gmail.com" class="contact-link">
-          <i class="uil uil-envelope"></i>
-          <span>Email Me</span>
-        </a>
-        <a href="https://github.com/sh4dowkey" target="_blank" class="contact-link">
-          <i class="uil uil-github"></i>
-          <span>GitHub</span>
-        </a>
-        <a href="https://linkedin.com/in/anant-ku-pandey" target="_blank" class="contact-link">
-          <i class="uil uil-linkedin"></i>
-          <span>LinkedIn</span>
-        </a>
-        <a href="https://twitter.com/" target="_blank" class="contact-link">
-          <i class="uil uil-twitter"></i>
-          <span>Twitter</span>
-        </a>
-      </div>
+      <h2>Let's Connect</h2>
+      <p>Interested in collaborations or just a good cyber chat? Reach out to me via:</p>
+      <ul>
+        <li>Email: <a href="mailto:anant.pandey017@gmail.com">anant.pandey017@gmail.com</a></li>
+        <li>GitHub: <a href="https://github.com/sh4dowkey" target="_blank">@sh4dowkey</a></li>
+        <li>LinkedIn: <a href="https://www.linkedin.com/in/anant-ku-pandey" target="_blank">Anant Kumar Pandey</a></li>
+      </ul>
     </section>
 
   </main>
 
-  <!-- Footer -->
   <footer>
     <p>© 2025 anantsec – by Anant Ku. Pandey</p>
   </footer>
 
-  <!-- Scripts -->
   <script src="assets/js/main.js"></script>
   <script>
-    // Terminal Typing Effect
     const quotes = [
       "Hack the planet.",
       "People always make the best exploits.",
       "The quieter you become, the more you hear.",
       "Security isn't a product, it's a mindset.",
-      "Red Team is performance art.",
+      "I see the beauty in the code.",
+      "Red Team is not a job. It's performance art.",
       "Nothing is secure by default.",
       "You are not root... yet.",
       "There is no patch for human curiosity.",
@@ -591,87 +296,29 @@
       "Trust is the weakest link.",
       "Think like an attacker. Build like a defender.",
       "Enumeration is always the key.",
-      "Burp. Bash. Break. Repeat."
+      "Burp. Bash. Break. Repeat.",
+      "Payloads are love letters to machines.",
+      "Bug bounty: modern-day treasure hunting."
     ];
 
     const terminal = document.getElementById('terminal-text');
-    let quoteIndex = 0;
-    let charIndex = 0;
+    let quoteIndex = 0, charIndex = 0;
 
     function typeQuote() {
       const quote = quotes[quoteIndex];
       terminal.textContent = quote.slice(0, charIndex++) + "_";
-      
       if (charIndex <= quote.length) {
-        setTimeout(typeQuote, 50);
+        setTimeout(typeQuote, 40);
       } else {
         setTimeout(() => {
           charIndex = 0;
           quoteIndex = (quoteIndex + 1) % quotes.length;
           typeQuote();
-        }, 3000);
+        }, 2500);
       }
     }
 
     typeQuote();
-
-    // Auto-populate stats from JSON files
-    async function loadStats() {
-      try {
-        // Load writeups (HTB + Bug Bounty)
-        const htbResponse = await fetch('data/htb.json');
-        const htbData = await htbResponse.json();
-        const bugbountyResponse = await fetch('data/bugbounty.json');
-        const bugbountyData = await bugbountyResponse.json();
-        const totalWriteups = htbData.length + bugbountyData.length;
-
-        // Load certificates
-        const certResponse = await fetch('data/certificates.json');
-        const certData = await certResponse.json();
-        const totalCerts = (certData.certificates?.length || 0) + 
-                          (certData.jobsim?.length || 0) + 
-                          (certData.badges?.length || 0);
-
-        // Load notes
-        const notesResponse = await fetch('data/notes.json');
-        const notesData = await notesResponse.json();
-        const totalNotes = notesData.length;
-
-        // Animate counters
-        animateCounter('writeup-count', totalWriteups);
-        animateCounter('cert-count', totalCerts);
-        animateCounter('notes-count', totalNotes);
-      } catch (error) {
-        console.error('Error loading stats:', error);
-        // Fallback to 0 if error
-        document.getElementById('writeup-count').textContent = '0';
-        document.getElementById('cert-count').textContent = '0';
-        document.getElementById('notes-count').textContent = '0';
-      }
-    }
-
-    function animateCounter(id, target) {
-      const element = document.getElementById(id);
-      const duration = 2000;
-      const increment = target / (duration / 16);
-      let current = 0;
-
-      const updateCounter = () => {
-        current += increment;
-        if (current < target) {
-          element.textContent = Math.floor(current);
-          requestAnimationFrame(updateCounter);
-        } else {
-          element.textContent = target;
-        }
-      };
-
-      updateCounter();
-    }
-
-    // Load stats when page loads
-    loadStats();
   </script>
-
 </body>
 </html>
