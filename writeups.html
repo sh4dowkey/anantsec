@@ -58,18 +58,15 @@
     z-index: 1;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 4rem 2rem;
+    padding: 1.5rem 2rem; /* MODIFIED: Reduced vertical padding */
   }
 
   .page-header {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem; /* MODIFIED: Reduced bottom margin */
     animation: fadeIn 0.8s ease;
     background: transparent;
-    backdrop-filter: none;
-    border: none;
-    border-radius: 12px;
-    padding: 2.5rem;
+    padding: 1.5rem; /* MODIFIED: Reduced padding */
     position: relative;
     overflow: hidden;
   }
@@ -155,7 +152,7 @@
     backdrop-filter: blur(15px);
     border: 1px solid rgba(255,255,255,0.08);
     border-radius: 16px;
-    padding: 3rem 2.5rem;
+    padding: 2rem 2.5rem; /* MODIFIED: Reduced vertical padding */
     text-align: center;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -255,7 +252,7 @@
 
   .card-icon {
     font-size: 3.5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem; /* MODIFIED: Reduced bottom margin */
     color: #d5d5d5;
     position: relative;
     z-index: 1;
@@ -309,17 +306,13 @@
 
   footer {
     text-align: center;
-    padding: 3rem 0 2rem;
+    padding: 2rem 0; /* MODIFIED: Reduced vertical padding */
     color: #666;
     font-size: 0.9rem;
     position: relative;
     z-index: 1;
   }
 </style>
-
-
-
-
 </head>
 <body>
   
@@ -336,7 +329,7 @@
 
     <div class="nav-right">
       <a href="about.html">About</a>
-      <a href="album.html">Gallery</a>
+      <a href="gallery.html">Gallery</a>
       <a href="notes.html">Notes</a>
       <a href="resume.html">Resume</a>
       <a href="certificates.html">Certificates</a>
@@ -346,13 +339,11 @@
   </nav>
 
   <div class="container">
-    <!-- Page Header -->
     <div class="page-header">
       <h1>Writeups</h1>
       <p>Security research and penetration testing documentation</p>
     </div>
 
-    <!-- Cards Grid -->
     <div class="cards-grid">
       <a href="blog/htb.html" class="writeup-card">
         <span class="card-badge">Labs</span>
@@ -371,7 +362,7 @@
   </div>
 
   <footer>
-    <p>© 2025 anantsec – by Anant Ku. Pandey</p>
+    <p>&lt;/&gt; Code, curiosity, and creativity. © 2025 anantsec</p>
   </footer>
 
   <script src="assets/js/main.js"></script>
