@@ -6,429 +6,373 @@
   <title>Writeups – anantsec</title>
   <link rel="stylesheet" href="assets/css/style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <style>
-    /* keep original base layout and background rules (minimal changes) */
-    body, html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      overflow: hidden; /* preserved from your original */
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
+  
+<style>
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden;
+  }
 
-    /* keep your existing light theme background */
-    body.light {
-      background:
-        linear-gradient(180deg, #e8f0f7 0%, #f5f8fa 50%, #e8f0f7 100%);
-    }
+  body {
+    background-color: #292a2d;
+    color: #a9a9b3;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
 
-    body.light::before {
-      content: '';
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-image:
-        linear-gradient(30deg, rgba(0, 102, 170, 0.02) 12%, transparent 12.5%, transparent 87%, rgba(0,102,170,0.02) 87.5%),
-        linear-gradient(150deg, rgba(0, 102, 170, 0.02) 12%, transparent 12.5%, transparent 87%, rgba(0,102,170,0.02) 87.5%),
-        linear-gradient(30deg, rgba(0, 102, 170, 0.02) 12%, transparent 12.5%, transparent 87%, rgba(0,102,170,0.02) 87.5%),
-        linear-gradient(150deg, rgba(0, 102, 170, 0.02) 12%, transparent 12.5%, transparent 87%, rgba(0,102,170,0.02) 87.5%);
-      background-size: 80px 140px;
-      background-position: 0 0, 0 0, 40px 70px, 40px 70px;
-      pointer-events: none;
-    }
+  body.light {
+    background: #e8e8e8;
+    color: #333;
+  }
 
-    /* container & preserved content area */
-    .container {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: gridFloat 30s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
 
-    /* -------------------- MIDDLE CONTENT ENHANCEMENTS -------------------- */
+  body.light::before {
+    background-image:
+      linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px);
+  }
 
-    .content {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 3rem 2rem;
-      /* keep center layout as before */
-    }
+  @keyframes gridFloat {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(50px, 50px); }
+  }
 
-    .inner {
-      max-width: 1000px;
-      width: 100%;
-      opacity: 0;
-      animation: fadeIn 0.7s ease forwards;
-    }
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
 
-    @keyframes fadeIn { to { opacity: 1; } }
+  .page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    animation: fadeIn 0.8s ease;
+    background: transparent;
+    backdrop-filter: none;
+    border: none;
+    border-radius: 12px;
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
 
-    h1 {
-      font-size: 3rem;
-      text-align: center;
-      margin-bottom: 0.5rem;
-      color: #d5d5d5;
-      font-weight: 700;
-      letter-spacing: -1px;
-    }
+  .page-header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(100,100,100,0.02), transparent 50%);
+    pointer-events: none;
+    transform-origin: center;
+    animation: headerGlow 10s linear infinite;
+    z-index: 0;
+  }
 
-    body.light h1 {
-      color: #1a1a1a;
-      background: linear-gradient(135deg, #0a4a6e, #0066aa, #4a90e2);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
+  @keyframes headerGlow {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
 
-    .subtitle {
-      text-align: center;
-      color: #888;
-      margin-bottom: 3.5rem;
-      font-size: 1rem;
-    }
+  body.light .page-header {
+    background: transparent;
+    box-shadow: none;
+  }
 
-    body.light .subtitle { color: #666; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
-    /* grid for cards */
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2.5rem;
-      max-width: 900px;
-      margin: 0 auto;
-    }
+  .page-header h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    color: #d5d5d5;
+    letter-spacing: 1px;
+    position: relative;
+    display: inline-block;
+  }
 
-    /* card base (keeps your original look but enhanced) */
-    .card {
-      --radius: 20px;
-      background: #1e1f22;
-      border-radius: var(--radius);
-      padding: 3rem 2.5rem;
-      text-align: center;
-      border: 1px solid rgba(255,255,255,0.05);
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-      transition:
-        transform 500ms cubic-bezier(0.22,1,0.36,1),
-        box-shadow 450ms ease,
-        filter 300ms ease;
-      transform-style: preserve-3d;
-      -webkit-transform-style: preserve-3d;
-      backface-visibility: hidden;
-    }
+  .page-header h1::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 2px;
+    background: linear-gradient(to right, rgba(200,200,200,0), rgba(200,200,200,0.8), rgba(200,200,200,0));
+    border-radius: 2px;
+    animation: neutralUnderline 3s ease-in-out infinite alternate;
+  }
 
-    body.light .card {
-      background: white;
-      border-color: rgba(0,0,0,0.06);
-      box-shadow:
-        0 4px 20px rgba(0,0,0,0.04),
-        0 1px 3px rgba(0,0,0,0.02);
-    }
+  @keyframes neutralUnderline {
+    0% { opacity: 0.5; width: 40%; }
+    100% { opacity: 1; width: 80%; }
+  }
 
-    /* animated / moving gradient border, revealed on hover */
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: var(--radius);
-      padding: 2px;
-      background: linear-gradient(60deg, rgba(102,204,255,0.95), rgba(169,169,179,0.85), rgba(102,204,255,0.95));
-      -webkit-mask:
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      opacity: 0;
-      transition: opacity 300ms ease;
-      background-size: 200% 200%;
-      z-index: 0;
-    }
+  body.light .page-header h1 {
+    color: #1a1a1a;
+  }
 
-    body.light .card::before {
-      background: linear-gradient(60deg, #0066aa, #4a90e2, #0066aa);
-    }
+  .page-header p {
+    color: #888;
+    font-size: 1rem;
+    position: relative;
+    z-index: 1;
+  }
 
-    @keyframes borderSlide { 0% { background-position: 0% 50% } 50% { background-position: 100% 50% } 100% { background-position: 0% 50% } }
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
 
-    .card:hover::before,
-    .card:focus::before {
-      opacity: 1;
-      animation: borderSlide 6s linear infinite;
-    }
+  .writeup-card {
+    background: rgba(30, 31, 34, 0.4);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 3rem 2.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    display: block;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    animation: cardFadeIn 0.6s ease forwards;
+    opacity: 0;
+  }
 
-    /* delayed spotlight effect for premium feel */
-    .card::after {
-      content: "";
-      position: absolute;
-      width: 220px; height: 220px;
-      border-radius: 50%;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0);
-      pointer-events: none;
-      transition: transform 600ms cubic-bezier(.2,.9,.2,1), opacity 220ms ease;
-      z-index: 0;
-      background: radial-gradient(circle, rgba(102,204,255,0.12), transparent 40%);
-      filter: blur(6px);
-      opacity: 0;
-    }
+  .writeup-card:nth-child(1) { animation-delay: 0.1s; }
+  .writeup-card:nth-child(2) { animation-delay: 0.2s; }
 
-    body.light .card::after {
-      background: radial-gradient(circle, rgba(0,102,170,0.09), transparent 40%);
-    }
+  @keyframes cardFadeIn { to { opacity: 1; } }
 
-    .card:hover::after,
-    .card:focus::after {
-      transition-delay: 60ms;
-      transform: translate(-50%, -50%) scale(2.3);
-      opacity: 1;
-    }
+  body.light .writeup-card {
+    background: rgba(255, 255, 255, 0.75);
+    border-color: rgba(0,0,0,0.08);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  }
 
-    /* hover lift + sync with icon animation */
-    .card:hover,
-    .card:focus {
-      transform: translateY(-10px) scale(1.03);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.38);
-      z-index: 2;
-    }
+  .writeup-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.08), transparent 50%, rgba(255,255,255,0.05));
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+  }
 
-    body.light .card:hover,
-    body.light .card:focus {
-      box-shadow:
-        0 20px 50px rgba(0,102,170,0.15),
-        0 10px 25px rgba(0,0,0,0.08);
-    }
+  .writeup-card:hover::before { opacity: 1; }
 
-    /* icon improvements: slower spin, float, smoother easing */
-    .icon {
-      font-size: 3.5rem;
-      margin-bottom: 1.8rem;
-      color: #66ccff;
-      display: inline-block;
-      position: relative;
-      transition: transform 1.2s cubic-bezier(0.25,1,0.5,1), filter 0.6s ease;
-      backface-visibility: hidden;
-      will-change: transform;
-      z-index: 1;
-    }
+  .writeup-card::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.08) 50%, transparent 70%);
+    border-radius: 16px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: -1;
+  }
 
-    body.light .icon { color: #0066aa; }
+  .writeup-card:hover::after {
+    opacity: 1;
+    animation: borderGlow 2s linear infinite;
+  }
 
-    .card:hover .icon,
-    .card:focus .icon {
-      transform: translateY(-6px) scale(1.18) rotateY(360deg);
-      filter: drop-shadow(0 0 24px rgba(102,204,255,0.52));
-    }
+  @keyframes borderGlow {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 200% 200%; }
+  }
 
-    body.light .card:hover .icon,
-    body.light .card:focus .icon {
-      filter: drop-shadow(0 0 22px rgba(0,102,170,0.42));
-    }
+  .writeup-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: rgba(255,255,255,0.15);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+  }
 
-    /* headings & copy */
-    .card h2 {
-      font-size: 1.8rem;
-      margin: 0 0 1rem 0;
-      color: #e8e8e8;
-      font-weight: 600;
-      transition: color 300ms ease, letter-spacing 300ms ease;
-      z-index: 1;
-      position: relative;
-    }
+  body.light .writeup-card:hover {
+    border-color: rgba(0,0,0,0.15);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+  }
 
-    body.light .card h2 { color: #1a1a1a; }
+  .card-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(10px);
+    color: #d5d5d5;
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    border: 1px solid rgba(255,255,255,0.15);
+    transition: all 0.3s ease;
+    z-index: 2;
+  }
 
-    .card:hover h2,
-    .card:focus h2 {
-      color: #66ccff;
-      letter-spacing: 0.5px;
-    }
+  body.light .card-badge {
+    background: rgba(255,255,255,0.85);
+    color: #333;
+    border-color: rgba(0,0,0,0.15);
+  }
 
-    body.light .card:hover h2,
-    body.light .card:focus h2 { color: #0066aa; }
+  .writeup-card:hover .card-badge { transform: translateY(-3px) scale(1.05); }
 
-    .card p {
-      color: #999;
-      line-height: 1.7;
-      font-size: 0.95rem;
-      margin: 0;
-      z-index: 1;
-      position: relative;
-    }
+  .card-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    color: #d5d5d5;
+    position: relative;
+    z-index: 1;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
 
-    body.light .card p { color: #666; }
+  body.light .card-icon { color: #333; }
 
-    /* badge */
-    .badge {
-      position: absolute;
-      top: 1.5rem;
-      right: 1.5rem;
-      background: rgba(102,204,255,0.1);
-      border: 1px solid rgba(102,204,255,0.3);
-      color: #66ccff;
-      padding: 0.35rem 0.85rem;
-      border-radius: 20px;
-      font-size: 0.7rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: transform 260ms ease, background 260ms ease;
-      z-index: 2;
-    }
+  .writeup-card:hover .card-icon {
+    transform: translateY(-6px) scale(1.15);
+    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.3));
+  }
 
-    body.light .badge {
-      background: rgba(0,102,170,0.08);
-      border-color: rgba(0,102,170,0.25);
-      color: #0066aa;
-    }
+  body.light .writeup-card:hover .card-icon {
+    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.15));
+  }
 
-    .card:hover .badge,
-    .card:focus .badge {
-      transform: translateY(-3px);
-      background: rgba(102,204,255,0.18);
-    }
+  .card-title {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #d5d5d5;
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s ease;
+  }
 
-    body.light .card:hover .badge,
-    body.light .card:focus .badge { background: rgba(0,102,170,0.15); }
+  body.light .card-title { color: #1a1a1a; }
 
-    /* staggered entrance animation */
-    .card:nth-child(1) { animation: slideUp 0.6s ease forwards 0.18s; opacity: 0; }
-    .card:nth-child(2) { animation: slideUp 0.6s ease forwards 0.34s; opacity: 0; }
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+  .writeup-card:hover .card-title { color: #fff; }
 
-    /* accessibility: focus-visible for keyboard users */
-    .card:focus-visible {
-      outline: 3px solid rgba(102,204,255,0.22);
-      outline-offset: 6px;
-    }
+  body.light .writeup-card:hover .card-title { color: #000; }
 
-    /* reduced motion preference */
-    @media (prefers-reduced-motion: reduce) {
-      .icon, .card, .card::after, .card::before {
-        transition: none !important;
-        animation: none !important;
-      }
-    }
+  .card-description {
+    color: #999;
+    line-height: 1.7;
+    font-size: 0.95rem;
+    position: relative;
+    z-index: 1;
+  }
 
-    /* responsive keep same behavior */
-    @media (max-width: 768px) {
-      h1 { font-size: 2.2rem; }
-      .cards { grid-template-columns: 1fr; gap: 2rem; }
-      .card { padding: 2.5rem 2rem; }
-      .icon { font-size: 3rem; }
-    }
+  body.light .card-description { color: #666; }
 
-    /* footer kept same look as original */
-    footer {
-      text-align: center;
-      padding: 1.5rem;
-      color: #666;
-      font-size: 0.85rem;
-    }
-    body.light footer { color: #888; }
+  @media (max-width: 768px) {
+    .container { padding: 2rem 1rem; }
+    .page-header h1 { font-size: 2.2rem; }
+    .cards-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    .writeup-card { padding: 2.5rem 2rem; }
+    .card-icon { font-size: 3rem; }
+  }
 
-  </style>
+  footer {
+    text-align: center;
+    padding: 3rem 0 2rem;
+    color: #666;
+    font-size: 0.9rem;
+    position: relative;
+    z-index: 1;
+  }
+</style>
+
+
+
+
 </head>
 <body>
-  <div class="container">
-    <!-- NAV LEFT EXACTLY PRESERVED (no style changes) -->
-    <nav>
-      <div class="nav-left">
-        <a href="index.html" id="home_page" style="font-family: monospace; display: flex; align-items: center; gap: 6px;">
-          <span>>anantSec</span>
-          <span id="svg-icon" class="flicker"></span>
-        </a>
-      </div>
-      <input type="checkbox" id="menu-toggle" />
-      <label for="menu-toggle" class="menu-icon">&#9776;</label>
-      <div class="nav-right">
-        <a href="about.html">About</a>
-        <a href="notes.html">Notes</a>
-        <a href="resume.html">Resume</a>
-        <a href="certificates.html">Certificates</a>
-        <a href="writeups.html">Writeups</a>
-        <div class="theme-icon">◐</div>
-      </div>
-    </nav>
-
-    <!-- ENHANCED MIDDLE SECTION -->
-    <div class="content">
-      <div class="inner">
-        <h1>Writeups</h1>
-        <p class="subtitle">Security research and penetration testing documentation</p>
-
-        <div class="cards">
-          <a href="blog/htb.html" class="card" aria-label="HackTheBox writeups">
-            <span class="badge">Labs</span>
-            <div class="icon" aria-hidden="true"><i class="fas fa-cube"></i></div>
-            <h2>HackTheBox</h2>
-            <p>Machine walkthroughs with detailed exploitation techniques and privilege escalation methods.</p>
-          </a>
-
-          <a href="blog/bugbounty.html" class="card" aria-label="Bug bounty writeups">
-            <span class="badge">Live</span>
-            <div class="icon" aria-hidden="true"><i class="fas fa-shield-alt"></i></div>
-            <h2>Bug Bounty</h2>
-            <p>Vulnerability research and responsible disclosure from real-world production systems.</p>
-          </a>
-        </div>
-      </div>
+  
+  <nav  class="nav-container">
+    <div class="nav-left">
+      <a href="index.html" id="home_page" style="font-family: monospace; display: flex; align-items: center; gap: 6px;">
+        <span>>anantSec</span>
+        <span id="svg-icon" class="flicker"></span>
+      </a>
     </div>
 
-    <footer>
-      <p>© 2025 anantsec</p>
-    </footer>
+    <input type="checkbox" id="menu-toggle" />
+    <label for="menu-toggle" class="menu-icon">&#9776;</label>
+
+    <div class="nav-right">
+      <a href="about.html">About</a>
+      <a href="album.html">Gallery</a>
+      <a href="notes.html">Notes</a>
+      <a href="resume.html">Resume</a>
+      <a href="certificates.html">Certificates</a>
+      <a href="writeups.html">Writeups</a>
+      <div class="theme-icon">◐</div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <!-- Page Header -->
+    <div class="page-header">
+      <h1>Writeups</h1>
+      <p>Security research and penetration testing documentation</p>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="cards-grid">
+      <a href="blog/htb.html" class="writeup-card">
+        <span class="card-badge">Labs</span>
+        <div class="card-icon"><i class="fas fa-cube"></i></div>
+        <h2 class="card-title">HackTheBox</h2>
+        <p class="card-description">Machine walkthroughs with detailed exploitation techniques and privilege escalation methods.</p>
+      </a>
+
+      <a href="blog/bugbounty.html" class="writeup-card">
+        <span class="card-badge">Live</span>
+        <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+        <h2 class="card-title">Bug Bounty</h2>
+        <p class="card-description">Vulnerability research and responsible disclosure from real-world production systems.</p>
+      </a>
+    </div>
   </div>
 
-  <!-- JS: subtle tilt + keyboard-friendly activations (only affects middle cards) -->
-  <script>
-    (function () {
-      const cards = document.querySelectorAll('.content .card');
-
-      cards.forEach(card => {
-        // pointermove tilt (works only with pointer devices)
-        const handlePointerMove = (e) => {
-          // only respond to pointer type mouse/pen for subtle tilt (not touch)
-          if (e.pointerType === 'touch') return;
-          const rect = card.getBoundingClientRect();
-          const cx = rect.left + rect.width / 2;
-          const cy = rect.top + rect.height / 2;
-          const dx = (e.clientX - cx) / rect.width; // roughly -0.5..0.5
-          const dy = (e.clientY - cy) / rect.height;
-          const rotateX = (dy * 6).toFixed(2); // smaller values for subtlety
-          const rotateY = (dx * -10).toFixed(2);
-          // apply perspective + rotation
-          card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(0)`;
-          card.style.boxShadow = '0 28px 70px rgba(0,0,0,0.36)';
-        };
-
-        const handleLeave = () => {
-          // reset transform nicely
-          card.style.transform = '';
-          card.style.boxShadow = '';
-        };
-
-        card.addEventListener('pointermove', handlePointerMove);
-        card.addEventListener('pointerleave', handleLeave);
-        card.addEventListener('pointercancel', handleLeave);
-
-        // keyboard activation support: spacebar triggers click
-        card.addEventListener('keydown', (ev) => {
-          if (ev.key === ' ' || ev.key === 'Spacebar') {
-            ev.preventDefault();
-            card.click();
-          }
-        });
-
-        // ensure links remain focusable (they already are since they are <a>)
-      });
-    })();
-  </script>
+  <footer>
+    <p>© 2025 anantsec – by Anant Ku. Pandey</p>
+  </footer>
 
   <script src="assets/js/main.js"></script>
 </body>

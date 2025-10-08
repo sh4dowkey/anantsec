@@ -1,4 +1,3 @@
-<!-- ✅ Updated notes.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,125 +5,192 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Notes – Anantsec Cybersecurity Portfolio" />
   <title>anantsec – Notes</title>
-
-  <!-- Styles -->
-  
+  <link rel="stylesheet" href="assets/css/style.css" />
   <style>
+    body {
+      background-color: #292a2d;
+      color: #a9a9b3;
+    }
 
-  .notes-container {
-    max-width: 800px;
-    margin: 4rem auto;
-    padding: 0 1rem;
-    font-size: 1.2rem;
-    
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 2s ease forwards;
-  }
+    body.light {
+      background: #e8e8e8;
+      color: #333;
+    }
 
-  .notes-container h1 {
-    font-size: 2rem;
-    margin-bottom: 2rem;
-    text-align: center;
-    color: #a9a9b3;
-  }
+    /* Animated grid background */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: gridFloat 30s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
 
-  .notes-group {
-    margin-bottom: 3rem;
-  }
+    body.light::before {
+      background-image: 
+        linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px);
+    }
 
-  .notes-group h2 {
-    font-size: 1.2rem;
-    margin-bottom: 1.5rem;
-    color: #a9a9b3;
-    border-bottom: 2px dashed #444;
-    padding-bottom: 0.5rem;
-  }
+    @keyframes gridFloat {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(50px, 50px); }
+    }
 
-  .note-entry {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding: 0.8rem 0;
-    border-bottom: 2px dotted #444;
-  }
+    .notes-container {
+      max-width: 800px;
+      margin: 4rem auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease forwards;
+    }
 
-  .note-entry a {
-    color: #a9a9b3;
-    text-decoration: none;
-    transition: color 0.2s;
-  }
+    @keyframes fadeInUp {
+      to { opacity: 1; }
+    }
 
-  .note-entry a:hover {
-    color: #fff;
-  }
+    .notes-container h1 {
+      font-size: 2rem;
+      margin-bottom: 3rem;
+      text-align: center;
+      color: #d5d5d5;
+      font-weight: 600;
+    }
 
-  .note-date {
-    color: #888;
-    font-size: 0.9rem;
-  }
+    body.light .notes-container h1 {
+      color: #1a1a1a;
+    }
 
-  body.light-theme .notes-container h1 {
-    color: #111;
-  }
+    .notes-group {
+      margin-bottom: 3rem;
+    }
 
-  body.light-theme .notes-group h2 {
-    color: #333;
-    border-color: #ccc;
-  }
+    .notes-group h2 {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      color: #999;
+      font-weight: 500;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
 
-  body.light-theme .note-entry a {
-    color: #111;
-  }
+    body.light .notes-group h2 {
+      color: #666;
+      border-bottom-color: rgba(0,0,0,0.1);
+    }
 
-  body.light-theme .note-entry a:hover {
-    color: #000;
-  }
+    .note-entry {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+      transition: all 0.2s ease;
+    }
 
-  body.light-theme .note-date {
-    color: #777;
-  }
-</style>
+    body.light .note-entry {
+      border-bottom-color: rgba(0,0,0,0.05);
+    }
 
+    .note-entry:hover {
+      padding-left: 0.5rem;
+    }
 
-<link rel="stylesheet" href="assets/css/style.css" />
+    .note-entry a {
+      color: #a9a9b3;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.2s ease;
+    }
 
+    body.light .note-entry a {
+      color: #333;
+    }
+
+    .note-entry a:hover {
+      color: #d5d5d5;
+    }
+
+    body.light .note-entry a:hover {
+      color: #000;
+    }
+
+    .note-date {
+      color: #666;
+      font-size: 0.85rem;
+      font-family: monospace;
+    }
+
+    body.light .note-date {
+      color: #888;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 0;
+      font-size: 0.9rem;
+      color: #666;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 768px) {
+      .notes-container {
+        padding: 0 1.5rem;
+      }
+
+      .note-entry {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.3rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <!-- ✅ Navigation Bar -->
- <nav>
-  <div class="nav-left">
-    <a href="index.html" id="home_page" style="font-family: monospace; display: flex; align-items: center; gap: 6px;">
-      <span>>anantSec</span>
-      <span id="svg-icon" class="flicker"></span>
-    </a>
-  </div>
 
-  <!-- Hamburger Toggle -->
-  <input type="checkbox" id="menu-toggle" />
-  <label for="menu-toggle" class="menu-icon">&#9776;</label>
+  <nav class="nav-container">
+    <div class="nav-left">
+      <a href="index.html" id="home_page" style="font-family: monospace; display: flex; align-items: center; gap: 6px;">
+        <span>>anantSec</span>
+        <span id="svg-icon" class="flicker"></span>
+      </a>
+    </div>
 
-  <div class="nav-right">
-    <a href="about.html">About</a>
-    <a href="notes.html">Notes</a>
-    <a href="resume.html">Resume</a>
-    <a href="certificates.html">Certificates</a>
-    <a href="writeups.html">Writeups</a>
-    <div class="theme-icon">◐</div>
-  </div>
-</nav>
+    <input type="checkbox" id="menu-toggle" />
+    <label for="menu-toggle" class="menu-icon">&#9776;</label>
 
+    <div class="nav-right">
+      <a href="about.html">About</a>
+      <a href="album.html">Gallery</a>
+      <a href="notes.html">Notes</a>
+      <a href="resume.html">Resume</a>
+      <a href="certificates.html">Certificates</a>
+      <a href="writeups.html">Writeups</a>
+      <div class="theme-icon">◐</div>
+    </div>
+  </nav>
 
-  <!-- ✅ Notes Section -->
   <main class="notes-container">
     <h1>📚 Study Notes</h1>
     <div id="notes-wrapper"></div>
   </main>
 
   <footer>
-    <p style="text-align:center; padding: 2rem 0; font-size: 0.9rem; color: #555">© 2025 anantsec – by Anant Ku. Pandey</p>
+    <p>© 2025 anantsec – by Anant Ku. Pandey</p>
   </footer>
 
+  <script src="assets/js/main.js"></script>
   <script>
     fetch("data/notes.json")
       .then(res => res.json())
@@ -161,6 +227,5 @@
         console.error(err);
       });
   </script>
-  <script src="assets/js/main.js"></script>
 </body>
 </html>

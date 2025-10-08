@@ -8,183 +8,228 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
   <style>
+    body {
+      background-color: #292a2d;
+      color: #a9a9b3;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body.light {
+      background: #f5f5f5;
+      color: #333;
+    }
+
+    /* Subtle background grid */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(255,255,255,0.008) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.008) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: gridFloat 30s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body.light::before {
+      background-image: 
+        linear-gradient(rgba(0,0,0,0.01) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.01) 1px, transparent 1px);
+    }
+
+    @keyframes gridFloat {
+      0% { transform: translate(0,0); }
+      100% { transform: translate(50px,50px); }
+    }
 
     main {
-      max-width: 900px;
-      margin: 4rem auto;
-      padding: 0 1.5rem;
-
+      max-width: 850px;
+      margin: 3rem auto;
+      padding: 0 1.2rem;
+      position: relative;
+      z-index: 1;
       opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 1.5s ease forwards;
+      transform: translateY(15px);
+      animation: fadeInUp 0.8s ease forwards;
     }
 
-    .writeup-content {
-      background: #2a2b2f;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-      transition: transform 0.3s ease, opacity 0.3s ease;
-      animation: fadeIn 0.5s ease-out;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
+    @keyframes fadeInUp {
       to {
         opacity: 1;
         transform: translateY(0);
       }
     }
 
-    .writeup-content h1, .writeup-content h2, .writeup-content h3 {
+    /* 🡐 Simple Back Button */
+    .back-button {
+      display: inline-block;
+      color: #a9a9b3;
+      font-size: 1.4rem;
+      margin-bottom: 1.5rem;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .back-button:hover {
       color: #fff;
     }
 
-   .writeup-content p,
-    .writeup-content li,
-    .writeup-content {
-      font-size: 1.1rem;
-      line-height: 1.6;
-      color: #bbb;
+    body.light .back-button {
+      color: #333;
     }
 
+    body.light .back-button:hover {
+      color: #000;
+    }
+
+    /* ✍️ Content Box — Clean & Simple */
+    .writeup-content {
+      background: rgba(30, 31, 34, 0.4);
+      border: 1px solid rgba(255,255,255,0.05);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      line-height: 1.8;
+    }
+
+    body.light .writeup-content {
+      background: #ffffff;
+      border-color: #ddd;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .writeup-content h1, 
+    .writeup-content h2, 
+    .writeup-content h3 {
+      color: #e0e0e0;
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    body.light .writeup-content h1,
+    body.light .writeup-content h2,
+    body.light .writeup-content h3 {
+      color: #1a1a1a;
+    }
+
+    .writeup-content p,
+    .writeup-content li {
+      font-size: 1.05rem;
+      color: #c0c0c0;
+    }
+
+    body.light .writeup-content p,
+    body.light .writeup-content li {
+      color: #444;
+    }
 
     .writeup-content img {
       max-width: 100%;
-      border-radius: 8px;
-      margin: 1rem 0;
+      border-radius: 6px;
+      margin: 1.5rem 0;
     }
 
     .writeup-content pre {
-      background: #1e1f22;
+      background: #1e1e1e;
       padding: 1rem;
       border-radius: 6px;
       overflow-x: auto;
-      color: #ddd;
+      font-size: 0.9rem;
+    }
+
+    body.light .writeup-content pre {
+      background: #f0f0f0;
+      color: #222;
     }
 
     footer {
+      width: 100%;
       text-align: center;
       padding: 2rem 0;
       font-size: 0.9rem;
-      color: #666;
+      color: #777;
+      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 3rem;
     }
 
- .back-icon {
-  margin: 1.5rem 0;
-}
+    footer p {
+      margin: 0;
+    }
 
-.back-icon a {
-  color: #888;
-  font-size: 1.4rem;
-  text-decoration: none;
-  transition: color 0.3s ease, transform 0.2s ease;
-}
-
-.back-icon a:hover {
-  color: #fff;
-  transform: translateX(-4px);
-}
-
-footer {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem 0;
-  font-size: 0.4rem;
-  color: #888;
-  transition: color 0.3s ease;
-  text-align: center;
-}
-body.light footer {
-  color: #555;
-}
-
-footer {
-  text-align: center;
-  padding: 1rem 0;
-  color: #888;
-}
-
-footer p {
-  font-size: 0.9rem;
-  margin: 0;
-}
-
-
-
+    body.light-theme footer {
+      color: #555;
+    }
 
   </style>
 </head>
 <body>
 
-<!-- ✅ Navigation Bar -->
-<nav>
-  <div class="nav-left">
-    <a href="index.html" id="home_page" style="font-family: monospace; display: flex; align-items: center; gap: 6px;">
-      <span>>anantSec</span>
-      <span id="svg-icon" class="flicker"></span>
-    </a>
-  </div>
-
-  <!-- Hamburger Toggle -->
-  <input type="checkbox" id="menu-toggle" />
-  <label for="menu-toggle" class="menu-icon">&#9776;</label>
-
-  <div class="nav-right">
-    <a href="about.html">About</a>
-    <a href="notes.html">Notes</a>
-    <a href="resume.html">Resume</a>
-    <a href="certificates.html">Certificates</a>
-    <a href="writeups.html">Writeups</a>
-    <div class="theme-icon">◐</div>
-  </div>
-</nav>
-
-
-<main>
-    <div class="back-icon">
-        <a href="javascript:history.back()" title="Go back">
-            <i class="fas fa-arrow-left"></i>
-        </a>
+  <!-- ✅ Nav -->
+  <nav class="nav-container">
+    <div class="nav-left">
+      <a href="index.html" id="home_page" style="font-family: monospace; display: flex; align-items: center; gap: 6px;">
+        <span>>anantSec</span>
+        <span id="svg-icon" class="flicker"></span>
+      </a>
     </div>
 
+    <input type="checkbox" id="menu-toggle" />
+    <label for="menu-toggle" class="menu-icon">&#9776;</label>
 
+    <div class="nav-right">
+      <a href="about.html">About</a>
+      <a href="album.html">Gallery</a>
+      <a href="notes.html">Notes</a>
+      <a href="resume.html">Resume</a>
+      <a href="certificates.html">Certificates</a>
+      <a href="writeups.html">Writeups</a>
+      <div class="theme-icon">◐</div>
+    </div>
+  </nav>
 
-  <div id="content" class="writeup-content">Loading...</div>
-</main>
+  <main>
+    <!-- 🡐 Simple Back Button -->
+    <a href="javascript:history.back()" class="back-button" title="Back">
+      <i class="fas fa-arrow-left"></i>
+    </a>
 
-<footer>
-  <p>© 2025 anantsec – by Anant Ku. Pandey</p>
-</footer>
+    <!-- 📄 Writeup -->
+    <div id="content" class="writeup-content">Loading...</div>
+  </main>
 
+  <footer>
+    <p>© 2025 anantsec – by Anant Ku. Pandey</p>
+  </footer>
 
+  <script src="/assets/js/main.js"></script>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const type = urlParams.get('type');
+    const file = urlParams.get('file');
 
+    const contentDiv = document.getElementById('content');
 
-<script>
-  const urlParams = new URLSearchParams(window.location.search);
-  const type = urlParams.get('type');
-  const file = urlParams.get('file');
-
-  if (!type || !file) {
-    document.getElementById('content').innerHTML = '<p>❌ Invalid file path.</p>';
-  } else {
-    fetch(`./posts/${type}/${file}`)
-      .then(res => res.text())
-      .then(html => {
-        document.getElementById('content').innerHTML = html;
-      })
-      .catch(err => {
-        console.error(err);
-        document.getElementById('content').innerHTML = '<p>⚠️ Failed to load the writeup.</p>';
-      });
-  }
-</script>
-<script src="/assets/js/main.js"></script>
-
+    if (!type || !file) {
+      contentDiv.innerHTML = '<p style="color: #888;">❌ Invalid file path.</p>';
+    } else {
+      fetch(`./posts/${type}/${file}`)
+        .then(res => {
+          if (!res.ok) throw new Error('File not found');
+          return res.text();
+        })
+        .then(html => {
+          contentDiv.innerHTML = html;
+        })
+        .catch(err => {
+          console.error(err);
+          contentDiv.innerHTML = '<p style="color: #888;">⚠️ Failed to load the writeup.</p>';
+        });
+    }
+  </script>
 </body>
 </html>
