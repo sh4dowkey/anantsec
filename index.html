@@ -40,12 +40,15 @@
     }
 
     #particles-js {
-      position: absolute;
-      inset: 0;
+      position: fixed; /* fixed instead of absolute */
+      top: 0; left: 0; right: 0; bottom: 0;
+      width: 100%;
+      height: 100%;
       z-index: 0;
       opacity: 0;
       animation: fadeInParticles 2s ease-in forwards;
     }
+
 
     @keyframes fadeInParticles {
       to { opacity: 1; }
@@ -186,6 +189,16 @@
       cursor: pointer;
       z-index: 10;
     }
+
+    .scroll-indicator:hover span,
+    .scroll-indicator:hover i {
+      background: linear-gradient(45deg, #64c364, #6f8fa1, #6ec4c5, #4b4b4b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text; /* fallback */
+    }
+
+
 
     @keyframes float {
       0%, 100% { transform: translate(-50%, 0); }

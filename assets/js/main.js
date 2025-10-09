@@ -287,3 +287,4 @@ if ('serviceWorker' in navigator && location.protocol === 'https:') {
       });
   });
 }
+
