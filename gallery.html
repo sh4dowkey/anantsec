@@ -3,12 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Portfolio showcase of cybersecurity projects, certifications, and achievements by anantsec" />
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Portfolio Gallery | anantsec" />
+    <meta property="og:description" content="Explore my cybersecurity journey through certificates, projects, and achievements" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://yourdomain.com/gallery.html" />
+    <meta property="og:image" content="https://yourdomain.com/assets/img/og-gallery.png" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Portfolio Gallery | anantsec" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+    
     <link rel="stylesheet" href="assets/css/style.css" /> 
     <link rel="stylesheet" href="assets/css/gallery.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.min.js"></script>
     <title>Portfolio Showcase | anantsec</title>
   </head>
   <body>
+    <a href="#main-gallery" class="skip-link">Skip to gallery</a>
+    
     <div id="app" class="page-container">
       <nav class="nav-container">
         <div class="nav-left">
@@ -30,7 +48,7 @@
         </div>
       </nav>
 
-      <main class="album-main-content">
+      <main id="main-gallery" class="album-main-content">
         <div class="container">
           <div class="album" :class="{'album--open': isOpenedTop}">
             <div
@@ -63,14 +81,26 @@
                 <div class="content">
                   <div class="content__title">{{ page.title }}</div>
                   <div class="content__img1">
-                    <img :src="page.img1" @click.stop="showLightbox(page.img1)" />
+                    <img 
+                      :src="page.img1" 
+                      loading="lazy" 
+                      @click.stop="showLightbox(page.img1)"
+                      :alt="page.title + ' - Image 1'" />
                     <div class="content__text">{{ idx + 1 }}</div>
                   </div>
                   <div class="content__img2">
-                    <img :src="page.img2" @click.stop="showLightbox(page.img2)" />
+                    <img 
+                      :src="page.img2" 
+                      loading="lazy" 
+                      @click.stop="showLightbox(page.img2)"
+                      :alt="page.title + ' - Image 2'" />
                   </div>
                   <div class="content__img3">
-                    <img :src="page.img3" @click.stop="showLightbox(page.img3)" />
+                    <img 
+                      :src="page.img3" 
+                      loading="lazy" 
+                      @click.stop="showLightbox(page.img3)"
+                      :alt="page.title + ' - Image 3'" />
                   </div>
                 </div>
               </div>
@@ -89,8 +119,8 @@
         </transition>
 
         <div v-if="lightboxVisible" class="lightbox-overlay" @click.self="hideLightbox">
-          <span class="lightbox-close" @click="hideLightbox">&times;</span>
-          <img class="lightbox-content" :src="lightboxSrc" />
+          <span class="lightbox-close" @click="hideLightbox" aria-label="Close lightbox">&times;</span>
+          <img class="lightbox-content" :src="lightboxSrc" :alt="'Enlarged view'" />
         </div>
       </main>
     </div>

@@ -5,7 +5,9 @@ on:
     paths:
       - 'scripts/**'
       - '.github/workflows/**'
-  workflow_dispatch:  # allows manual trigger
+      - 'assets/pdf/notes/**'
+      - 'posts/**'
+  workflow_dispatch:
 
 jobs:
   generate-json:
@@ -13,12 +15,12 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.11'
 
       - name: Install Python Requirements
         run: |
@@ -26,23 +28,67 @@ jobs:
           pip install beautifulsoup4
 
       - name: Run Notes JSON Generator
-        run: python generate_notes_json.py
+        id: notes
+        run: |
+          set -e
+          python generate_notes_json.py
+          echo "notes_status=success" >> $GITHUB_OUTPUT
         working-directory: scripts/
-
-
-      # - name: Run Certificates JSON Generator
-      #   run: python generate_certificates_json.py
-      #   working-directory: scripts/
+        continue-on-error: true
 
       - name: Run Writeups JSON Generator
-        run: python generate_writeup_json.py
+        id: writeups
+        run: |
+          set -e
+          python generate_writeup_json.py
+          echo "writeups_status=success" >> $GITHUB_OUTPUT
         working-directory: scripts/
+        continue-on-error: true
+
+      - name: Run Certificates JSON Generator (Optional)
+        id: certificates
+        run: |
+          if [ -f "generate_certificates_json.py" ]; then
+            python generate_certificates_json.py
+            echo "certificates_status=success" >> $GITHUB_OUTPUT
+          else
+            echo "certificates_status=skipped" >> $GITHUB_OUTPUT
+          fi
+        working-directory: scripts/
+        continue-on-error: true
+
+      - name: Check for Changes
+        id: check_changes
+        run: |
+          if git diff --quiet data/*.json; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "No changes detected in JSON files"
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            echo "Changes detected in JSON files"
+          fi
 
       - name: Commit & Push Changes
+        if: steps.check_changes.outputs.has_changes == 'true'
         run: |
-          git config --global user.name "GitHub Actions"
+          git config --global user.name "GitHub Actions Bot"
           git config --global user.email "actions@github.com"
           git add data/*.json
-          git commit -m "Update JSON files [auto]" || echo "No changes to commit"
+          git commit -m "🤖 Update JSON files [auto-generated]" || echo "No changes to commit"
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:${{ github.ref }}
 
+      - name: Report Status
+        if: always()
+        run: |
+          echo "### JSON Generation Report 📊" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- Notes: ${{ steps.notes.outputs.notes_status || 'failed' }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Writeups: ${{ steps.writeups.outputs.writeups_status || 'failed' }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Certificates: ${{ steps.certificates.outputs.certificates_status || 'skipped' }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Changes Detected: ${{ steps.check_changes.outputs.has_changes || 'unknown' }}" >> $GITHUB_STEP_SUMMARY
+
+      - name: Notify on Failure
+        if: failure()
+        run: |
+          echo "::error::JSON generation workflow failed. Check the logs above."
+          exit 1

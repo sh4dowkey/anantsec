@@ -1,17 +1,16 @@
-// === main.js ===
+// === main.js - Enhanced Version ===
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Initialize all functionalities when the DOM is fully loaded.
   initThemeToggle();
   initTypingEffect();
   initSvgIconAnimation();
   initResumeImageFullscreen();
+  initAccessibility();
+  logPerformanceMetrics();
 });
 
 /**
- * Initializes the theme toggle functionality.
- * Checks for a saved theme in localStorage and applies it.
- * Toggles the 'light' class on the body when the theme icon is clicked.
+ * Theme Toggle with localStorage persistence
  */
 function initThemeToggle() {
   const themeToggle = document.querySelector(".theme-icon");
@@ -26,21 +25,28 @@ function initThemeToggle() {
   if (themeToggle) {
     themeToggle.addEventListener("click", () => {
       document.body.classList.toggle("light");
-      localStorage.setItem("theme", document.body.classList.contains("light") ? "light" : "dark");
+      const currentTheme = document.body.classList.contains("light") ? "light" : "dark";
+      localStorage.setItem("theme", currentTheme);
+      
+      // Update theme icon text for accessibility
+      themeToggle.setAttribute('aria-label', `Switch to ${currentTheme === 'light' ? 'dark' : 'light'} theme`);
     });
+    
+    // Set initial aria-label
+    const currentTheme = document.body.classList.contains("light") ? "light" : "dark";
+    themeToggle.setAttribute('aria-label', `Switch to ${currentTheme === 'light' ? 'dark' : 'light'} theme`);
   }
 }
 
 /**
- * Initializes the typing effect for the hero section.
- * This function will only run if the required elements are present.
+ * Typing Effect for Hero Section
  */
 function initTypingEffect() {
   const typedTextSpan = document.querySelector(".typed-text");
   const cursorSpan = document.querySelector(".cursor");
 
   if (!typedTextSpan || !cursorSpan) {
-    return; // Exit if elements are not found (e.g., not on index page)
+    return;
   }
 
   const textArray = [
@@ -60,6 +66,7 @@ function initTypingEffect() {
     ">> echo $FLAG > ~/success.txt",
     "🛡️ ethical_hack.exe"
   ];
+  
   const typingDelay = 65;
   const erasingDelay = 50;
   const newTextDelay = 1500;
@@ -87,19 +94,17 @@ function initTypingEffect() {
     }
   }
 
-  // Start the typing effect after a brief delay
   setTimeout(type, 1000);
 }
 
 /**
- * Initializes the SVG icon animation for the logo.
- * Randomly changes the SVG icon at a set interval.
+ * SVG Icon Animation for Logo
  */
 function initSvgIconAnimation() {
   const svgContainer = document.getElementById('svg-icon');
 
   if (!svgContainer) {
-    return; // Exit if SVG container is not found
+    return;
   }
 
   const svgIcons = [
@@ -117,20 +122,17 @@ function initSvgIconAnimation() {
     svgContainer.innerHTML = randomIcon;
   }
 
-  changeIcon(); // Set an icon immediately on page load
-  setInterval(changeIcon, 2000); // Change icon every 2 seconds
+  changeIcon();
+  setInterval(changeIcon, 2000);
 }
 
 /**
- * Handles the logic for displaying the resume image in fullscreen.
- * Opens the overlay when the preview image is clicked and closes it
- * via the close button, overlay click, or Escape key.
+ * Resume Image Fullscreen Viewer
  */
 function initResumeImageFullscreen() {
   const fullscreenOverlay = document.getElementById('fullscreen-overlay');
   const fullscreenImage = document.getElementById('fullscreen-image');
   const closeFullscreenButton = document.getElementById('close-fullscreen');
-
   const previewImages = document.querySelectorAll('.clickable-resume');
 
   if (!fullscreenOverlay || !fullscreenImage || !closeFullscreenButton || previewImages.length === 0) {
@@ -143,6 +145,9 @@ function initResumeImageFullscreen() {
       fullscreenImage.src = fullSrc;
       fullscreenOverlay.classList.add('active');
       document.body.classList.add('overlay-active');
+      
+      // Set focus to close button for accessibility
+      setTimeout(() => closeFullscreenButton.focus(), 100);
     });
   });
 
@@ -164,5 +169,121 @@ function initResumeImageFullscreen() {
     if (e.key === 'Escape' && fullscreenOverlay.classList.contains('active')) {
       closeFullscreen();
     }
+  });
+}
+
+/**
+ * Accessibility Enhancements
+ */
+function initAccessibility() {
+  // Add keyboard navigation for hamburger menu
+  const menuToggle = document.getElementById('menu-toggle');
+  const menuIcon = document.querySelector('.menu-icon');
+  
+  if (menuIcon && menuToggle) {
+    menuIcon.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        menuToggle.checked = !menuToggle.checked;
+      }
+    });
+  }
+
+  // Add focus trap for mobile menu when open
+  const navRight = document.querySelector('.nav-right');
+  if (navRight && menuToggle) {
+    menuToggle.addEventListener('change', () => {
+      if (menuToggle.checked) {
+        const focusableElements = navRight.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])');
+        if (focusableElements.length > 0) {
+          focusableElements[0].focus();
+        }
+      }
+    });
+  }
+
+  // Close mobile menu when clicking a link
+  const navLinks = document.querySelectorAll('.nav-right a');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (menuToggle && menuToggle.checked) {
+        menuToggle.checked = false;
+      }
+    });
+  });
+
+  // Add reduced motion detection
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) {
+    document.documentElement.classList.add('reduce-motion');
+  }
+}
+
+/**
+ * Performance Monitoring
+ */
+function logPerformanceMetrics() {
+  if ('performance' in window) {
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const perfData = window.performance.timing;
+        const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
+        const connectTime = perfData.responseEnd - perfData.requestStart;
+        const renderTime = perfData.domComplete - perfData.domLoading;
+
+        console.log('⚡ Performance Metrics:');
+        console.log(`├─ Page Load: ${pageLoadTime}ms`);
+        console.log(`├─ Server Response: ${connectTime}ms`);
+        console.log(`└─ DOM Render: ${renderTime}ms`);
+
+        // Optional: Send to analytics
+        if (pageLoadTime > 3000) {
+          console.warn('⚠️ Page load time exceeds 3 seconds');
+        }
+      }, 0);
+    });
+  }
+}
+
+/**
+ * Utility: Debounce Function
+ */
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+/**
+ * Handle External Links (Open in new tab with security)
+ */
+document.addEventListener('click', (e) => {
+  const link = e.target.closest('a');
+  if (link && link.hostname !== window.location.hostname) {
+    if (!link.hasAttribute('target')) {
+      link.setAttribute('target', '_blank');
+      link.setAttribute('rel', 'noopener noreferrer');
+    }
+  }
+});
+
+/**
+ * Service Worker Registration (Optional - for PWA)
+ */
+if ('serviceWorker' in navigator && location.protocol === 'https:') {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(registration => {
+        console.log('✅ Service Worker registered:', registration.scope);
+      })
+      .catch(error => {
+        console.log('❌ Service Worker registration failed:', error);
+      });
   });
 }

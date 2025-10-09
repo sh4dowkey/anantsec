@@ -4,6 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Cybersecurity portfolio of Anant Pandey, showcasing red teaming, labs, and bug bounty work." />
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="anantsec – Cybersecurity Portfolio" />
+  <meta property="og:description" content="Cybersecurity enthusiast specializing in Active Directory, Bug Bounty, and Red Teaming" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://sh4dowkey.github.io" />
+  <meta property="og:image" content="https://sh4dowkey.github.io/assets/img/og-image.png" />
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="anantsec – Cybersecurity Portfolio" />
+  <meta name="twitter:description" content="Cybersecurity enthusiast specializing in Active Directory, Bug Bounty, and Red Teaming" />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+  
   <title>anantsec – Cybersecurity Portfolio</title>
 
   <link rel="stylesheet" href="assets/css/style.css" />
@@ -11,8 +27,6 @@
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
 
   <style>
-    /* ========== ENHANCED HERO STYLES ========== */
-    
     body, html {
       height: 100%;
       overflow: hidden;
@@ -24,7 +38,6 @@
       flex-direction: column;
     }
 
-    /* Particles Canvas */
     #particles-js {
       position: absolute;
       width: 100%;
@@ -40,7 +53,6 @@
       to { opacity: 1; }
     }
 
-    /* Hero Container */
     .center-screen {
       position: relative;
       z-index: 1;
@@ -52,7 +64,6 @@
       padding: 2rem;
     }
 
-    /* Enhanced Title with Gradient - SMALLER SIZE */
     .hero-title {
       font-size: clamp(1.4rem, 4vw, 2.3rem);
       font-weight: 700;
@@ -89,7 +100,6 @@
       }
     }
 
-    /* Enhanced Cursor */
     .cursor {
       display: inline-block;
       width: 3px;
@@ -109,7 +119,6 @@
       50%, 100% { opacity: 0; }
     }
 
-    /* Subtitle Enhancement */
     .hero-subtitle {
       font-size: clamp(0.9rem, 2.2vw, 1.15rem);
       color: #a9a9b3;
@@ -123,7 +132,6 @@
       color: #555;
     }
 
-    /* Modern Social Icons - Cleaner Design */
     .social-icons {
       display: flex;
       gap: 1rem;
@@ -165,7 +173,6 @@
       color: #0066aa;
     }
 
-    /* Scroll Indicator */
     .scroll-indicator {
       position: absolute;
       bottom: 2rem;
@@ -202,7 +209,6 @@
       color: #0066aa;
     }
 
-    /* Responsive */
     @media (max-width: 768px) {
       .social-icons a {
         width: 38px;
@@ -226,6 +232,7 @@
 </head>
 
 <body id="index-page-body">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
   <div class="page-wrapper">
     <nav class="nav-container">
@@ -250,7 +257,7 @@
       </div>
     </nav>
 
-    <main class="center-screen">
+    <main id="main-content" class="center-screen">
       <div id="particles-js"></div>
 
       <h1 class="hero-title">
@@ -260,11 +267,11 @@
 
       <div class="social-icons">
         <a href="mailto:anant.pandey017@gmail.com" aria-label="Email"><i class="uil uil-envelope"></i></a>
-        <a href="https://github.com/sh4dowkey" aria-label="GitHub"><i class="uil uil-github"></i></a>
-        <a href="https://linkedin.com/in/anant-ku-pandey" aria-label="LinkedIn"><i class="uil uil-linkedin"></i></a>
-        <a href="https://twitter.com/" aria-label="Twitter"><i class="uil uil-twitter"></i></a>
-        <a href="https://discord.com/" aria-label="Discord"><i class="uil uil-discord"></i></a>
-        <a href="https://youtube.com/" aria-label="YouTube"><i class="uil uil-youtube"></i></a>
+        <a href="https://github.com/sh4dowkey" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><i class="uil uil-github"></i></a>
+        <a href="https://linkedin.com/in/anant-ku-pandey" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="uil uil-linkedin"></i></a>
+        <a href="https://twitter.com/" aria-label="Twitter" target="_blank" rel="noopener noreferrer"><i class="uil uil-twitter"></i></a>
+        <a href="https://discord.com/" aria-label="Discord" target="_blank" rel="noopener noreferrer"><i class="uil uil-discord"></i></a>
+        <a href="https://youtube.com/" aria-label="YouTube" target="_blank" rel="noopener noreferrer"><i class="uil uil-youtube"></i></a>
       </div>
 
       <div class="scroll-indicator" onclick="window.location.href='about.html'">
@@ -277,10 +284,14 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
 
   <script>
+    // Optimize particle count based on screen size
+    const isMobile = window.innerWidth < 768;
+    const particleCount = isMobile ? 30 : 60;
+    
     particlesJS('particles-js', {
       particles: {
         number: {
-          value: 60,
+          value: particleCount,
           density: {
             enable: true,
             value_area: 800
@@ -325,7 +336,7 @@
         },
         move: {
           enable: true,
-          speed: 1,
+          speed: isMobile ? 0.5 : 1,
           direction: 'none',
           random: true,
           straight: false,
@@ -337,7 +348,7 @@
         detect_on: 'canvas',
         events: {
           onhover: {
-            enable: true,
+            enable: !isMobile,
             mode: 'grab'
           },
           onclick: {
@@ -362,23 +373,33 @@
     });
 
     function updateParticlesTheme() {
-      if (document.body.classList.contains('light')) {
-        pJSDom[0].pJS.particles.color.value = '#555555';
-        pJSDom[0].pJS.particles.line_linked.color = '#555555';
-        pJSDom[0].pJS.particles.opacity.value = 0.5;
-        pJSDom[0].pJS.particles.line_linked.opacity = 0.35;
-        pJSDom[0].pJS.fn.particlesRefresh();
-      } else {
-        pJSDom[0].pJS.particles.color.value = '#66ccff';
-        pJSDom[0].pJS.particles.line_linked.color = '#66ccff';
-        pJSDom[0].pJS.particles.opacity.value = 0.4;
-        pJSDom[0].pJS.particles.line_linked.opacity = 0.25;
-        pJSDom[0].pJS.fn.particlesRefresh();
+      if (pJSDom && pJSDom[0]) {
+        if (document.body.classList.contains('light')) {
+          pJSDom[0].pJS.particles.color.value = '#555555';
+          pJSDom[0].pJS.particles.line_linked.color = '#555555';
+          pJSDom[0].pJS.particles.opacity.value = 0.5;
+          pJSDom[0].pJS.particles.line_linked.opacity = 0.35;
+          pJSDom[0].pJS.fn.particlesRefresh();
+        } else {
+          pJSDom[0].pJS.particles.color.value = '#66ccff';
+          pJSDom[0].pJS.particles.line_linked.color = '#66ccff';
+          pJSDom[0].pJS.particles.opacity.value = 0.4;
+          pJSDom[0].pJS.particles.line_linked.opacity = 0.25;
+          pJSDom[0].pJS.fn.particlesRefresh();
+        }
       }
     }
 
     const observer = new MutationObserver(updateParticlesTheme);
     observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    
+    // Update particles on window resize
+    window.addEventListener('resize', () => {
+      if (pJSDom && pJSDom[0]) {
+        pJSDom[0].pJS.fn.vendors.destroypJS();
+        particlesJS('particles-js', { /* same config */ });
+      }
+    });
   </script>
 
   <script src="assets/js/main.js"></script>
