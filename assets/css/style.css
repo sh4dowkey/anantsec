@@ -74,6 +74,10 @@ body.light.animated-grid-bg::before {
   100% { transform: translate(50px, 50px); }
 }
 
+
+
+
+
 /* Error State Styling */
 .error-state {
   text-align: center;
