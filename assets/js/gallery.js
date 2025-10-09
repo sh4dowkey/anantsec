@@ -27,7 +27,7 @@ new Vue({
         // Page 3: TOOLKIT & CODE
         {
           img1: "assets/album_images/pwndbg_contribution_pr.png",
-          img2: "",
+          img2: "assets/album_images/crawler_help.png",
           img3: "assets/album_images/crawler_output.png",
           title: "TOOLKIT",
           isOpen: false,
