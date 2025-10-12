@@ -1,21 +1,30 @@
 name: Update JSON Data
 
+# allow the job to push to the repo
+permissions:
+  contents: write
+
 on:
   push:
-    paths:
-      - 'scripts/**'
-      - '.github/workflows/**'
-      - 'assets/pdf/notes/**'
-      - 'posts/**'
+    branches:
+      - main   # runs on any push to main
   workflow_dispatch:
 
 jobs:
   generate-json:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Repository
+      - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Debug info
+        run: |
+          echo "Actor: $GITHUB_ACTOR"
+          echo "Ref: $GITHUB_REF"
+          echo "Ref name: $GITHUB_REF_NAME"
+          echo "Repository: $GITHUB_REPOSITORY"
+          git --no-pager status --porcelain || true
+          git --no-pager diff --name-only HEAD^ HEAD || true
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -25,42 +34,41 @@ jobs:
       - name: Install Python Requirements
         run: |
           python -m pip install --upgrade pip
-          pip install beautifulsoup4
+          pip install -r requirements.txt
 
       - name: Run Notes JSON Generator
         id: notes
         run: |
           set -e
-          python generate_notes_json.py
+          python scripts/generate_notes_json.py
           echo "notes_status=success" >> $GITHUB_OUTPUT
-        working-directory: scripts/
         continue-on-error: true
 
       - name: Run Writeups JSON Generator
         id: writeups
         run: |
           set -e
-          python generate_writeup_json.py
+          python scripts/generate_writeup_json.py
           echo "writeups_status=success" >> $GITHUB_OUTPUT
-        working-directory: scripts/
         continue-on-error: true
 
       - name: Run Certificates JSON Generator (Optional)
         id: certificates
         run: |
-          if [ -f "generate_certificates_json.py" ]; then
-            python generate_certificates_json.py
+          if [ -f "scripts/generate_certificates_json.py" ]; then
+            python scripts/generate_certificates_json.py
             echo "certificates_status=success" >> $GITHUB_OUTPUT
           else
             echo "certificates_status=skipped" >> $GITHUB_OUTPUT
           fi
-        working-directory: scripts/
         continue-on-error: true
 
       - name: Check for Changes
         id: check_changes
         run: |
-          if git diff --quiet data/*.json; then
+          # make sure data dir exists to avoid errors
+          mkdir -p data
+          if git diff --quiet -- data/*.json 2>/dev/null; then
             echo "has_changes=false" >> $GITHUB_OUTPUT
             echo "No changes detected in JSON files"
           else
@@ -70,25 +78,20 @@ jobs:
 
       - name: Commit & Push Changes
         if: steps.check_changes.outputs.has_changes == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --global user.name "GitHub Actions Bot"
           git config --global user.email "actions@github.com"
-          git add data/*.json
+          git add data/*.json || true
           git commit -m "🤖 Update JSON files [auto-generated]" || echo "No changes to commit"
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:${{ github.ref }}
+          git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }} HEAD:refs/heads/${{ github.ref_name }}
 
       - name: Report Status
         if: always()
         run: |
           echo "### JSON Generation Report 📊" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
           echo "- Notes: ${{ steps.notes.outputs.notes_status || 'failed' }}" >> $GITHUB_STEP_SUMMARY
           echo "- Writeups: ${{ steps.writeups.outputs.writeups_status || 'failed' }}" >> $GITHUB_STEP_SUMMARY
           echo "- Certificates: ${{ steps.certificates.outputs.certificates_status || 'skipped' }}" >> $GITHUB_STEP_SUMMARY
           echo "- Changes Detected: ${{ steps.check_changes.outputs.has_changes || 'unknown' }}" >> $GITHUB_STEP_SUMMARY
-
-      - name: Notify on Failure
-        if: failure()
-        run: |
-          echo "::error::JSON generation workflow failed. Check the logs above."
-          exit 1
