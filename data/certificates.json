@@ -6,16 +6,6 @@
       "issuer": "Google"
     },
     {
-      "file": "02-teachnook-cybersecurity.png",
-      "title": "Teachnook Cybersecurity Intern",
-      "issuer": "Teachnook"
-    },
-    {
-      "file": "03-edunet-cybersecurity.png",
-      "title": "Edunet Cybersecurity Intern",
-      "issuer": "Edunet By IBM"
-    },
-    {
       "file": "04-owasp-apisec-cybersecurity.png",
       "title": "Owasp Apisec Cybersecurity",
       "issuer": "APISec"
@@ -26,33 +16,13 @@
       "file": "01-tata-jobsim.png",
       "title": "TATA Job Simulation Cybersecurity",
       "issuer": "TATA, Forage"
-    },
-    {
-      "file": "02-datacom-jobsim.png",
-      "title": "Datacom Job Simulation Cybersecurity",
-      "issuer": "Datacom, Forage"
-    },
-    {
-      "file": "03-deloitte-jobsim.png",
-      "title": "Deloitte Job Simulation Cybersecurity",
-      "issuer": "Deloitte, Forage"
-    },
-    {
-      "file": "04-mastercard-jobsim.png",
-      "title": "Mastercard Job Simulation Cybersecurity",
-      "issuer": "Mastrecard, Forage"
-    }
+    }    
   ],
   "badges": [
     {
       "file": "01-owasp-api-security-top-10-badge.png",
       "title": "Owasp Api Security Top10 Badge",
       "issuer": "APISec"
-    },
-    {
-      "file": "02-leetcode-100days-badge.png",
-      "title": "Leetcode 100Days Badge",
-      "issuer": "Leetcode"
     }
   ]
 }
