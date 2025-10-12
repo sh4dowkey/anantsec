@@ -1,263 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="anantsec – Cybersecurity Portfolio" />
-  <meta property="og:description" content="Cybersecurity enthusiast specializing in Active Directory, Bug Bounty, and Red Teaming" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://sh4dowkey.github.iof" />
-  <meta property="og:image" content="https://sh4dowkey.github.io/assets/img/og-image.png" />
-  
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="anantsec – Cybersecurity Portfolio" />
-  <meta name="twitter:description" content="Cybersecurity enthusiast specializing in Active Directory, Bug Bounty, and Red Teaming" />
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+    <meta property="og:title" content="anantsec – Cybersecurity Portfolio" />
+    <meta
+      property="og:description"
+      content="Cybersecurity enthusiast specializing in Active Directory, Bug Bounty, and Red Teaming"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://sh4dowkey.github.iof" />
+    <meta
+      property="og:image"
+      content="https://sh4dowkey.github.io/assets/img/og-image.png"
+    />
 
-  <title>Writeup Viewer – anantsec</title>
-  <link rel="stylesheet" href="./assets/css/style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="anantsec – Cybersecurity Portfolio" />
+    <meta
+      name="twitter:description"
+      content="Cybersecurity enthusiast specializing in Active Directory, Bug Bounty, and Red Teaming"
+    />
 
-  <style>
-    body {
-      background-color: #292a2d;
-      color: #a9a9b3;
-      font-family: 'Segoe UI', sans-serif;
-    }
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/img/favicon.png" />
 
-    body.light {
-      background: #f5f5f5;
-      color: #333;
-    }
+    <title>Writeup Viewer – anantsec</title>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/view.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- ✅ Nav -->
+    <nav class="nav-container">
+      <div class="nav-left">
+        <a
+          href="index.html"
+          id="home_page"
+          style="
+            font-family: monospace;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+          "
+        >
+          <span>>anantSec</span>
+          <span id="svg-icon" class="flicker"></span>
+        </a>
+      </div>
 
-    /* Subtle background grid */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: 
-        linear-gradient(rgba(255,255,255,0.008) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.008) 1px, transparent 1px);
-      background-size: 50px 50px;
-      animation: gridFloat 30s linear infinite;
-      pointer-events: none;
-      z-index: 0;
-    }
+      <input type="checkbox" id="menu-toggle" />
+      <label for="menu-toggle" class="menu-icon">&#9776;</label>
 
-    body.light::before {
-      background-image: 
-        linear-gradient(rgba(0,0,0,0.01) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,0,0,0.01) 1px, transparent 1px);
-    }
+      <div class="nav-right">
+        <a href="about.html">About</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="notes.html">Notes</a>
+        <a href="resume.html">Resume</a>
+        <a href="certificates.html">Certificates</a>
+        <a href="writeups.html">Writeups</a>
+        <div class="theme-icon">◐</div>
+      </div>
+    </nav>
 
-    @keyframes gridFloat {
-      0% { transform: translate(0,0); }
-      100% { transform: translate(50px,50px); }
-    }
-
-    main {
-      max-width: 850px;
-      margin: 3rem auto;
-      padding: 0 1.2rem;
-      position: relative;
-      z-index: 1;
-      opacity: 0;
-      transform: translateY(15px);
-      animation: fadeInUp 0.8s ease forwards;
-    }
-
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* 🡐 Simple Back Button */
-    .back-button {
-      display: inline-block;
-      color: #a9a9b3;
-      font-size: 1.4rem;
-      margin-bottom: 1.5rem;
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
-
-    .back-button:hover {
-      color: #fff;
-    }
-
-    body.light .back-button {
-      color: #333;
-    }
-
-    body.light .back-button:hover {
-      color: #000;
-    }
-
-    /* ✍️ Content Box — Clean & Simple */
-    .writeup-content {
-      background: rgba(30, 31, 34, 0.4);
-      border: 1px solid rgba(255,255,255,0.05);
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      line-height: 1.8;
-    }
-
-    body.light .writeup-content {
-      background: #ffffff;
-      border-color: #ddd;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    }
-
-    .writeup-content h1, 
-    .writeup-content h2, 
-    .writeup-content h3 {
-      color: #e0e0e0;
-      margin-top: 1.5rem;
-      margin-bottom: 1rem;
-    }
-
-    body.light .writeup-content h1,
-    body.light .writeup-content h2,
-    body.light .writeup-content h3 {
-      color: #1a1a1a;
-    }
-
-    .writeup-content p,
-    .writeup-content li {
-      font-size: 1.05rem;
-      color: #c0c0c0;
-    }
-
-    body.light .writeup-content p,
-    body.light .writeup-content li {
-      color: #444;
-    }
-
-    .writeup-content img {
-      max-width: 100%;
-      border-radius: 6px;
-      margin: 1.5rem 0;
-    }
-
-    .writeup-content pre {
-      background: #1e1e1e;
-      padding: 1rem;
-      border-radius: 6px;
-      overflow-x: auto;
-      font-size: 0.9rem;
-    }
-
-    body.light .writeup-content pre {
-      background: #f0f0f0;
-      color: #222;
-    }
-
-    footer {
-      width: 100%;
-      text-align: center;
-      padding: 2rem 0;
-      font-size: 0.9rem;
-      color: #777;
-      background: transparent;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 3rem;
-    }
-
-    footer p {
-      margin: 0;
-    }
-
-    body.light-theme footer {
-      color: #555;
-    }
-
-  </style>
-</head>
-<body>
-
-  <!-- ✅ Nav -->
-  <nav class="nav-container">
-    <div class="nav-left">
-      <a href="index.html" id="home_page" style="font-family: monospace; display: flex; align-items: center; gap: 6px;">
-        <span>>anantSec</span>
-        <span id="svg-icon" class="flicker"></span>
+    <main>
+      <!-- 🡐 Simple Back Button -->
+      <a
+        href="writeups.html"
+        onclick="goBack(event)"
+        class="back-button"
+        title="Back"
+      >
+        <i class="fas fa-arrow-left"></i>
       </a>
-    </div>
 
-    <input type="checkbox" id="menu-toggle" />
-    <label for="menu-toggle" class="menu-icon">&#9776;</label>
+      <!-- 📄 Writeup -->
+      <div id="content" class="writeup-content">Loading...</div>
+    </main>
 
-    <div class="nav-right">
-      <a href="about.html">About</a>
-      <a href="gallery.html">Gallery</a>
-      <a href="notes.html">Notes</a>
-      <a href="resume.html">Resume</a>
-      <a href="certificates.html">Certificates</a>
-      <a href="writeups.html">Writeups</a>
-      <div class="theme-icon">◐</div>
-    </div>
-  </nav>
+    <footer>
+      <p>&lt;/&gt; Code, curiosity, and creativity. © 2025 anantsec</p>
+    </footer>
 
-  <main>
-    <!-- 🡐 Simple Back Button -->
-    <a href="writeups.html" onclick="goBack(event)" class="back-button" title="Back">
-      <i class="fas fa-arrow-left"></i>
-    </a>
-
-    <!-- 📄 Writeup -->
-    <div id="content" class="writeup-content">Loading...</div>
-  </main>
-
-  <footer>
-    <p>&lt;/&gt; Code, curiosity, and creativity. © 2025 anantsec</p>
-  </footer>
-
-  <script src="/assets/js/main.js"></script>
-  <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const type = urlParams.get('type');
-    const file = urlParams.get('file');
-
-    const contentDiv = document.getElementById('content');
-
-    if (!type || !file) {
-      contentDiv.innerHTML = '<p style="color: #888;">❌ Invalid file path.</p>';
-    } else {
-      fetch(`./posts/${type}/${file}`)
-        .then(res => {
-          if (!res.ok) throw new Error('File not found');
-          return res.text();
-        })
-        .then(html => {
-          contentDiv.innerHTML = html;
-        })
-        .catch(err => {
-          console.error(err);
-          contentDiv.innerHTML = '<p style="color: #888;">⚠️ Failed to load the writeup.</p>';
-        });
-    }
-
-
-    function goBack(e) {
-      e.preventDefault(); // prevent default link
-      if (document.referrer) {
-        // if user came from another page
-        window.history.back();
-      } else {
-        // fallback to a default page
-        window.location.href = 'writeups.html';
-      }
-    }
-  </script>
-</body>
+    <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/view.js"></script>
+  </body>
 </html>

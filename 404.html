@@ -1,251 +1,681 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>404 · anantSec</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Arvo:400,700&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg:#0f1724; --card:#0b1220; --muted:#9aa4b2; --accent:#39ac31; --glass: rgba(255,255,255,0.03);
-      --glow: 0 8px 24px rgba(57,172,49,0.12);
-      --text: #e6eef6;
-    }
-    /* gentler light theme (not stark white) with textured background */
-    [data-theme="light"]{
-      --bg:#eef4fa; --card:#f7fbff; --muted:#5b6a73; --accent:#0b76d1; --glass: rgba(11,20,28,0.02); --glow: 0 8px 30px rgba(11,118,209,0.06);
-      --text: #0b1b26;
-    }
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>404 · anantSec</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Arvo:400,700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0f1724;
+        --card: #0b1220;
+        --muted: #9aa4b2;
+        --accent: #39ac31;
+        --glass: rgba(255, 255, 255, 0.03);
+        --glow: 0 8px 24px rgba(57, 172, 49, 0.12);
+        --text: #e6eef6;
+      }
+      /* gentler light theme (not stark white) with textured background */
+      [data-theme="light"] {
+        --bg: #eef4fa;
+        --card: #f7fbff;
+        --muted: #5b6a73;
+        --accent: #0b76d1;
+        --glass: rgba(11, 20, 28, 0.02);
+        --glow: 0 8px 30px rgba(11, 118, 209, 0.06);
+        --text: #0b1b26;
+      }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; font-family:Inter, Arvo, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-      background: radial-gradient(1200px 600px at 10% 10%, rgba(57,172,49,0.04), transparent), var(--bg);
-      color:var(--text); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-      display:flex; align-items:center; justify-content:center; padding:40px;
-    }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        font-family: Inter, Arvo, system-ui, -apple-system, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial;
+        background: radial-gradient(
+            1200px 600px at 10% 10%,
+            rgba(57, 172, 49, 0.04),
+            transparent
+          ),
+          var(--bg);
+        color: var(--text);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px;
+      }
 
-    /* layout */
-    .card{
-      width:100%; max-width:980px; background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-      border-radius:14px; padding:28px; box-shadow:var(--glow); position:relative; overflow:hidden; border:1px solid rgba(255,255,255,0.03);
-      backdrop-filter: blur(6px);
-    }
+      /* layout */
+      .card {
+        width: 100%;
+        max-width: 980px;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.02),
+          transparent
+        );
+        border-radius: 14px;
+        padding: 28px;
+        box-shadow: var(--glow);
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(6px);
+      }
 
-    nav{display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:8px}
-    .brand{display:flex;align-items:center;gap:10px}
-    .brand .logo{font-family:monospace; font-weight:700}
-    .small{font-size:0.9rem; color:var(--muted)}
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 8px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .brand .logo {
+        font-family: monospace;
+        font-weight: 700;
+      }
+      .small {
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
 
-    .row{display:flex; gap:28px; align-items:center}
-    .main-left{flex:0 0 360px}
-    .main-right{flex:1}
+      .row {
+        display: flex;
+        gap: 28px;
+        align-items: center;
+      }
+      .main-left {
+        flex: 0 0 360px;
+      }
+      .main-right {
+        flex: 1;
+      }
 
-    /* 404 graphic */
-    .big-number{
-      font-family:Arvo, serif; font-weight:700; font-size:108px; letter-spacing:6px; margin:0; position:relative;
-      line-height:0.9; display:flex; align-items:center; gap:6px; justify-content:flex-start;
-      color:transparent; -webkit-text-stroke:2px rgba(255,255,255,0.06);
-    }
-    .big-number .digit{position:relative}
+      /* 404 graphic */
+      .big-number {
+        font-family: Arvo, serif;
+        font-weight: 700;
+        font-size: 108px;
+        letter-spacing: 6px;
+        margin: 0;
+        position: relative;
+        line-height: 0.9;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        justify-content: flex-start;
+        color: transparent;
+        -webkit-text-stroke: 2px rgba(255, 255, 255, 0.06);
+      }
+      .big-number .digit {
+        position: relative;
+      }
 
-    /* glitch effect */
-    .big-number .digit::before, .big-number .digit::after{
-      content:attr(data-digit); position:absolute; left:0; top:0; width:100%;
-      color:var(--accent); mix-blend-mode:screen; opacity:0.85; clip-path:polygon(0 0,100% 0,100% 60%,0 60%);
-      transform:translate3d(0,0,0);
-      animation:glitch-anim 2.6s infinite linear;
-    }
-    .big-number .digit::after{ animation-delay:0.12s; clip-path:polygon(0 40%,100% 40%,100% 100%,0 100%); color:#ff5c8a; opacity:0.6 }
-    @keyframes glitch-anim{
-      0%{transform:translateX(0)}
-      10%{transform:translateX(-8px) translateY(-2px)}
-      20%{transform:translateX(6px) translateY(2px)}
-      30%{transform:translateX(-4px) translateY(-1px)}
-      40%{transform:translateX(3px) translateY(1px)}
-      50%{transform:translateX(0)}
-      100%{transform:translateX(0)}
-    }
+      /* glitch effect */
+      .big-number .digit::before,
+      .big-number .digit::after {
+        content: attr(data-digit);
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        color: var(--accent);
+        mix-blend-mode: screen;
+        opacity: 0.85;
+        clip-path: polygon(0 0, 100% 0, 100% 60%, 0 60%);
+        transform: translate3d(0, 0, 0);
+        animation: glitch-anim 2.6s infinite linear;
+      }
+      .big-number .digit::after {
+        animation-delay: 0.12s;
+        clip-path: polygon(0 40%, 100% 40%, 100% 100%, 0 100%);
+        color: #ff5c8a;
+        opacity: 0.6;
+      }
+      @keyframes glitch-anim {
+        0% {
+          transform: translateX(0);
+        }
+        10% {
+          transform: translateX(-8px) translateY(-2px);
+        }
+        20% {
+          transform: translateX(6px) translateY(2px);
+        }
+        30% {
+          transform: translateX(-4px) translateY(-1px);
+        }
+        40% {
+          transform: translateX(3px) translateY(1px);
+        }
+        50% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
 
-    .subtitle{font-size:1.25rem; margin:6px 0 12px}
-    p.lead{color:var(--muted); margin:0 0 18px}
+      .subtitle {
+        font-size: 1.25rem;
+        margin: 6px 0 12px;
+      }
+      p.lead {
+        color: var(--muted);
+        margin: 0 0 18px;
+      }
 
-    .actions{display:flex; gap:12px; flex-wrap:wrap}
-    .btn{padding:10px 16px; border-radius:8px; font-weight:600; text-decoration:none; display:inline-flex; gap:8px; align-items:center}
-    .btn-primary{background:var(--accent); color:#fff; box-shadow:0 6px 18px rgba(0,0,0,0.2)}
-    .btn-ghost{background:transparent; border:1px solid rgba(255,255,255,0.06); color:var(--muted)}
-    .btn:focus{outline:3px solid rgba(255,255,255,0.06)}
+      .actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .btn {
+        padding: 10px 16px;
+        border-radius: 8px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .btn-primary {
+        background: var(--accent);
+        color: #fff;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+      }
+      .btn-ghost {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        color: var(--muted);
+      }
+      .btn:focus {
+        outline: 3px solid rgba(255, 255, 255, 0.06);
+      }
 
-    /* redesigned diagnostic block */
-    .diag{
-      margin-top:16px; display:flex; gap:12px; align-items:flex-start; flex-direction:column; background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005)); padding:12px; border-radius:10px;
-    }
-    .diag-top{display:flex; justify-content:space-between; gap:12px; width:100%}
-    .diag-title{font-family:monospace; font-weight:700; color:var(--muted)}
+      /* redesigned diagnostic block */
+      .diag {
+        margin-top: 16px;
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        flex-direction: column;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.01),
+          rgba(255, 255, 255, 0.005)
+        );
+        padding: 12px;
+        border-radius: 10px;
+      }
+      .diag-top {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        width: 100%;
+      }
+      .diag-title {
+        font-family: monospace;
+        font-weight: 700;
+        color: var(--muted);
+      }
 
-    .progress-wrap{background:rgba(255,255,255,0.03); border-radius:8px; padding:8px; width:100%;}
-    .progress{height:8px; border-radius:6px; background:linear-gradient(90deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)); overflow:hidden}
-    .bar{height:100%; width:0%; background:linear-gradient(90deg, var(--accent), rgba(255,255,255,0.07)); transition:width 600ms ease}
+      .progress-wrap {
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 8px;
+        padding: 8px;
+        width: 100%;
+      }
+      .progress {
+        height: 8px;
+        border-radius: 6px;
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.04),
+          rgba(255, 255, 255, 0.02)
+        );
+        overflow: hidden;
+      }
+      .bar {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(
+          90deg,
+          var(--accent),
+          rgba(255, 255, 255, 0.07)
+        );
+        transition: width 600ms ease;
+      }
 
-    .diag-lines{font-family:monospace; font-size:0.92rem; color:var(--muted); display:flex; flex-direction:column; gap:6px; margin-top:8px}
-    .diag-lines .ok{color:var(--accent); font-weight:700}
-    .diag-footer{font-size:0.85rem; color:var(--muted); margin-top:6px}
+      .diag-lines {
+        font-family: monospace;
+        font-size: 0.92rem;
+        color: var(--muted);
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-top: 8px;
+      }
+      .diag-lines .ok {
+        color: var(--accent);
+        font-weight: 700;
+      }
+      .diag-footer {
+        font-size: 0.85rem;
+        color: var(--muted);
+        margin-top: 6px;
+      }
 
-    /* right column card */
-    .card-panel{background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent); padding:18px; border-radius:10px}
-    .robot{width:100%; max-width:240px; display:block; margin:0 auto}
+      /* right column card */
+      .card-panel {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.01),
+          transparent
+        );
+        padding: 18px;
+        border-radius: 10px;
+      }
+      .robot {
+        width: 100%;
+        max-width: 240px;
+        display: block;
+        margin: 0 auto;
+      }
 
-    footer{font-size:0.85rem; color:var(--muted); text-align:center; margin-top:18px}
+      footer {
+        font-size: 0.85rem;
+        color: var(--muted);
+        text-align: center;
+        margin-top: 18px;
+      }
 
-    /* background canvas */
-    #bg-canvas{ position:absolute; inset:0; z-index:0; pointer-events:none }
-    .card *{position:relative; z-index:2}
+      /* background canvas */
+      #bg-canvas {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+      }
+      .card * {
+        position: relative;
+        z-index: 2;
+      }
 
-    /* subtle entrance */
-    .card{transform:translateY(10px); opacity:0; animation:card-in .6s cubic-bezier(.2,.9,.3,1) forwards}
-    @keyframes card-in{to{transform:none; opacity:1}}
+      /* subtle entrance */
+      .card {
+        transform: translateY(10px);
+        opacity: 0;
+        animation: card-in 0.6s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+      }
+      @keyframes card-in {
+        to {
+          transform: none;
+          opacity: 1;
+        }
+      }
 
-    @media (prefers-reduced-motion:reduce){ .big-number .digit::before, .big-number .digit::after, .card{animation:none} }
-    @media (max-width:880px){ .row{flex-direction:column; align-items:flex-start} .main-left{flex:unset;width:100%} .big-number{font-size:72px} }
-  </style>
-</head>
-<body>
-  <div class="card" role="main" aria-labelledby="title">
-    <canvas id="bg-canvas" aria-hidden="true"></canvas>
-    <nav>
-      <div class="brand">
-        <div class="logo">&gt;anantSec</div>
-        <div class="small">portfolio</div>
-      </div>
-      <div>
-        <button id="themeToggle" class="btn btn-ghost" aria-pressed="false" title="Toggle theme">Toggle theme</button>
-      </div>
-    </nav>
+      @media (prefers-reduced-motion: reduce) {
+        .big-number .digit::before,
+        .big-number .digit::after,
+        .card {
+          animation: none;
+        }
+      }
+      @media (max-width: 880px) {
+        .row {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .main-left {
+          flex: unset;
+          width: 100%;
+        }
+        .big-number {
+          font-size: 72px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card" role="main" aria-labelledby="title">
+      <canvas id="bg-canvas" aria-hidden="true"></canvas>
+      <nav>
+        <div class="brand">
+          <div class="logo">&gt;anantSec</div>
+          <div class="small">portfolio</div>
+        </div>
+        <div>
+          <button
+            id="themeToggle"
+            class="btn btn-ghost"
+            aria-pressed="false"
+            title="Toggle theme"
+          >
+            Toggle theme
+          </button>
+        </div>
+      </nav>
 
-    <div class="row">
-      <div class="main-left">
-        <h1 id="title" class="big-number" aria-hidden="true">
-          <span class="digit" data-digit="4">4</span>
-          <span class="digit" data-digit="0">0</span>
-          <span class="digit" data-digit="4">4</span>
-        </h1>
-        <div class="subtitle">Looks like you've hit a dead end.</div>
-        <p class="lead">The page you were trying to reach can't be found — either it moved, was renamed, or never existed. Try one of these:</p>
+      <div class="row">
+        <div class="main-left">
+          <h1 id="title" class="big-number" aria-hidden="true">
+            <span class="digit" data-digit="4">4</span>
+            <span class="digit" data-digit="0">0</span>
+            <span class="digit" data-digit="4">4</span>
+          </h1>
+          <div class="subtitle">Looks like you've hit a dead end.</div>
+          <p class="lead">
+            The page you were trying to reach can't be found — either it moved,
+            was renamed, or never existed. Try one of these:
+          </p>
 
-        <div class="actions">
-          <a href="index.html" class="btn btn-primary" id="homeBtn">Return to Home Base</a>
-          <a href="notes.html" class="btn btn-ghost">Browse Notes</a>
-          <a href="writeups.html" class="btn btn-ghost">Read Writeups</a>
-          <a href="resume.html" class="btn btn-ghost">Resume</a>
+          <div class="actions">
+            <a href="index.html" class="btn btn-primary" id="homeBtn"
+              >Return to Home Base</a
+            >
+            <a href="notes.html" class="btn btn-ghost">Browse Notes</a>
+            <a href="writeups.html" class="btn btn-ghost">Read Writeups</a>
+            <a href="resume.html" class="btn btn-ghost">Resume</a>
+          </div>
+
+          <!-- redesigned diagnostic area -->
+          <div class="diag" aria-live="polite">
+            <div class="diag-top">
+              <div class="diag-title">Diagnostic console</div>
+              <div style="font-size: 0.85rem; color: var(--muted)">
+                Path:
+                <span
+                  id="dPath"
+                  style="font-family: monospace; font-weight: 700"
+                ></span>
+              </div>
+            </div>
+
+            <div class="progress-wrap" aria-hidden="true">
+              <div class="progress" aria-hidden="true">
+                <div class="bar" id="scanBar"></div>
+              </div>
+            </div>
+
+            <div class="diag-lines" id="diagLines">
+              <div>
+                • Checking DNS resolution... <span class="ok" id="r1">OK</span>
+              </div>
+              <div>
+                • Fetching resource... <span class="ok" id="r2">--</span>
+              </div>
+              <div>
+                • Trying cache lookup... <span class="ok" id="r3">--</span>
+              </div>
+            </div>
+
+            <div class="diag-footer">
+              If this keeps happening, please report the URL so I can fix it.
+            </div>
+          </div>
+
+          <div class="hint" id="hintText">
+            Tip: Press <kbd>H</kbd> to go home — quick navigation for power
+            users.
+          </div>
         </div>
 
-        <!-- redesigned diagnostic area -->
-        <div class="diag" aria-live="polite">
-          <div class="diag-top">
-            <div class="diag-title">Diagnostic console</div>
-            <div style="font-size:0.85rem;color:var(--muted)">Path: <span id="dPath" style="font-family:monospace;font-weight:700"></span></div>
+        <div class="main-right">
+          <div class="card-panel">
+            <!-- simple SVG mascot -->
+            <svg
+              class="robot"
+              viewBox="0 0 120 120"
+              xmlns="http://www.w3.org/2000/svg"
+              role="img"
+              aria-label="friendly robot"
+            >
+              <g
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                style="color: var(--accent); opacity: 0.95"
+              >
+                <rect
+                  x="26"
+                  y="30"
+                  width="68"
+                  height="62"
+                  rx="10"
+                  fill="currentColor"
+                  style="mix-blend-mode: screen; opacity: 0.08"
+                ></rect>
+                <rect x="40" y="16" width="40" height="20" rx="6"></rect>
+                <circle
+                  cx="60"
+                  cy="48"
+                  r="6"
+                  fill="white"
+                  style="mix-blend-mode: screen"
+                ></circle>
+                <path d="M44 76q6-6 16-6t16 6" stroke-width="2" />
+                <rect x="52" y="56" width="16" height="4" rx="2"></rect>
+              </g>
+            </svg>
+            <p class="hint">
+              Can't find what you need? Use the quick actions above — I'm
+              tracking errors to improve the site.
+            </p>
+            <p class="small" style="margin-top: 8px; color: var(--muted)">
+              © 2025 anantsec — Anant Ku. Pandey
+            </p>
           </div>
-
-          <div class="progress-wrap" aria-hidden="true">
-            <div class="progress" aria-hidden="true"><div class="bar" id="scanBar"></div></div>
-          </div>
-
-          <div class="diag-lines" id="diagLines">
-            <div>• Checking DNS resolution... <span class="ok" id="r1">OK</span></div>
-            <div>• Fetching resource... <span class="ok" id="r2">--</span></div>
-            <div>• Trying cache lookup... <span class="ok" id="r3">--</span></div>
-          </div>
-
-          <div class="diag-footer">If this keeps happening, please report the URL so I can fix it.</div>
-        </div>
-
-        <div class="hint" id="hintText">Tip: Press <kbd>H</kbd> to go home — quick navigation for power users.</div>
-      </div>
-
-      <div class="main-right">
-        <div class="card-panel">
-          <!-- simple SVG mascot -->
-          <svg class="robot" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="friendly robot">
-            <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent); opacity:0.95">
-              <rect x="26" y="30" width="68" height="62" rx="10" fill="currentColor" style="mix-blend-mode:screen; opacity:0.08"></rect>
-              <rect x="40" y="16" width="40" height="20" rx="6"></rect>
-              <circle cx="60" cy="48" r="6" fill="white" style="mix-blend-mode:screen"></circle>
-              <path d="M44 76q6-6 16-6t16 6" stroke-width="2"/>
-              <rect x="52" y="56" width="16" height="4" rx="2"></rect>
-            </g>
-          </svg>
-          <p class="hint">Can't find what you need? Use the quick actions above — I'm tracking errors to improve the site.</p>
-          <p class="small" style="margin-top:8px;color:var(--muted)">© 2025 anantsec — Anant Ku. Pandey</p>
         </div>
       </div>
     </div>
 
-  </div>
+    <script>
+      // accessibility: respect reduced motion
+      const prefersReduced = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
 
-  <script>
-    // accessibility: respect reduced motion
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      // theme toggle
+      const themeToggle = document.getElementById("themeToggle");
+      const saved = localStorage.getItem("theme");
+      if (saved) document.documentElement.setAttribute("data-theme", saved);
+      themeToggle.addEventListener("click", () => {
+        const cur =
+          document.documentElement.getAttribute("data-theme") === "light"
+            ? "dark"
+            : "light";
+        document.documentElement.setAttribute("data-theme", cur);
+        localStorage.setItem("theme", cur);
+        updateCanvasAppearance();
+      });
 
-    // theme toggle
-    const themeToggle = document.getElementById('themeToggle');
-    const saved = localStorage.getItem('theme');
-    if(saved) document.documentElement.setAttribute('data-theme', saved);
-    themeToggle.addEventListener('click', ()=>{
-      const cur = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-theme', cur);
-      localStorage.setItem('theme', cur);
-      updateCanvasAppearance();
-    });
+      // populate path display
+      document.getElementById("dPath").textContent = location.pathname || "/";
 
-    // populate path display
-    document.getElementById('dPath').textContent = location.pathname || '/';
-
-    // diagnostic animation: progress bar and status updates
-    const bar = document.getElementById('scanBar');
-    const r1 = document.getElementById('r1'); const r2 = document.getElementById('r2'); const r3 = document.getElementById('r3');
-    let progress=0; function stepDiag(){ progress = (progress + Math.random()*18)|0; if(progress>100) progress=100; bar.style.width = progress + '%';
-      if(progress>20) r1.textContent='OK';
-      if(progress>48) r2.textContent='404';
-      if(progress>76) r3.textContent='MISS';
-      if(progress<100) setTimeout(stepDiag, 520);
-      else { setTimeout(()=>{ progress=0; bar.style.width='0%'; r2.textContent='--'; r3.textContent='--'; setTimeout(stepDiag,700) }, 1400) }
-    }
-    stepDiag();
-
-    // keyboard shortcut: H -> home
-    window.addEventListener('keydown', (e)=>{ if(e.key.toLowerCase()==='h') location.href='/' });
-
-    // single animation loop for background orbs, uses theme-aware rendering
-    const canvas = document.getElementById('bg-canvas'); const ctx = canvas.getContext('2d'); let W=0,H=0, orbs=[]; let rafId = null;
-    function resize(){ W=canvas.width = innerWidth; H=canvas.height = innerHeight; }
-    function rand(a,b){return Math.random()*(b-a)+a}
-    function makeOrbs(){ orbs=[]; const count=Math.max(6, Math.round((W*H)/90000)); for(let i=0;i<count;i++) orbs.push({x:rand(0,W), y:rand(0,H), r:rand(1.2,4), vx:rand(-0.25,0.25), vy:rand(-0.25,0.25), o:rand(0.05,0.16) }); }
-
-    function draw(){ ctx.clearRect(0,0,W,H); const theme = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
-      if(theme === 'dark'){
-        for(const p of orbs){ ctx.beginPath(); ctx.fillStyle = 'rgba(255,255,255,'+p.o+')'; ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill(); p.x+=p.vx; p.y+=p.vy; if(p.x< -10) p.x = W+10; if(p.x> W+10) p.x = -10; if(p.y< -10) p.y = H+10; if(p.y> H+10) p.y = -10; }
-      } else {
-        // light theme: softer pastel orbs + subtle radial gradients
-        for(const p of orbs){ ctx.beginPath(); const alpha = p.o * 0.38; ctx.fillStyle = 'rgba(11,118,209,'+ alpha +')'; ctx.arc(p.x,p.y,p.r*1.8,0,Math.PI*2); ctx.fill(); p.x+=p.vx*0.6; p.y+=p.vy*0.6; if(p.x< -10) p.x = W+10; if(p.x> W+10) p.x = -10; if(p.y< -10) p.y = H+10; if(p.y> H+10) p.y = -10; }
+      // diagnostic animation: progress bar and status updates
+      const bar = document.getElementById("scanBar");
+      const r1 = document.getElementById("r1");
+      const r2 = document.getElementById("r2");
+      const r3 = document.getElementById("r3");
+      let progress = 0;
+      function stepDiag() {
+        progress = (progress + Math.random() * 18) | 0;
+        if (progress > 100) progress = 100;
+        bar.style.width = progress + "%";
+        if (progress > 20) r1.textContent = "OK";
+        if (progress > 48) r2.textContent = "404";
+        if (progress > 76) r3.textContent = "MISS";
+        if (progress < 100) setTimeout(stepDiag, 520);
+        else {
+          setTimeout(() => {
+            progress = 0;
+            bar.style.width = "0%";
+            r2.textContent = "--";
+            r3.textContent = "--";
+            setTimeout(stepDiag, 700);
+          }, 1400);
+        }
       }
-      rafId = requestAnimationFrame(draw);
-    }
+      stepDiag();
 
-    function startCanvas(){ resize(); makeOrbs(); if(!prefersReduced){ if(rafId) cancelAnimationFrame(rafId); draw(); } }
-    function updateCanvasAppearance(){ // rebuild orbs to suit new size/contrast
-      if(rafId) cancelAnimationFrame(rafId); resize(); makeOrbs(); if(!prefersReduced) draw(); }
+      // keyboard shortcut: H -> home
+      window.addEventListener("keydown", (e) => {
+        if (e.key.toLowerCase() === "h") location.href = "/";
+      });
 
-    window.addEventListener('resize', ()=>{ updateCanvasAppearance(); });
-    if(!prefersReduced) startCanvas();
+      // single animation loop for background orbs, uses theme-aware rendering
+      const canvas = document.getElementById("bg-canvas");
+      const ctx = canvas.getContext("2d");
+      let W = 0,
+        H = 0,
+        orbs = [];
+      let rafId = null;
+      function resize() {
+        W = canvas.width = innerWidth;
+        H = canvas.height = innerHeight;
+      }
+      function rand(a, b) {
+        return Math.random() * (b - a) + a;
+      }
+      function makeOrbs() {
+        orbs = [];
+        const count = Math.max(6, Math.round((W * H) / 90000));
+        for (let i = 0; i < count; i++)
+          orbs.push({
+            x: rand(0, W),
+            y: rand(0, H),
+            r: rand(1.2, 4),
+            vx: rand(-0.25, 0.25),
+            vy: rand(-0.25, 0.25),
+            o: rand(0.05, 0.16),
+          });
+      }
 
-    // subtle confetti burst when home clicked (kept, but gentle)
-    document.getElementById('homeBtn').addEventListener('click', (e)=>{
-      if(prefersReduced) return; const cvs=document.createElement('canvas'); cvs.style.position='fixed'; cvs.style.left=0; cvs.style.top=0; cvs.width=innerWidth; cvs.height=innerHeight; cvs.style.pointerEvents='none'; document.body.appendChild(cvs); const g=cvs.getContext('2d'); const bits=[]; for(let i=0;i<22;i++) bits.push({x:innerWidth/2,y:innerHeight/2,vx:rand(-6,6),vy:rand(-9,-2),s:rand(6,10),c:['#39ac31','#ff5c8a','#ffd86b','#8bd3ff'][i%4]}); let t=0; function step(){ g.clearRect(0,0,cvs.width,cvs.height); for(const b of bits){ b.x+=b.vx; b.y+=b.vy; b.vy+=0.35; g.fillStyle=b.c; g.fillRect(b.x,b.y,b.s,b.s); } t++; if(t<90) requestAnimationFrame(step); else document.body.removeChild(cvs); } step(); });
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+        const theme =
+          document.documentElement.getAttribute("data-theme") === "light"
+            ? "light"
+            : "dark";
+        if (theme === "dark") {
+          for (const p of orbs) {
+            ctx.beginPath();
+            ctx.fillStyle = "rgba(255,255,255," + p.o + ")";
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fill();
+            p.x += p.vx;
+            p.y += p.vy;
+            if (p.x < -10) p.x = W + 10;
+            if (p.x > W + 10) p.x = -10;
+            if (p.y < -10) p.y = H + 10;
+            if (p.y > H + 10) p.y = -10;
+          }
+        } else {
+          // light theme: softer pastel orbs + subtle radial gradients
+          for (const p of orbs) {
+            ctx.beginPath();
+            const alpha = p.o * 0.38;
+            ctx.fillStyle = "rgba(11,118,209," + alpha + ")";
+            ctx.arc(p.x, p.y, p.r * 1.8, 0, Math.PI * 2);
+            ctx.fill();
+            p.x += p.vx * 0.6;
+            p.y += p.vy * 0.6;
+            if (p.x < -10) p.x = W + 10;
+            if (p.x > W + 10) p.x = -10;
+            if (p.y < -10) p.y = H + 10;
+            if (p.y > H + 10) p.y = -10;
+          }
+        }
+        rafId = requestAnimationFrame(draw);
+      }
 
-    // ensure interactive text color adapts to theme
-    document.querySelectorAll('.hint, .diag-title, .diag-lines, .diag-footer').forEach(el=> el.style.color = getComputedStyle(document.documentElement).getPropertyValue('--muted'));
+      function startCanvas() {
+        resize();
+        makeOrbs();
+        if (!prefersReduced) {
+          if (rafId) cancelAnimationFrame(rafId);
+          draw();
+        }
+      }
+      function updateCanvasAppearance() {
+        // rebuild orbs to suit new size/contrast
+        if (rafId) cancelAnimationFrame(rafId);
+        resize();
+        makeOrbs();
+        if (!prefersReduced) draw();
+      }
 
-  </script>
-</body>
+      window.addEventListener("resize", () => {
+        updateCanvasAppearance();
+      });
+      if (!prefersReduced) startCanvas();
+
+      // subtle confetti burst when home clicked (kept, but gentle)
+      document.getElementById("homeBtn").addEventListener("click", (e) => {
+        if (prefersReduced) return;
+        const cvs = document.createElement("canvas");
+        cvs.style.position = "fixed";
+        cvs.style.left = 0;
+        cvs.style.top = 0;
+        cvs.width = innerWidth;
+        cvs.height = innerHeight;
+        cvs.style.pointerEvents = "none";
+        document.body.appendChild(cvs);
+        const g = cvs.getContext("2d");
+        const bits = [];
+        for (let i = 0; i < 22; i++)
+          bits.push({
+            x: innerWidth / 2,
+            y: innerHeight / 2,
+            vx: rand(-6, 6),
+            vy: rand(-9, -2),
+            s: rand(6, 10),
+            c: ["#39ac31", "#ff5c8a", "#ffd86b", "#8bd3ff"][i % 4],
+          });
+        let t = 0;
+        function step() {
+          g.clearRect(0, 0, cvs.width, cvs.height);
+          for (const b of bits) {
+            b.x += b.vx;
+            b.y += b.vy;
+            b.vy += 0.35;
+            g.fillStyle = b.c;
+            g.fillRect(b.x, b.y, b.s, b.s);
+          }
+          t++;
+          if (t < 90) requestAnimationFrame(step);
+          else document.body.removeChild(cvs);
+        }
+        step();
+      });
+
+      // ensure interactive text color adapts to theme
+      document
+        .querySelectorAll(".hint, .diag-title, .diag-lines, .diag-footer")
+        .forEach(
+          (el) =>
+            (el.style.color = getComputedStyle(
+              document.documentElement
+            ).getPropertyValue("--muted"))
+        );
+    </script>
+  </body>
 </html>

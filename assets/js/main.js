@@ -27,11 +27,11 @@ function initThemeToggle() {
       document.body.classList.toggle("light");
       const currentTheme = document.body.classList.contains("light") ? "light" : "dark";
       localStorage.setItem("theme", currentTheme);
-      
+
       // Update theme icon text for accessibility
       themeToggle.setAttribute('aria-label', `Switch to ${currentTheme === 'light' ? 'dark' : 'light'} theme`);
     });
-    
+
     // Set initial aria-label
     const currentTheme = document.body.classList.contains("light") ? "light" : "dark";
     themeToggle.setAttribute('aria-label', `Switch to ${currentTheme === 'light' ? 'dark' : 'light'} theme`);
@@ -66,7 +66,7 @@ function initTypingEffect() {
     ">> echo $FLAG > ~/success.txt",
     "🛡️ ethical_hack.exe"
   ];
-  
+
   const typingDelay = 65;
   const erasingDelay = 50;
   const newTextDelay = 1500;
@@ -145,7 +145,7 @@ function initResumeImageFullscreen() {
       fullscreenImage.src = fullSrc;
       fullscreenOverlay.classList.add('active');
       document.body.classList.add('overlay-active');
-      
+
       // Set focus to close button for accessibility
       setTimeout(() => closeFullscreenButton.focus(), 100);
     });
@@ -179,7 +179,7 @@ function initAccessibility() {
   // Add keyboard navigation for hamburger menu
   const menuToggle = document.getElementById('menu-toggle');
   const menuIcon = document.querySelector('.menu-icon');
-  
+
   if (menuIcon && menuToggle) {
     menuIcon.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {

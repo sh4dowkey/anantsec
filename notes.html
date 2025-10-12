@@ -1,247 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Notes – Anantsec Cybersecurity Portfolio" />
-  
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Notes – Anantsec Cybersecurity Portfolio"
+    />
+
     <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="anantsec – Cybersecurity Portfolio" />
-  <meta property="og:description" content="Cybersecurity enthusiast specializing in Active Directory, Bug Bounty, and Red Teaming" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://sh4dowkey.github.iof" />
-  <meta property="og:image" content="https://sh4dowkey.github.io/assets/img/og-image.png" />
-  
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="anantsec – Cybersecurity Portfolio" />
-  <meta name="twitter:description" content="Cybersecurity enthusiast specializing in Active Directory, Bug Bounty, and Red Teaming" />
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+    <meta property="og:title" content="anantsec – Cybersecurity Portfolio" />
+    <meta
+      property="og:description"
+      content="Cybersecurity enthusiast specializing in Active Directory, Bug Bounty, and Red Teaming"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://sh4dowkey.github.iof" />
+    <meta
+      property="og:image"
+      content="https://sh4dowkey.github.io/assets/img/og-image.png"
+    />
 
-  <title>anantsec – Notes</title>
-  <link rel="stylesheet" href="assets/css/style.css" />
-  <style>
-    body {
-      background-color: #292a2d;
-      color: #a9a9b3;
-    }
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="anantsec – Cybersecurity Portfolio" />
+    <meta
+      name="twitter:description"
+      content="Cybersecurity enthusiast specializing in Active Directory, Bug Bounty, and Red Teaming"
+    />
 
-    body.light {
-      background: #e8e8e8;
-      color: #333;
-    }
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/img/favicon.png" />
 
-    /* Animated grid background */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-image: 
-        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
-      background-size: 50px 50px;
-      animation: gridFloat 30s linear infinite;
-      pointer-events: none;
-      z-index: 0;
-    }
+    <title>anantsec – Notes</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/notes.css" />
+  </head>
+  <body>
+    <nav class="nav-container">
+      <div class="nav-left">
+        <a
+          href="index.html"
+          id="home_page"
+          style="
+            font-family: monospace;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+          "
+        >
+          <span>>anantSec</span>
+          <span id="svg-icon" class="flicker"></span>
+        </a>
+      </div>
 
-    body.light::before {
-      background-image: 
-        linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px);
-    }
+      <input type="checkbox" id="menu-toggle" />
+      <label for="menu-toggle" class="menu-icon">&#9776;</label>
 
-    @keyframes gridFloat {
-      0% { transform: translate(0, 0); }
-      100% { transform: translate(50px, 50px); }
-    }
+      <div class="nav-right">
+        <a href="about.html">About</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="notes.html">Notes</a>
+        <a href="resume.html">Resume</a>
+        <a href="certificates.html">Certificates</a>
+        <a href="writeups.html">Writeups</a>
+        <div class="theme-icon">◐</div>
+      </div>
+    </nav>
 
-    .notes-container {
-      max-width: 800px;
-      margin: 4rem auto;
-      padding: 0 2rem;
-      position: relative;
-      z-index: 1;
-      opacity: 0;
-      animation: fadeInUp 0.8s ease forwards;
-    }
+    <main class="notes-container">
+      <h1>📚 Study Notes</h1>
+      <div id="notes-wrapper"></div>
+    </main>
 
-    @keyframes fadeInUp {
-      to { opacity: 1; }
-    }
+    <footer>
+      <p>&lt;/&gt; Code, curiosity, and creativity. © 2025 anantsec</p>
+    </footer>
 
-    .notes-container h1 {
-      font-size: 2rem;
-      margin-bottom: 3rem;
-      text-align: center;
-      color: #d5d5d5;
-      font-weight: 600;
-    }
-
-    body.light .notes-container h1 {
-      color: #1a1a1a;
-    }
-
-    .notes-group {
-      margin-bottom: 3rem;
-    }
-
-    .notes-group h2 {
-      font-size: 1.2rem;
-      margin-bottom: 1.5rem;
-      color: #999;
-      font-weight: 500;
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-
-    body.light .notes-group h2 {
-      color: #666;
-      border-bottom-color: rgba(0,0,0,0.1);
-    }
-
-    .note-entry {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.03);
-      transition: all 0.2s ease;
-    }
-
-    body.light .note-entry {
-      border-bottom-color: rgba(0,0,0,0.05);
-    }
-
-    .note-entry:hover {
-      padding-left: 0.5rem;
-    }
-
-    .note-entry a {
-      color: #a9a9b3;
-      text-decoration: none;
-      font-size: 1rem;
-      transition: color 0.2s ease;
-    }
-
-    body.light .note-entry a {
-      color: #333;
-    }
-
-    .note-entry a:hover {
-      color: #d5d5d5;
-    }
-
-    body.light .note-entry a:hover {
-      color: #000;
-    }
-
-    .note-date {
-      color: #666;
-      font-size: 0.85rem;
-      font-family: monospace;
-    }
-
-    body.light .note-date {
-      color: #888;
-    }
-
-    footer {
-      text-align: center;
-      padding: 2rem 0;
-      font-size: 0.9rem;
-      color: #666;
-      position: relative;
-      z-index: 1;
-    }
-
-    @media (max-width: 768px) {
-      .notes-container {
-        padding: 0 1.5rem;
-      }
-
-      .note-entry {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.3rem;
-      }
-    }
-  </style>
-</head>
-<body>
-
-  <nav class="nav-container">
-    <div class="nav-left">
-      <a href="index.html" id="home_page" style="font-family: monospace; display: flex; align-items: center; gap: 6px;">
-        <span>>anantSec</span>
-        <span id="svg-icon" class="flicker"></span>
-      </a>
-    </div>
-
-    <input type="checkbox" id="menu-toggle" />
-    <label for="menu-toggle" class="menu-icon">&#9776;</label>
-
-    <div class="nav-right">
-      <a href="about.html">About</a>
-      <a href="gallery.html">Gallery</a>
-      <a href="notes.html">Notes</a>
-      <a href="resume.html">Resume</a>
-      <a href="certificates.html">Certificates</a>
-      <a href="writeups.html">Writeups</a>
-      <div class="theme-icon">◐</div>
-    </div>
-  </nav>
-
-  <main class="notes-container">
-    <h1>📚 Study Notes</h1>
-    <div id="notes-wrapper"></div>
-  </main>
-
-  <footer>
-    <p>&lt;/&gt; Code, curiosity, and creativity. © 2025 anantsec</p>
-  </footer>
-
-  <script src="assets/js/main.js"></script>
-  <script>
-    fetch("data/notes.json")
-      .then(res => res.json())
-      .then(data => {
-        const grouped = {};
-        data.forEach(note => {
-          const year = new Date(note.date).getFullYear();
-          if (!grouped[year]) grouped[year] = [];
-          grouped[year].push(note);
-        });
-
-        const wrapper = document.getElementById("notes-wrapper");
-        Object.keys(grouped).sort((a, b) => b - a).forEach(year => {
-          const group = document.createElement("div");
-          group.className = "notes-group";
-          group.innerHTML = `<h2>${year}</h2>`;
-
-          grouped[year].forEach(note => {
-            const entry = document.createElement("div");
-            entry.className = "note-entry";
-            entry.innerHTML = `
-              <a href="${note.url}" download>${note.name}</a>
-              <span class="note-date">${note.date}</span>
-            `;
-            group.appendChild(entry);
-          });
-
-          wrapper.appendChild(group);
-        });
-      })
-      .catch(err => {
-        document.getElementById("notes-wrapper").innerHTML =
-          "<p style='color: #888;'>⚠️ Failed to load notes.</p>";
-        console.error(err);
-      });
-  </script>
-</body>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/notes.js"></script>
+  </body>
 </html>

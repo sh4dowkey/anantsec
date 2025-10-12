@@ -1,233 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="anantsec – Cybersecurity Portfolio" />
-  <meta property="og:description" content="Cybersecurity enthusiast specializing in Active Directory, Bug Bounty, and Red Teaming" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://sh4dowkey.github.iof" />
-  <meta property="og:image" content="https://sh4dowkey.github.io/assets/img/og-image.png" />
-  
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="anantsec – Cybersecurity Portfolio" />
-  <meta name="twitter:description" content="Cybersecurity enthusiast specializing in Active Directory, Bug Bounty, and Red Teaming" />
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+    <meta property="og:title" content="anantsec – Cybersecurity Portfolio" />
+    <meta
+      property="og:description"
+      content="Cybersecurity enthusiast specializing in Active Directory, Bug Bounty, and Red Teaming"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://sh4dowkey.github.iof" />
+    <meta
+      property="og:image"
+      content="https://sh4dowkey.github.io/assets/img/og-image.png"
+    />
 
-  <title>Bug Bounty Writeups – anantsec</title>
-  <link rel="stylesheet" href="../assets/css/style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #292a2d;
-      color: #a9a9b3;
-    }
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="anantsec – Cybersecurity Portfolio" />
+    <meta
+      name="twitter:description"
+      content="Cybersecurity enthusiast specializing in Active Directory, Bug Bounty, and Red Teaming"
+    />
 
-    body.light-theme {
-      background-color: #f5f5f5;
-      color: #333;
-    }
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/img/favicon.png" />
 
-    main {
-      max-width: 800px;
-      margin: 4rem auto;
-      padding: 0 1.5rem;
+    <title>Bug Bounty Writeups – anantsec</title>
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="../assets/css/bugbounty.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- ✅ Navigation Bar -->
+    <nav class="nav-container">
+      <div class="nav-left">
+        <a
+          href="../index.html"
+          id="home_page"
+          style="
+            font-family: monospace;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+          "
+        >
+          <span>>anantSec</span>
+          <span id="svg-icon" class="flicker"></span>
+        </a>
+      </div>
 
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 1s ease forwards;
-    }
+      <!-- Hamburger Toggle -->
+      <input type="checkbox" id="menu-toggle" />
+      <label for="menu-toggle" class="menu-icon">&#9776;</label>
 
-    /* Properly centered and balanced heading */
-    h1 {
-      display: block;                        /* full width for true centering */
-      text-align: center;
-      margin: 0 auto 2.5rem;                 /* bottom spacing below heading */
-      font-size: 1.8rem;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      line-height: 1.2;
-      max-width: 90%;
-      background: linear-gradient(90deg, #cfcfd6, #a9a9b3);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      color: #cfcfd6;                        /* fallback for non-webkit browsers */
-      position: relative;
-      padding-top: 0.2rem;                   /* tiny breathing space above */
-      padding-bottom: 0.2rem;
-      opacity: 0.98;
-    }
+      <div class="nav-right">
+        <a href="../about.html">About</a>
+        <a href="../gallery.html">Gallery</a>
+        <a href="../notes.html">Notes</a>
+        <a href="../resume.html">Resume</a>
+        <a href="../certificates.html">Certificates</a>
+        <a href="../writeups.html">Writeups</a>
+        <div class="theme-icon">◐</div>
+      </div>
+    </nav>
 
-    /* Underline effect */
-    h1::after {
-      content: '';
-      display: block;
-      margin: 0.8rem auto 0;                 /* space between text & underline */
-      width: 48%;
-      max-width: 280px;
-      height: 2px;
-      background: linear-gradient(90deg, rgba(200,200,200,0.25), rgba(200,200,200,0.55));
-      border-radius: 2px;
-      transition: width 350ms ease;
-      opacity: 0.9;
-    }
+    <!-- ✅ Bug Bounty Writeups Section -->
+    <main>
+      <h1>🕷️ Bug Bounty Writeups</h1>
+      <div id="bugbounty-wrapper"></div>
+    </main>
 
-    /* Hover underline widen */
-    h1:hover::after,
-    h1:focus::after {
-      width: 60%;
-    }
+    <footer>
+      <p>&lt;/&gt; Code, curiosity, and creativity. © 2025 anantsec</p>
+    </footer>
 
-    /* Dark/Light Theme Support */
-    body.light h1,
-    body.light-theme h1 {
-      background: linear-gradient(90deg, #2a2a2a, #444);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      color: #222;
-    }
-
-    body.light h1::after,
-    body.light-theme h1::after {
-      background: linear-gradient(90deg, rgba(60,60,60,0.3), rgba(60,60,60,0.6));
-    }
-
-    /* Responsive */
-    @media (max-width: 520px) {
-      h1 {
-        font-size: 1.5rem;
-        max-width: 95%;
-        margin-bottom: 1.8rem;
-      }
-      h1::after { width: 56%; }
-    }
-
-
-    .writeup-entry {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.2rem 1rem;
-      border-bottom: 2px dotted #444;
-    }
-
-    body.light-theme .writeup-entry {
-      border-bottom: 2px dotted #ccc;
-    }
-
-    .writeup-entry a {
-      color: #ddd;
-      font-size: 1.05rem;
-      text-decoration: none;
-    }
-
-    .writeup-entry a:hover {
-      color: #fff;
-    }
-
-    body.light-theme .writeup-entry a {
-      color: #111;
-    }
-
-    body.light-theme .writeup-entry a:hover {
-      color: #000;
-    }
-
-    .writeup-date {
-      color: #888;
-      font-size: 0.9rem;
-    }
-
-
-    body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: 
-    linear-gradient(rgba(255,255,255,0.008) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.008) 1px, transparent 1px);
-  background-size: 50px 50px;
-  animation: gridFloat 30s linear infinite;
-  pointer-events: none;
-  z-index: 0;
-}
-
-body.light::before {
-  background-image: 
-    linear-gradient(rgba(0,0,0,0.01) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,0,0,0.01) 1px, transparent 1px);
-}
-
-
-
-  </style>
-</head>
-<body>
-
-<!-- ✅ Navigation Bar -->
-<nav class="nav-container">
-  <div class="nav-left">
-   <a href="../index.html" id="home_page" style="font-family: monospace; display: flex; align-items: center; gap: 6px;">
-  <span>>anantSec</span>
-  <span id="svg-icon" class="flicker"></span>
-</a>
-  </div>
-
-   <!-- Hamburger Toggle -->
-  <input type="checkbox" id="menu-toggle" />
-  <label for="menu-toggle" class="menu-icon">&#9776;</label>
-  
-  <div class="nav-right">
-    <a href="../about.html">About</a>
-    <a href="../gallery.html">Gallery</a>
-    <a href="../notes.html">Notes</a>
-    <a href="../resume.html">Resume</a>
-    <a href="../certificates.html">Certificates</a>
-    <a href="../writeups.html">Writeups</a>
-    <div class="theme-icon">◐</div>
-  </div>
-</nav>
-
-<!-- ✅ Bug Bounty Writeups Section -->
-<main>
-  <h1>🕷️ Bug Bounty Writeups</h1>
-  <div id="bugbounty-wrapper"></div>
-</main>
-
-<footer>
-  <p>&lt;/&gt; Code, curiosity, and creativity. © 2025 anantsec</p>
-</footer>
-
-<script>
-fetch("../data/bugbounty.json")
-  .then(res => res.json())
-  .then(data => {
-    const wrapper = document.getElementById("bugbounty-wrapper");
-    data.forEach(post => {
-      const entry = document.createElement("div");
-      entry.className = "writeup-entry";
-      entry.innerHTML = `
-        <a href="../view.html?type=bugbounty&file=${encodeURIComponent(post.file)}">${post.name}</a>
-        <span class="writeup-date">${post.date}</span>
-      `;
-      wrapper.appendChild(entry);
-    });
-  })
-  .catch(err => {
-    document.getElementById("bugbounty-wrapper").innerHTML =
-      "<p style='color: #888;'>⚠️ Failed to load bug bounty writeups.</p>";
-    console.error(err);
-  });
-</script>
-<script src="../assets/js/main.js"></script>
-</body>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/bugbounty.js"></script>
+  </body>
 </html>

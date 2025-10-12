@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Cute+Font&display=swap");
 
 /* === Page Layout & Enhanced Backgrounds === */
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   height: 100%;
@@ -36,12 +37,26 @@ body.light .page-container {
   background: linear-gradient(180deg, #e8f0f7 0%, #f5f8fa 50%, #e8f0f7 100%);
 }
 body.light .page-container::before {
-  content: '';
+  content: "";
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-image:
-    linear-gradient(30deg, rgba(0, 102, 170, 0.02) 12%, transparent 12.5%, transparent 87%, rgba(0,102,170,0.02) 87.5%),
-    linear-gradient(150deg, rgba(0, 102, 170, 0.02) 12%, transparent 12.5%, transparent 87%, rgba(0,102,170,0.02) 87.5%);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: linear-gradient(
+      30deg,
+      rgba(0, 102, 170, 0.02) 12%,
+      transparent 12.5%,
+      transparent 87%,
+      rgba(0, 102, 170, 0.02) 87.5%
+    ),
+    linear-gradient(
+      150deg,
+      rgba(0, 102, 170, 0.02) 12%,
+      transparent 12.5%,
+      transparent 87%,
+      rgba(0, 102, 170, 0.02) 87.5%
+    );
   background-size: 80px 140px;
   background-position: 0 0, 0 0, 40px 70px;
   pointer-events: none;
@@ -50,15 +65,17 @@ body.light .page-container::before {
 
 /* Added Grid Background Effect (applied to .page-container::after for layering behind content, on top of existing backgrounds) */
 .page-container::after {
-  content: '';
+  content: "";
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: 
-    linear-gradient(rgba(255,255,255,0.008) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.008) 1px, transparent 1px);
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.008) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.008) 1px, transparent 1px);
   background-size: 50px 50px;
   animation: gridFloat 30s linear infinite;
   pointer-events: none;
@@ -66,9 +83,8 @@ body.light .page-container::before {
 }
 
 body.light .page-container::after {
-  background-image: 
-    linear-gradient(rgba(0,0,0,0.01) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,0,0,0.01) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.01) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.01) 1px, transparent 1px);
 }
 
 @keyframes gridFloat {
@@ -206,8 +222,14 @@ body.light .page-container::after {
   border-left: 50px solid transparent;
   border-radius: 33px;
 }
-.cat-mark:before { right: -20px; transform: rotate(32deg); }
-.cat-mark:after { left: -20px; transform: rotate(-32deg); }
+.cat-mark:before {
+  right: -20px;
+  transform: rotate(32deg);
+}
+.cat-mark:after {
+  left: -20px;
+  transform: rotate(-32deg);
+}
 .content {
   display: grid;
   grid-template-columns: 50% 50%;
@@ -269,7 +291,9 @@ body.light .page-container::after {
   box-sizing: border-box;
 }
 @media screen and (max-width: 768px) {
-  body { overflow: visible; }
+  body {
+    overflow: visible;
+  }
 }
 
 /* Lightbox & Clickable Image Styles */
@@ -279,7 +303,7 @@ body.light .page-container::after {
 }
 .content img:hover {
   transform: scale(1.05);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 .lightbox-overlay {
   position: fixed;
@@ -314,12 +338,20 @@ body.light .page-container::after {
   color: #bbb;
 }
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 @keyframes zoomIn {
-  from { transform: scale(0.8); }
-  to { transform: scale(1); }
+  from {
+    transform: scale(0.8);
+  }
+  to {
+    transform: scale(1);
+  }
 }
 
 /* === FINAL Polished Instructional Message Styles === */
@@ -331,7 +363,7 @@ body.light .page-container::after {
   transform: translateX(-50%);
   color: rgba(255, 255, 255, 0.7);
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  font-family: 'Fira Code', monospace;
+  font-family: "Fira Code", monospace;
   font-size: 1.1rem;
   font-weight: 500;
   pointer-events: none;
@@ -340,12 +372,13 @@ body.light .page-container::after {
 }
 
 body.light .album-instruction {
-    color: #4a5568; /* A dark gray for light backgrounds */
-    text-shadow: none;
+  color: #4a5568; /* A dark gray for light backgrounds */
+  text-shadow: none;
 }
 
 @keyframes gentle-float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(-50%, 0);
   }
   50% {
@@ -360,7 +393,8 @@ body.light .album-instruction {
 .prompt-fade-leave-active {
   transition: all 0.25s ease-in;
 }
-.prompt-fade-enter, .prompt-fade-leave-to {
+.prompt-fade-enter,
+.prompt-fade-leave-to {
   opacity: 0;
   transform: translate(-50%, -6px) scale(0.95);
 }

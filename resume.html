@@ -1,427 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="anantsec – Cybersecurity Portfolio" />
-  <meta property="og:description" content="Cybersecurity enthusiast specializing in Active Directory, Bug Bounty, and Red Teaming" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://sh4dowkey.github.iof" />
-  <meta property="og:image" content="https://sh4dowkey.github.io/assets/img/og-image.png" />
-  
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="anantsec – Cybersecurity Portfolio" />
-  <meta name="twitter:description" content="Cybersecurity enthusiast specializing in Active Directory, Bug Bounty, and Red Teaming" />
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+    <meta property="og:title" content="anantsec – Cybersecurity Portfolio" />
+    <meta
+      property="og:description"
+      content="Cybersecurity enthusiast specializing in Active Directory, Bug Bounty, and Red Teaming"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://sh4dowkey.github.iof" />
+    <meta
+      property="og:image"
+      content="https://sh4dowkey.github.io/assets/img/og-image.png"
+    />
 
-  <title>Resume | anantsec</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="assets/css/style.css" />
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="anantsec – Cybersecurity Portfolio" />
+    <meta
+      name="twitter:description"
+      content="Cybersecurity enthusiast specializing in Active Directory, Bug Bounty, and Red Teaming"
+    />
 
- <style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/img/favicon.png" />
 
-  body {
-    background-color: #292a2d;
-    color: #a9a9b3;
-  }
+    <title>Resume | anantsec</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/resume.css" />
+  </head>
+  <body>
+    <nav class="nav-container">
+      <div class="nav-left">
+        <a
+          href="index.html"
+          id="home_page"
+          style="
+            font-family: monospace;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+          "
+        >
+          <span>>anantSec</span>
+          <span id="svg-icon" class="flicker"></span>
+        </a>
+      </div>
 
-  body.light {
-    background: #e8e8e8;
-    color: #333;
-  }
+      <input type="checkbox" id="menu-toggle" />
+      <label for="menu-toggle" class="menu-icon">&#9776;</label>
 
-  body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: 
-      linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
-    background-size: 50px 50px;
-    animation: gridFloat 30s linear infinite;
-    pointer-events: none;
-    z-index: 0;
-  }
+      <div class="nav-right">
+        <a href="about.html">About</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="notes.html">Notes</a>
+        <a href="resume.html">Resume</a>
+        <a href="certificates.html">Certificates</a>
+        <a href="writeups.html">Writeups</a>
+        <div class="theme-icon">◐</div>
+      </div>
+    </nav>
 
-  body.light::before {
-    background-image: 
-      linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px);
-  }
+    <main class="resume-section">
+      <div class="resume-download-container">
+        <a href="assets/pdf/resume/resume.pdf" download class="resume-download">
+          <i class="fas fa-download"></i> Download Full Resume
+        </a>
+      </div>
 
-  @keyframes gridFloat {
-    0% { transform: translate(0, 0); }
-    100% { transform: translate(50px, 50px); }
-  }
+      <div class="resume-image-wrapper">
+        <img
+          id="resume-preview-image-1"
+          src="assets/pdf/resume/resume-preview-pg1.png"
+          alt="Resume Page 1"
+          class="resume-preview clickable-resume"
+          data-full="assets/pdf/resume/resume-preview-pg1.png"
+        />
+        <img
+          id="resume-preview-image-2"
+          src="assets/pdf/resume/resume-preview-pg2.png"
+          alt="Resume Page 2"
+          class="resume-preview clickable-resume"
+          data-full="assets/pdf/resume/resume-preview-pg2.png"
+        />
+      </div>
+    </main>
 
-  .resume-section {
-    max-width: 1000px;
-    margin: 3rem auto;
-    padding: 0 2rem;
-    text-align: center;
-    position: relative;
-    z-index: 1;
-    opacity: 0;
-    animation: fadeInUp 0.8s ease forwards;
-  }
+    <footer>
+      <p>&lt;/&gt; Code, curiosity, and creativity. © 2025 anantsec</p>
+    </footer>
 
-  @keyframes fadeInUp {
-    to { opacity: 1; }
-  }
-
-  .resume-download-container {
-    background: transparent;
-    backdrop-filter: none;
-    border: none;
-    padding: 1.5rem 0;
-    box-shadow: none;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .resume-download-container::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(100,100,100,0.02), transparent 50%);
-    pointer-events: none;
-    transform-origin: center;
-    animation: headerGlow 10s linear infinite;
-    z-index: 0;
-  }
-
-  @keyframes headerGlow {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-
-  .resume-download {
-    font-size: 1rem;
-    color: #d5d5d5;
-    text-decoration: none;
-    border: 1px solid rgba(255,255,255,0.15);
-    background: rgba(100,100,100,0.2);
-    backdrop-filter: blur(8px);
-    padding: 0.9rem 2rem;
-    border-radius: 8px;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.8rem;
-    transition: all 0.3s ease;
-    font-weight: 500;
-    position: relative;
-    z-index: 1;
-  }
-
-  body.light .resume-download {
-    color: #333;
-    border-color: rgba(0,0,0,0.15);
-    background: rgba(150,150,150,0.15);
-  }
-
-  .resume-download:hover {
-    background: rgba(100,100,100,0.35);
-    border-color: rgba(255,255,255,0.25);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-  }
-
-  body.light .resume-download:hover {
-    background: rgba(150,150,150,0.3);
-    border-color: rgba(0,0,0,0.25);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-  }
-
-  .resume-download i {
-    font-size: 1.1rem;
-    color: #7a90c4;
-  }
-
-  body.light .resume-download i {
-    color: #5d7aa8;
-  }
-
-  .resume-image-wrapper {
-    background: rgba(30, 31, 34, 0.4);
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 16px;
-    padding: 2rem;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 0.8s ease forwards 0.3s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .resume-image-wrapper::before {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.05) 50%, transparent 70%);
-    border-radius: 16px;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .resume-image-wrapper:hover::before {
-    opacity: 1;
-    animation: borderGlow 2s linear infinite;
-  }
-
-  @keyframes borderGlow {
-    0% { background-position: 0% 0%; }
-    100% { background-position: 200% 200%; }
-  }
-
-  body.light .resume-image-wrapper {
-    background: rgba(255, 255, 255, 0.75);
-    border-color: rgba(0,0,0,0.08);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
-  }
-
-  .resume-preview {
-    width: 100%;
-    max-width: 800px;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-    transition: all 0.4s ease;
-    cursor: pointer;
-    position: relative;
-    z-index: 1;
-  }
-
-  body.light .resume-preview {
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-  }
-
-  .resume-preview:hover {
-    transform: scale(1.02);
-    box-shadow: 0 12px 35px rgba(0,0,0,0.35);
-  }
-
-  body.light .resume-preview:hover {
-    box-shadow: 0 12px 35px rgba(0,0,0,0.15);
-  }
-
-  .resume-preview + .resume-preview {
-    margin-top: 2rem;
-  }
-
-  .fullscreen-overlay {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.95);
-    backdrop-filter: blur(10px);
-    justify-content: center;
-    align-items: center;
-  }
-
-  .fullscreen-overlay.active {
-    display: flex;
-  }
-
-  .fullscreen-image {
-    max-width: 95%;
-    max-height: 95%;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    display: block;
-    margin: auto;
-    border-radius: 8px;
-    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
-  }
-
-  .close-fullscreen {
-    position: absolute;
-    top: 30px;
-    right: 45px;
-    background: rgba(120,140,180,0.2);
-    border: 1px solid rgba(120,140,180,0.3);
-    color: #d5d5d5;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 1.5rem;
-    transition: all 0.3s ease;
-    z-index: 1001;
-  }
-
-  .close-fullscreen:hover {
-    background: rgba(120,140,180,0.3);
-    border-color: rgba(120,140,180,0.4);
-  }
-
-  body.light .close-fullscreen {
-    background: rgba(90,110,150,0.2);
-    border-color: rgba(90,110,150,0.3);
-    color: #333;
-  }
-
-  body.light .close-fullscreen:hover {
-    background: rgba(90,110,150,0.3);
-    border-color: rgba(90,110,150,0.4);
-  }
-
-  body.overlay-active {
-    overflow: hidden;
-  }
-
-  footer {
-    text-align: center;
-    padding: 3rem 0 2rem;
-    color: #666;
-    font-size: 0.9rem;
-    position: relative;
-    z-index: 1;
-  }
-
-  @media (max-width: 768px) {
-    .resume-section {
-      padding: 0 1.5rem;
-    }
-
-    .resume-download {
-      font-size: 0.95rem;
-      padding: 0.75rem 1.5rem;
-    }
-
-    .resume-image-wrapper {
-      padding: 1.5rem;
-    }
-
-    .close-fullscreen {
-      top: 20px;
-      right: 30px;
-      width: 36px;
-      height: 36px;
-      font-size: 1.3rem;
-    }
-  }
-
-  html, body {
-    max-width: 100%;
-    overflow-x: hidden;
-  }
-</style>
-
-
-
-</head>
-<body>
-
-  <nav class="nav-container">
-    <div class="nav-left">
-      <a href="index.html" id="home_page" style="font-family: monospace; display: flex; align-items: center; gap: 6px;">
-        <span>>anantSec</span>
-        <span id="svg-icon" class="flicker"></span>
-      </a>
+    <div id="fullscreen-overlay" class="fullscreen-overlay">
+      <span id="close-fullscreen" class="close-fullscreen">&times;</span>
+      <img
+        id="fullscreen-image"
+        src=""
+        alt="Full Screen Resume"
+        class="fullscreen-image"
+      />
     </div>
 
-    <input type="checkbox" id="menu-toggle" />
-    <label for="menu-toggle" class="menu-icon">&#9776;</label>
-
-    <div class="nav-right">
-      <a href="about.html">About</a>
-      <a href="gallery.html">Gallery</a>
-      <a href="notes.html">Notes</a>
-      <a href="resume.html">Resume</a>
-      <a href="certificates.html">Certificates</a>
-      <a href="writeups.html">Writeups</a>
-      <div class="theme-icon">◐</div>
-    </div>
-  </nav>
-
-  <main class="resume-section">
-    <div class="resume-download-container">
-      <a href="assets/pdf/resume/resume.pdf" download class="resume-download">
-        <i class="fas fa-download"></i> Download Full Resume
-      </a>
-    </div>
-    
-    <div class="resume-image-wrapper">
-      <img id="resume-preview-image-1" src="assets/pdf/resume/resume-preview-pg1.png" alt="Resume Page 1" class="resume-preview clickable-resume" data-full="assets/pdf/resume/resume-preview-pg1.png" />
-      <img id="resume-preview-image-2" src="assets/pdf/resume/resume-preview-pg2.png" alt="Resume Page 2" class="resume-preview clickable-resume" data-full="assets/pdf/resume/resume-preview-pg2.png" />
-    </div>
-  </main>
-
-  <footer>
-   <p>&lt;/&gt; Code, curiosity, and creativity. © 2025 anantsec</p>
-  </footer>
-
-  <div id="fullscreen-overlay" class="fullscreen-overlay">
-    <span id="close-fullscreen" class="close-fullscreen">&times;</span>
-    <img id="fullscreen-image" src="" alt="Full Screen Resume" class="fullscreen-image" />
-  </div>
-
-  <script src="assets/js/main.js"></script>
-  <script>
-    // Fullscreen functionality
-    const fullscreenOverlay = document.getElementById('fullscreen-overlay');
-    const fullscreenImage = document.getElementById('fullscreen-image');
-    const closeFullscreenButton = document.getElementById('close-fullscreen');
-    const previewImages = document.querySelectorAll('.clickable-resume');
-
-    if (fullscreenOverlay && fullscreenImage && closeFullscreenButton && previewImages.length > 0) {
-      previewImages.forEach((img) => {
-        img.addEventListener('click', () => {
-          const fullSrc = img.getAttribute('data-full');
-          fullscreenImage.src = fullSrc;
-          fullscreenOverlay.classList.add('active');
-          document.body.classList.add('overlay-active');
-        });
-      });
-
-      const closeFullscreen = () => {
-        fullscreenOverlay.classList.remove('active');
-        fullscreenImage.src = '';
-        document.body.classList.remove('overlay-active');
-      };
-
-      closeFullscreenButton.addEventListener('click', closeFullscreen);
-
-      fullscreenOverlay.addEventListener('click', (e) => {
-        if (e.target === fullscreenOverlay) {
-          closeFullscreen();
-        }
-      });
-
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && fullscreenOverlay.classList.contains('active')) {
-          closeFullscreen();
-        }
-      });
-    }
-  </script>
-</body>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/resume.js"></script>
+  </body>
 </html>
