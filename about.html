@@ -338,34 +338,29 @@
         </div>
       </section>
 
-      <!-- Interactive Terminal -->
-      <section class="terminal-section">
-        <div class="terminal-header">
-          <div class="terminal-dots">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
+      <!-- Badge section -->
+      <section class="mission-briefing-section">
+          <div class="mission-header">
+              <span>FILE: #PROJECT_ANOMALY</span>
+              <span class="classified-stamp">TOP SECRET</span>
           </div>
-          <span class="terminal-title">terminal</span>
-        </div>
-        <div class="terminal">
-          <div id="terminal-output" class="terminal-output">
-            <div class="terminal-line">
-              Welcome to anantSec terminal. Type 'help' for commands.
-            </div>
+          <div class="mission-content">
+              <div class="mission-text">
+                  <h3>[CTF_FLAG_UNLOCKED]: The Rabbit Hole</h3>
+                  <p class="mission-description">
+                      Your mission, should you choose to accept it: infiltrate the system, interact with the 3D badge, and explore its integrated terminal. Proceed with curiosity. This message will not self-destruct... probably.
+                  </p>
+                  <a href="3d-badge.html" class="mission-cta">
+                      Launch Experience <i class="fas fa-arrow-right"></i>
+                  </a>
+              </div>
+              <div class="mission-visual">
+                  <img src="assets/img/about-badge.png" alt="A preview of the AnantSec logo, the mission's objective." title="Mission Objective Preview">
+                  <div class="visual-scanline"></div>
+              </div>
           </div>
-          <div class="terminal-input-line">
-            <span class="prompt">></span>
-            <input
-              type="text"
-              id="terminal-input"
-              autofocus
-              autocomplete="off"
-              placeholder="Type 'help' for commands..."
-            />
-          </div>
-        </div>
       </section>
+      
 
       <!-- About Me - Featured -->
       <section class="about-section featured">
@@ -434,6 +429,5 @@
     </footer>
 
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/about.js"></script>
   </body>
 </html>
