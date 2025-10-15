@@ -1,8 +1,47 @@
+function showCertificatesLoading() {
+  const sections = ['certificates-grid', 'jobsim-grid', 'badges-grid'];
+  sections.forEach(id => {
+    const grid = document.getElementById(id);
+    if (grid) {
+      grid.innerHTML = `
+        <div class="skeleton-wrapper">
+          <div class="skeleton-item" style="height: 300px;"></div>
+          <div class="skeleton-item" style="height: 300px;"></div>
+        </div>
+      `;
+    }
+  });
+}
+
+// Show error state
+function showCertificatesError() {
+  const grid = document.getElementById('certificates-grid');
+  if (grid) {
+    grid.parentElement.innerHTML = `
+      <div class="error-state" role="alert">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p>⚠️ Failed to load certificates.</p>
+        <button onclick="location.reload()">
+          <i class="fas fa-redo"></i> Try Again
+        </button>
+      </div>
+    `;
+  }
+}
+
+
+
 // Fetch and render certificates
+// showCertificatesLoading();
+
 fetch("data/certificates.json")
-  .then(res => res.json())
+  .then(res => {
+    if (!res.ok) throw new Error('Network response was not ok');
+    return res.json();
+  })
   .then(data => {
-    const certGrid = document.getElementById("certificates-grid");
+    setTimeout(() => {
+      const certGrid = document.getElementById("certificates-grid");
     const jobsimGrid = document.getElementById("jobsim-grid");
     const badgeGrid = document.getElementById("badges-grid");
 
@@ -62,9 +101,11 @@ fetch("data/certificates.json")
     data.badges.forEach(badge =>
       badgeGrid.appendChild(createCard(badge, 'Badge'))
     );
+    }, 300);
   })
   .catch(err => {
     console.error("❌ Failed to load certificates:", err);
+    showCertificatesError();
   });
 
 // Modal functionality

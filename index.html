@@ -29,6 +29,47 @@
       content="Cybersecurity enthusiast specializing in Active Directory, Bug Bounty, and Red Teaming"
     />
 
+
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+
+    <!-- Preload critical resources -->
+    <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js">
+    <link rel="preload" as="style" href="assets/css/style.css">
+    <link rel="preload" as="style" href="assets/css/index.css">
+
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" 
+          content="default-src 'self'; 
+                  script-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net 'unsafe-inline'; 
+                  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unicons.iconscout.com; 
+                  img-src 'self' data: https:; 
+                  font-src 'self' https://cdnjs.cloudflare.com https://unicons.iconscout.com;
+                  connect-src 'self' https:;">
+
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Anant Kumar Pandey",
+      "url": "https://sh4dowkey.github.io",
+      "sameAs": [
+        "https://github.com/sh4dowkey",
+        "https://linkedin.com/in/anant-ku-pandey",
+        "https://twitter.com/"
+      ],
+      "jobTitle": "Cybersecurity Enthusiast",
+      "description": "Cybersecurity enthusiast specializing in Active Directory, Bug Bounty, and Red Teaming",
+      "knowsAbout": ["Cybersecurity", "Penetration Testing", "Bug Bounty", "Active Directory", "Red Teaming"]
+    }
+    </script>
+
+    <!-- Web App Manifest (optional, for PWA) -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#292a2d">
+
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/img/favicon.png" />
 
@@ -156,9 +197,9 @@
     </div>
 
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
-
-    <script src="assets/js/index.js"></script>
-    <script src="assets/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js" defer></script>
+    <script src="assets/js/utils.js" type="module"></script>
+    <script src="assets/js/index.js" defer></script>
+    <script src="assets/js/main.js" defer></script>
   </body>
 </html>

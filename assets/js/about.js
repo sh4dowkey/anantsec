@@ -1,3 +1,49 @@
+// === ADD TO TOP OF assets/js/about.js ===
+
+// Sanitize user input to prevent XSS
+function sanitizeInput(input) {
+  const div = document.createElement('div');
+  div.textContent = input;
+  return div.innerHTML;
+}
+
+// THEN MODIFY the existing event listener:
+terminalInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        const rawCommand = terminalInput.value.trim();
+        const command = sanitizeInput(rawCommand).toLowerCase(); // SANITIZE HERE
+        
+        const line = document.createElement('div');
+        line.className = 'terminal-line';
+        line.innerHTML = `<span class="prompt">></span> ${sanitizeInput(rawCommand)}`; // SANITIZE HERE TOO
+        terminalOutput.appendChild(line);
+
+        if (command === 'clear') {
+            terminalOutput.innerHTML = '';
+        } else if (commands[command]) {
+            const response = document.createElement('div');
+            response.className = 'terminal-line';
+            response.style.whiteSpace = 'pre-wrap';
+            response.textContent = commands[command];
+            terminalOutput.appendChild(response);
+        } else if (command) {
+            const error = document.createElement('div');
+            error.className = 'terminal-line';
+            error.textContent = `Command not found: ${command}. Type 'help' for available commands.`;
+            terminalOutput.appendChild(error);
+        }
+
+        terminalInput.value = '';
+        terminalOutput.scrollTop = terminalOutput.scrollHeight;
+    }
+});
+
+
+
+
+
+
+
 const terminalInput = document.getElementById('terminal-input');
 const terminalOutput = document.getElementById('terminal-output');
 
