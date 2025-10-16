@@ -5,6 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive 3D Badge - anantsec</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    
+        <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" 
+          content="default-src 'self'; 
+                  script-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net 'unsafe-inline' 'unsafe-eval'; 
+                  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unicons.iconscout.com https://fonts.googleapis.com; 
+                  img-src 'self' data: https: blob:; 
+                  font-src 'self' https://cdnjs.cloudflare.com https://unicons.iconscout.com https://fonts.gstatic.com;
+                  connect-src 'self' https:;
+                  frame-src 'self' https://anantsecbadge.netlify.app;
+                  base-uri 'self';
+                  form-action 'self';
+                  upgrade-insecure-requests;">
+
+    <!-- Additional Security -->
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html, body {
@@ -51,5 +72,7 @@
         src="https://anantsecbadge.netlify.app/" 
         title="Interactive 3D Badge - anantsec">
     </iframe>
+
+    <script src="assets/js/security.js" defer></script>
 </body>
 </html>

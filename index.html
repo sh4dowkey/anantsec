@@ -48,6 +48,52 @@
                   font-src 'self' https://cdnjs.cloudflare.com https://unicons.iconscout.com;
                   connect-src 'self' https:;">
 
+    <!-- Add these security headers to ALL HTML files in <head> section -->
+
+    <!-- Content Security Policy - Prevents XSS attacks -->
+    <meta http-equiv="Content-Security-Policy" 
+          content="default-src 'self'; 
+                  script-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net 'unsafe-inline' 'unsafe-eval'; 
+                  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unicons.iconscout.com https://fonts.googleapis.com; 
+                  img-src 'self' data: https: blob:; 
+                  font-src 'self' https://cdnjs.cloudflare.com https://unicons.iconscout.com https://fonts.gstatic.com;
+                  connect-src 'self' https:;
+                  frame-src 'self' https://anantsecbadge.netlify.app;
+                  base-uri 'self';
+                  form-action 'self';
+                  upgrade-insecure-requests;">
+
+    <!-- Permissions Policy - Controls browser features -->
+    <meta http-equiv="Permissions-Policy" 
+          content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=(), gyroscope=(), speaker=(), vibrate=()">
+
+    <!-- Referrer Policy - Controls referrer information -->
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- X-Frame-Options - Prevents clickjacking -->
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+
+    <!-- X-Content-Type-Options - Prevents MIME sniffing -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+
+    <!-- X-XSS-Protection - Legacy XSS protection -->
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+
+    <!-- Strict-Transport-Security will be added via Netlify headers -->
+
+    <!-- DNS Prefetch Control - Disable for privacy -->
+    <meta http-equiv="x-dns-prefetch-control" content="off">
+
+    <!-- Additional Security Meta -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- Resource Integrity for CDN scripts -->
+    <!-- Example for particles.js - add integrity hashes for all CDN resources -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+
     <!-- Structured Data for SEO -->
     <script type="application/ld+json">
     {
@@ -201,5 +247,6 @@
     <script src="assets/js/utils.js" type="module"></script>
     <script src="assets/js/index.js" defer></script>
     <script src="assets/js/main.js" defer></script>
+    <script src="assets/js/security.js" defer></script>
   </body>
 </html>
