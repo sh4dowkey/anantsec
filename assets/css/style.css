@@ -770,3 +770,95 @@ a.button:active::after {
     border: 2px solid currentColor;
   }
 }
+
+
+
+
+/* === ADD TO END OF assets/css/certificates.css === */
+
+/* Fade in animation for content */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Card hover effects enhancement */
+.cert-card {
+  cursor: pointer;
+  user-select: none;
+}
+
+.cert-card:focus {
+  outline: 2px solid rgba(102, 204, 255, 0.5);
+  outline-offset: 4px;
+}
+
+body.light .cert-card:focus {
+  outline-color: rgba(0, 102, 170, 0.5);
+}
+
+/* Modal animations */
+.modal {
+  animation: modalFadeIn 0.3s ease;
+}
+
+.modal.active {
+  animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-content img {
+  animation: modalZoom 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes modalZoom {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Loading skeleton specific to certificates */
+.cert-grid .skeleton-item {
+  height: 300px;
+  border-radius: 16px;
+}
+
+/* Empty state styling */
+.cert-grid p {
+  padding: 3rem;
+  text-align: center;
+  color: #888;
+  font-size: 1rem;
+}
+
+body.light .cert-grid p {
+  color: #666;
+}
+
+/* Improve image loading */
+.cert-card img {
+  background: linear-gradient(135deg, #2a2a2d, #35353a);
+}
+
+body.light .cert-card img {
+  background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+}

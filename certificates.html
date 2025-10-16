@@ -3,55 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Professional certifications and achievements" />
 
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="anantsec – Cybersecurity Portfolio" />
-    <meta
-      property="og:description"
-      content="Cybersecurity enthusiast specializing in Active Directory, Bug Bounty, and Red Teaming"
-    />
+    <meta property="og:title" content="Certificates – anantsec" />
+    <meta property="og:description" content="Professional cybersecurity certifications and achievements" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://sh4dowkey.github.iof" />
-    <meta
-      property="og:image"
-      content="https://sh4dowkey.github.io/assets/img/og-image.png"
-    />
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="anantsec – Cybersecurity Portfolio" />
-    <meta
-      name="twitter:description"
-      content="Cybersecurity enthusiast specializing in Active Directory, Bug Bounty, and Red Teaming"
-    />
+    <meta property="og:url" content="https://sh4dowkey.github.io/certificates.html" />
+    <meta property="og:image" content="https://sh4dowkey.github.io/assets/img/og-image.png" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/img/favicon.png" />
 
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+
     <title>Certificates | anantsec</title>
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="assets/css/certificates.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   </head>
   <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <nav class="nav-container">
       <div class="nav-left">
-        <a
-          href="index.html"
-          id="home_page"
-          style="
-            font-family: monospace;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-          "
-        >
+        <a href="index.html" id="home_page" style="font-family: monospace; display: flex; align-items: center; gap: 6px;">
           <span>>anantSec</span>
           <span id="svg-icon" class="flicker"></span>
         </a>
       </div>
 
       <input type="checkbox" id="menu-toggle" />
-      <label for="menu-toggle" class="menu-icon">&#9776;</label>
+      <label for="menu-toggle" class="menu-icon" tabindex="0" role="button" aria-label="Toggle menu">&#9776;</label>
 
       <div class="nav-right">
         <a href="about.html">About</a>
@@ -60,41 +45,50 @@
         <a href="resume.html">Resume</a>
         <a href="certificates.html">Certificates</a>
         <a href="writeups.html">Writeups</a>
-        <div class="theme-icon">◐</div>
+        <div class="theme-icon" role="button" tabindex="0" aria-label="Toggle theme">◐</div>
       </div>
     </nav>
 
-    <div class="container">
+    <div id="main-content" class="container">
       <!-- Page Header -->
       <div class="page-header">
         <h1>Certifications & Achievements</h1>
         <p>Professional certifications and learning milestones</p>
       </div>
 
+      <!-- Loading State (will be replaced by JS) -->
+      <div id="loading-state" class="skeleton-wrapper" role="status" aria-live="polite" aria-label="Loading certificates">
+        <div class="skeleton-item" style="height: 300px;"></div>
+        <div class="skeleton-item" style="height: 300px;"></div>
+        <div class="skeleton-item" style="height: 300px;"></div>
+      </div>
+
       <!-- Certificates Section -->
-      <div class="section-header">
-        <h2>🎓 Professional Certificates</h2>
-      </div>
-      <div class="cert-grid" id="certificates-grid"></div>
+      <div id="certificates-section" style="display: none;">
+        <div class="section-header">
+          <h2>🎓 Professional Certificates</h2>
+        </div>
+        <div class="cert-grid" id="certificates-grid"></div>
 
-      <!-- Job Simulations Section -->
-      <div class="section-header">
-        <h2>💼 Job Simulations</h2>
-      </div>
-      <div class="cert-grid" id="jobsim-grid"></div>
+        <!-- Job Simulations Section -->
+        <div class="section-header">
+          <h2>💼 Job Simulations</h2>
+        </div>
+        <div class="cert-grid" id="jobsim-grid"></div>
 
-      <!-- Badges Section -->
-      <div class="section-header">
-        <h2>🏅 Achievement Badges</h2>
+        <!-- Badges Section -->
+        <div class="section-header">
+          <h2>🏅 Achievement Badges</h2>
+        </div>
+        <div class="cert-grid" id="badges-grid"></div>
       </div>
-      <div class="cert-grid" id="badges-grid"></div>
     </div>
 
     <!-- Fullscreen Modal -->
-    <div class="modal" id="modal">
+    <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
       <div class="modal-content">
-        <div class="modal-close" id="modal-close">&times;</div>
-        <img id="modal-image" src="" alt="Certificate" />
+        <button class="modal-close" id="modal-close" aria-label="Close modal">&times;</button>
+        <img id="modal-image" src="" alt="" />
       </div>
     </div>
 
