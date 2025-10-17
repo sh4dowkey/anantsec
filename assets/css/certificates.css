@@ -14,8 +14,7 @@ body {
 body {
   background-color: #292a2d;
   color: #a9a9b3;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 body.light {
@@ -30,10 +29,7 @@ body::before {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: linear-gradient(
-      rgba(255, 255, 255, 0.015) 1px,
-      transparent 1px
-    ),
+  background-image: linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
   background-size: 50px 50px;
   animation: gridFloat 30s linear infinite;
@@ -83,11 +79,7 @@ body.light::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(
-    circle,
-    rgba(100, 100, 100, 0.02),
-    transparent 50%
-  );
+  background: radial-gradient(circle, rgba(100, 100, 100, 0.02), transparent 50%);
   pointer-events: none;
   transform-origin: center;
   animation: headerGlow 10s linear infinite;
@@ -137,12 +129,7 @@ body.light .page-header {
   transform: translateX(-50%);
   width: 60%;
   height: 2px;
-  background: linear-gradient(
-    to right,
-    rgba(200, 200, 200, 0),
-    rgba(200, 200, 200, 0.85),
-    rgba(200, 200, 200, 0)
-  );
+  background: linear-gradient(to right, rgba(200, 200, 200, 0), rgba(200, 200, 200, 0.85), rgba(200, 200, 200, 0));
   border-radius: 2px;
   animation: neutralUnderline 3s ease-in-out infinite alternate;
 }
@@ -193,13 +180,15 @@ body.light .section-header h2 {
   color: #2a2a2a;
 }
 
+/* FIXED: Certificate Grid with proper sizing */
 .cert-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 1.8rem;
   margin-bottom: 2.5rem;
 }
 
+/* FIXED: Certificate Card with constrained dimensions */
 .cert-card {
   background: rgba(30, 31, 34, 0.4);
   backdrop-filter: blur(12px);
@@ -212,6 +201,10 @@ body.light .section-header h2 {
   position: relative;
   animation: cardFadeIn 0.5s ease forwards;
   opacity: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-width: 100%;
 }
 
 @keyframes cardFadeIn {
@@ -270,12 +263,14 @@ body.light .cert-card:hover {
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
 }
 
+/* FIXED: Image container with fixed aspect ratio */
 .cert-image-container {
   position: relative;
   width: 100%;
-  height: 200px;
+  padding-top: 66.67%; /* 3:2 aspect ratio */
   overflow: hidden;
   background: rgba(255, 255, 255, 0.02);
+  flex-shrink: 0;
 }
 
 body.light .cert-image-container {
@@ -283,6 +278,9 @@ body.light .cert-image-container {
 }
 
 .cert-card img {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -313,6 +311,7 @@ body.light .cert-card img {
   text-transform: uppercase;
   letter-spacing: 0.5px;
   border: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 2;
 }
 
 body.light .cert-badge {
@@ -321,8 +320,13 @@ body.light .cert-badge {
   border-color: rgba(0, 0, 0, 0.1);
 }
 
+/* FIXED: Content area with proper padding */
 .cert-content {
   padding: 1.3rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
 }
 
 .cert-title {
@@ -332,6 +336,11 @@ body.light .cert-badge {
   margin-bottom: 0.5rem;
   line-height: 1.4;
   transition: color 0.2s ease;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 body.light .cert-title {
@@ -352,6 +361,7 @@ body.light .cert-card:hover .cert-title {
   display: flex;
   align-items: center;
   gap: 0.4rem;
+  margin-top: auto;
 }
 
 .cert-issuer i {
@@ -359,6 +369,7 @@ body.light .cert-card:hover .cert-title {
   opacity: 0.7;
 }
 
+/* Modal styles */
 .modal {
   display: none;
   position: fixed;
@@ -435,6 +446,7 @@ body.light .cert-card:hover .cert-title {
   background: rgba(255, 255, 255, 0.2);
 }
 
+/* Responsive design */
 @media (max-width: 768px) {
   .container {
     padding: 2rem 1rem;
@@ -451,9 +463,91 @@ body.light .cert-card:hover .cert-title {
   }
 }
 
+@media (min-width: 769px) and (max-width: 1024px) {
+  .cert-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
 footer {
   text-align: center;
   padding: 3rem 0 2rem;
   color: #666;
   font-size: 0.9rem;
+}
+
+/* Loading and error states */
+.skeleton-wrapper {
+  padding: 2rem 0;
+}
+
+.skeleton-item {
+  height: 300px;
+  background: linear-gradient(90deg, #2a2a2d 25%, #35353a 50%, #2a2a2d 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+body.light .skeleton-item {
+  background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+  background-size: 200% 100%;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.error-state {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: #888;
+}
+
+.error-state i {
+  font-size: 3rem;
+  color: #ff6b6b;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.error-state p {
+  margin: 1rem 0;
+  font-size: 1.1rem;
+}
+
+.error-state button {
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background: rgba(100, 100, 100, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #d5d5d5;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.error-state button:hover {
+  background: rgba(100, 100, 100, 0.35);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+body.light .error-state button {
+  background: rgba(200, 200, 200, 0.3);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #333;
+}
+
+body.light .error-state button:hover {
+  background: rgba(200, 200, 200, 0.5);
+  border-color: rgba(0, 0, 0, 0.2);
 }

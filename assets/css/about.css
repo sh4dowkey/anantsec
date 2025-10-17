@@ -698,174 +698,358 @@ footer {
 
 
 
-
-
-/* === Mission Briefing Section (Final Polished Version) === */
-.mission-briefing-section {
-    background: rgba(30, 31, 34, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 12px;
-    margin: 3rem 0;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-    position: relative;
-    backdrop-filter: blur(10px);
+/* === Enhanced Badge Preview Section === */
+.badge-preview-section {
+  background: rgba(30, 31, 34, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  margin: 3rem 0;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.mission-header {
-    background: rgba(255, 255, 255, 0.03); /* Lighter, consistent header */
-    padding: 0.6rem 1.5rem;
-    font-family: 'Courier New', monospace;
-    font-size: 0.8rem;
-    color: #888;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+body.light .badge-preview-section {
+  background: rgba(255, 255, 255, 0.7);
+  border-color: rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
 }
 
-.classified-stamp {
-    background: #b32d2d;
-    color: #fff;
-    font-weight: bold;
-    padding: 3px 8px;
-    font-size: 0.7rem;
-    border-radius: 4px;
-    user-select: none;
+.badge-preview-section:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
 }
 
-.mission-content {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    padding: 2rem 2.5rem;
+body.light .badge-preview-section:hover {
+  border-color: rgba(0, 0, 0, 0.12);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
 }
 
-.mission-text {
-    flex: 1;
+/* Header with gradient background */
+.badge-preview-header {
+  background: linear-gradient(135deg, rgba(100, 140, 180, 0.1), rgba(80, 120, 160, 0.05));
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
 }
 
-.mission-text h3 {
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: #d5d5d5;
-    margin-bottom: 0.75rem;
+body.light .badge-preview-header {
+  background: linear-gradient(135deg, rgba(100, 140, 180, 0.08), rgba(80, 120, 160, 0.04));
+  border-bottom-color: rgba(0, 0, 0, 0.08);
 }
 
-.mission-description {
-    color: #a9a9b3;
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
+.badge-preview-header::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(100, 140, 180, 0.1), transparent 70%);
+  animation: headerPulse 8s ease-in-out infinite;
+  pointer-events: none;
 }
 
-.mission-visual {
-    flex-shrink: 0;
-    width: 160px;
-    height: 160px;
-    border-radius: 8px;
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    padding: 6px;
-    position: relative;
-    background: #111;
+@keyframes headerPulse {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate(-10%, -10%) scale(1.1);
+    opacity: 0.8;
+  }
 }
 
-.mission-visual img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 4px;
+.badge-preview-title {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  position: relative;
+  z-index: 1;
 }
 
-.visual-scanline {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: rgba(200, 200, 220, 0.6);
-    opacity: 0.7;
-    box-shadow: 0 0 10px rgba(200, 200, 220, 0.5);
-    animation: scan 4s linear infinite;
+.badge-preview-title h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #d5d5d5;
+  margin: 0;
 }
 
-@keyframes scan {
-    0% { top: 0; }
-    50% { top: 100%; }
-    100% { top: 0; }
+body.light .badge-preview-title h3 {
+  color: #1a1a1a;
 }
 
-/* --- Final Button Styles --- */
-.mission-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.7rem;
-    background: linear-gradient(145deg, #2e2e32, #1a1a1e);
-    color: #d5d5d5;
-    padding: 12px 28px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+.badge-preview-title i {
+  font-size: 1.2rem;
+  color: #7a90c4;
+  animation: iconFloat 3s ease-in-out infinite;
 }
 
-.mission-cta:hover {
+body.light .badge-preview-title i {
+  color: #5d7aa8;
+}
+
+@keyframes iconFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
     transform: translateY(-4px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-    color: #fff;
-    border-color: rgba(255, 255, 255, 0.15);
+  }
 }
 
-.mission-cta i {
-    transition: transform 0.3s ease;
+.badge-preview-status {
+  background: rgba(100, 200, 100, 0.15);
+  color: #7ed980;
+  padding: 0.4rem 0.9rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: 1px solid rgba(100, 200, 100, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  position: relative;
+  z-index: 1;
 }
 
-.mission-cta:hover i {
-    transform: translateX(5px);
-}
-/* --- End of Final Button Styles --- */
-
-
-/* Light Theme Adjustments */
-body.light .mission-briefing-section {
-    background: rgba(255, 255, 255, 0.7);
-    border-color: rgba(0, 0, 0, 0.06);
-}
-body.light .mission-header {
-    background: rgba(0, 0, 0, 0.05);
-    border-bottom-color: rgba(0, 0, 0, 0.1);
-    color: #555;
-}
-body.light .mission-text h3 {
-    color: #1a1a1a;
-}
-body.light .mission-description {
-    color: #444;
-}
-body.light .mission-visual {
-    border-color: rgba(0, 0, 0, 0.15);
-    background: #ddd;
-}
-body.light .mission-cta {
-    background: #f0f0f0;
-    color: #333;
-    border-color: #ddd;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-}
-body.light .mission-cta:hover {
-    color: #000;
-    border-color: #ccc;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+.badge-preview-status::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #7ed980;
+  animation: statusPulse 2s ease-in-out infinite;
 }
 
+@keyframes statusPulse {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgba(126, 217, 128, 0.7);
+  }
+  50% {
+    opacity: 0.7;
+    box-shadow: 0 0 0 4px rgba(126, 217, 128, 0);
+  }
+}
+
+/* Content area with preview */
+.badge-preview-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding: 2rem;
+  align-items: center;
+}
+
+.badge-preview-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.badge-preview-text h4 {
+  font-size: 1.2rem;
+  color: #c9c9c9;
+  margin: 0;
+  font-weight: 500;
+}
+
+body.light .badge-preview-text h4 {
+  color: #2a2a2a;
+}
+
+.badge-preview-text p {
+  color: #a9a9b3;
+  line-height: 1.7;
+  margin: 0;
+}
+
+body.light .badge-preview-text p {
+  color: #555;
+}
+
+.badge-features {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+.badge-feature {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #999;
+  font-size: 0.95rem;
+}
+
+.badge-feature i {
+  color: #7a90c4;
+  font-size: 0.9rem;
+  width: 20px;
+}
+
+body.light .badge-feature i {
+  color: #5d7aa8;
+}
+
+.badge-preview-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  background: linear-gradient(135deg, rgba(120, 140, 180, 0.2), rgba(100, 120, 160, 0.15));
+  color: #d5d5d5;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(120, 140, 180, 0.3);
+  position: relative;
+  overflow: hidden;
+  align-self: flex-start;
+}
+
+body.light .badge-preview-cta {
+  background: linear-gradient(135deg, rgba(100, 120, 160, 0.15), rgba(80, 100, 140, 0.1));
+  color: #333;
+  border-color: rgba(100, 120, 160, 0.3);
+}
+
+.badge-preview-cta::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.badge-preview-cta:hover::before {
+  left: 100%;
+}
+
+.badge-preview-cta:hover {
+  background: linear-gradient(135deg, rgba(120, 140, 180, 0.3), rgba(100, 120, 160, 0.25));
+  border-color: rgba(120, 140, 180, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(120, 140, 180, 0.2);
+}
+
+body.light .badge-preview-cta:hover {
+  background: linear-gradient(135deg, rgba(100, 120, 160, 0.25), rgba(80, 100, 140, 0.2));
+  border-color: rgba(100, 120, 160, 0.5);
+  box-shadow: 0 8px 20px rgba(100, 120, 160, 0.15);
+}
+
+.badge-preview-cta i {
+  transition: transform 0.3s ease;
+}
+
+.badge-preview-cta:hover i {
+  transform: translateX(4px);
+}
+
+/* Visual preview area */
+.badge-preview-visual {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  aspect-ratio: 16/9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body.light .badge-preview-visual {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+.badge-preview-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: brightness(0.9);
+}
+
+body.light .badge-preview-visual img {
+  filter: brightness(1);
+}
+
+.badge-preview-section:hover .badge-preview-visual img {
+  transform: scale(1.05);
+  filter: brightness(1);
+}
+
+.badge-preview-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.badge-preview-section:hover .badge-preview-overlay {
+  opacity: 1;
+}
+
+.badge-preview-play {
+  background: rgba(255, 255, 255, 0.95);
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  font-size: 2rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.badge-preview-play:hover {
+  transform: scale(1.1);
+  background: #fff;
+}
+
+/* Responsive design */
 @media (max-width: 768px) {
-    .mission-content {
-        flex-direction: column-reverse;
-        text-align: center;
-    }
-    .mission-visual {
-        width: 140px;
-        height: 140px;
-    }
+  .badge-preview-content {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .badge-preview-visual {
+    order: -1;
+  }
+
+  .badge-preview-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .badge-preview-cta {
+    width: 100%;
+    justify-content: center;
+  }
 }
