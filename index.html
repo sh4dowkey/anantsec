@@ -39,6 +39,16 @@
     <link rel="preload" as="style" href="assets/css/style.css">
     <link rel="preload" as="style" href="assets/css/index.css">
 
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" 
+          content="default-src 'self'; 
+                  script-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net 'unsafe-inline'; 
+                  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unicons.iconscout.com; 
+                  img-src 'self' data: https:; 
+                  font-src 'self' https://cdnjs.cloudflare.com https://unicons.iconscout.com;
+                  connect-src 'self' https:;">
+
+
     <!-- Resource Integrity for CDN scripts -->
     <!-- Example for particles.js - add integrity hashes for all CDN resources -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
