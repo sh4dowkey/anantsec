@@ -9,7 +9,7 @@ Disallow: /scripts/
 Disallow: /.github/
 
 # Sitemap location
-Sitemap: https://sh4dowkey.github.io/sitemap.xml
+Sitemap: https://anantsec.netlify.app/sitemap.xml
 
 # Crawl delay (optional)
 Crawl-delay: 1
