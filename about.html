@@ -9,9 +9,29 @@
     <meta property="og:title" content="About – anantsec" />
     <meta property="og:description" content="Cybersecurity enthusiast specializing in Active Directory, Bug Bounty, and Red Teaming" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://anantsec.netlify.app/about.html" />
-    <meta property="og:image" content="https://anantsec.netlify.app/assets/img/og-image.png" />
+    <meta property="og:url" content="https://sh4dowkey.github.io/about.html" />
+    <meta property="og:image" content="https://sh4dowkey.github.io/assets/img/og-image.png" />
 
+        <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" 
+          content="default-src 'self'; 
+                  script-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net 'unsafe-inline' 'unsafe-eval'; 
+                  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unicons.iconscout.com https://fonts.googleapis.com; 
+                  img-src 'self' data: https: blob:; 
+                  font-src 'self' https://cdnjs.cloudflare.com https://unicons.iconscout.com https://fonts.gstatic.com;
+                  connect-src 'self' https:;
+                  frame-src 'self' https://badge-anantsec.netlify.app;
+                  base-uri 'self';
+                  form-action 'self';
+                  upgrade-insecure-requests;">
+
+    <!-- Additional Security -->
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/img/favicon.png" />
 
@@ -24,40 +44,7 @@
     <link rel="stylesheet" href="assets/css/about.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   </head>
-  <body class="about-fullscreen">
-
-
-
-    <!-- LOADING SCREEN HTML  -->
-
-    <div class="page-loader" id="pageLoader">
-      <!-- Animated Logo -->
-      <div class="loader-logo">
-        <div class="loader-ring"></div>
-        <div class="loader-ring"></div>
-        <div class="loader-icon">
-          <i class="fas fa-shield-alt"></i>
-        </div>
-      </div>
-      
-      <!-- Loading Text -->
-      <div class="loader-text">Loading<span class="dots"></span></div>
-      
-      <!-- Progress Bar -->
-      <div class="loader-progress">
-        <div class="loader-progress-bar"></div>
-      </div>
-      
-      <!-- Floating Particles -->
-      <div class="loader-particles">
-        <div class="loader-particle"></div>
-        <div class="loader-particle"></div>
-        <div class="loader-particle"></div>
-        <div class="loader-particle"></div>
-        <div class="loader-particle"></div>
-      </div>
-    </div>
-    
+  <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <nav class="nav-container">
@@ -74,6 +61,7 @@
       <div class="nav-right">
         <a href="about.html">About</a>
         <a href="gallery.html">Gallery</a>
+        <a href="notes.html">Notes</a>
         <a href="resume.html">Resume</a>
         <a href="certificates.html">Certificates</a>
         <a href="writeups.html">Writeups</a>
@@ -81,50 +69,162 @@
       </div>
     </nav>
 
-    <!-- Main Content -->
-    <main id="main-content" class="badge-container">
-      <!-- Badge will be loaded here via iframe -->
-      <iframe 
-        id="badge-iframe"
-        src="https://badge-anantsec.netlify.app/" 
-        title="Interactive 3D Badge - anantsec"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        loading="lazy">
-      </iframe>
+    <main id="main-content" class="about-wrapper">
+      <!-- Profile Hero Section -->
+      <section class="profile-hero">
+        <div class="avatar-container">
+          <div class="avatar-glow" aria-hidden="true"></div>
+          <div class="avatar">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cybersecurity themed avatar">
+              <defs>
+                <radialGradient id="bgGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                  <stop offset="0%" style="stop-color: #333333; stop-opacity: 1" />
+                  <stop offset="100%" style="stop-color: #1d1d1d; stop-opacity: 1" />
+                </radialGradient>
+                <linearGradient id="monitorBodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color: #4c4c4c; stop-opacity: 1" />
+                  <stop offset="100%" style="stop-color: #9b9999; stop-opacity: 1" />
+                </linearGradient>
+                <linearGradient id="monitorScreenGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" style="stop-color: #3e3e3e; stop-opacity: 1" />
+                  <stop offset="100%" style="stop-color: #121111; stop-opacity: 1" />
+                </linearGradient>
+                <linearGradient id="bugBodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color: #b5b4af; stop-opacity: 1" />
+                  <stop offset="100%" style="stop-color: #cc9900; stop-opacity: 1" />
+                </linearGradient>
+                <linearGradient id="bugWingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color: #ffffff; stop-opacity: 0.8" />
+                  <stop offset="100%" style="stop-color: #cccccc; stop-opacity: 0.5" />
+                </linearGradient>
+                <pattern id="circuitPattern" width="10" height="10" patternUnits="userSpaceOnUse">
+                  <path d="M 0 0 L 10 10 M 10 0 L 0 10" stroke="#444" stroke-width="0.5" opacity="0.2" />
+                </pattern>
+              </defs>
 
-      <!-- Help Overlay (appears on first visit) -->
-      <div id="help-overlay" class="help-overlay">
-        <div class="help-content">
-          <button class="help-close" aria-label="Close help">&times;</button>
-          <h2>Interactive Terminal Commands</h2>
-          <div class="help-grid">
-            <div class="help-section">
-              <h3>Quick Start</h3>
-              <ul>
-                <li><code>help</code> - Show all commands</li>
-                <li><code>about</code> - My story</li>
-                <li><code>skills</code> - Technical skills</li>
-                <li><code>projects</code> - Featured work</li>
-              </ul>
-            </div>
-            <div class="help-section">
-              <h3>Navigation</h3>
-              <ul>
-                <li><code>contact</code> - Get in touch</li>
-                <li><code>github</code> - View GitHub</li>
-                <li><code>linkedin</code> - LinkedIn profile</li>
-                <li><code>clear</code> - Clear terminal</li>
-              </ul>
-            </div>
+              <circle cx="100" cy="100" r="100" fill="url(#bgGradient)" />
+              <rect x="0" y="0" width="200" height="200" fill="url(#circuitPattern)" />
+
+              <rect x="40" y="60" width="120" height="80" rx="8" ry="8" fill="url(#monitorBodyGrad)" />
+              <rect x="45" y="65" width="110" height="70" rx="5" ry="5" fill="url(#monitorScreenGrad)" />
+              <rect x="85" y="140" width="30" height="10" rx="3" fill="url(#monitorBodyGrad)" />
+              <rect x="80" y="150" width="40" height="5" rx="2" fill="#555" />
+
+              <g fill="#00ff00" opacity="0.8">
+                <rect x="50" y="70" width="40" height="2" />
+                <rect x="50" y="75" width="60" height="2" />
+                <rect x="50" y="80" width="30" height="2" />
+                <rect x="50" y="85" width="50" height="2" />
+                <rect x="50" y="90" width="45" height="2" />
+                <rect x="50" y="95" width="55" height="2" />
+                <rect x="50" y="100" width="35" height="2" />
+                <rect x="50" y="105" width="60" height="2" />
+                <rect x="50" y="110" width="40" height="2" />
+              </g>
+
+              <g transform="translate(100, 60) scale(0.6)">
+                <ellipse cx="0" cy="0" rx="30" ry="20" fill="url(#bugBodyGrad)" stroke="#806000" stroke-width="2" />
+                <circle cx="0" cy="-20" r="15" fill="url(#bugBodyGrad)" stroke="#806000" stroke-width="2" />
+                <circle cx="-7" cy="-25" r="4" fill="#fff" />
+                <circle cx="7" cy="-25" r="4" fill="#fff" />
+                <circle cx="-7" cy="-25" r="2" fill="#000" />
+                <circle cx="7" cy="-25" r="2" fill="#000" />
+                <line x1="-10" y1="-30" x2="-15" y2="-45" stroke="#806000" stroke-width="2" stroke-linecap="round" />
+                <circle cx="-15" cy="-45" r="3" fill="#806000" />
+                <line x1="10" y1="-30" x2="15" y2="-45" stroke="#806000" stroke-width="2" stroke-linecap="round" />
+                <circle cx="15" cy="-45" r="3" fill="#806000" />
+                <line x1="-20" y1="-5" x2="-35" y2="0" stroke="#806000" stroke-width="2" stroke-linecap="round" />
+                <line x1="-20" y1="5" x2="-35" y2="10" stroke="#806000" stroke-width="2" stroke-linecap="round" />
+                <line x1="20" y1="-5" x2="35" y2="0" stroke="#806000" stroke-width="2" stroke-linecap="round" />
+                <line x1="20" y1="5" x2="35" y2="10" stroke="#806000" stroke-width="2" stroke-linecap="round" />
+                <path d="M -10 0 Q -5 -15 0 -10 Q 5 -15 10 0 Z" fill="url(#bugWingGrad)" stroke="#cccccc" stroke-width="1" opacity="0.9" transform="rotate(-15)" />
+                <path d="M -10 0 Q -5 -15 0 -10 Q 5 -15 10 0 Z" fill="url(#bugWingGrad)" stroke="#cccccc" stroke-width="1" opacity="0.9" transform="rotate(15)" />
+              </g>
+            </svg>
           </div>
-          <button class="help-cta">Got it! Let's Explore</button>
         </div>
-      </div>
+        <div class="profile-info">
+          <h1>Anant Kumar Pandey</h1>
+          <p class="profile-subtitle">Cybersecurity Enthusiast</p>
+          <div class="profile-tags">
+            <span class="tag">Active Directory</span>
+            <span class="tag">Bug Bounty</span>
+            <span class="tag">Red Teaming</span>
+          </div>
+        </div>
+      </section>
 
+      <!-- Badge section -->
+      <section class="mission-briefing-section">
+        <div class="mission-header">
+          <span>FILE: #PROJECT_ANOMALY</span>
+          <span class="classified-stamp">TOP SECRET</span>
+        </div>
+        <div class="mission-content">
+          <div class="mission-text">
+            <h3>[CTF_FLAG_UNLOCKED]: The Rabbit Hole</h3>
+            <p class="mission-description">
+              Your mission, should you choose to accept it: infiltrate the system, interact with the 3D badge, and explore its integrated terminal. Proceed with curiosity. This message will not self-destruct... probably.
+            </p>
+            <a href="3d-badge.html" class="mission-cta">
+              Launch Experience <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+          <div class="mission-visual">
+            <img src="assets/img/about-badge.png" alt="AnantSec mission objective" loading="lazy">
+            <div class="visual-scanline" aria-hidden="true"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- About Me -->
+      <section class="about-section featured">
+        <h2>About Me</h2>
+        <p>
+          Hi there. I'm Anant Kumar Pandey, a Cybersecurity Enthusiast currently learning the ropes of security, Active Directory attacks, and bug bounty. This portfolio showcases Hack The Box walkthroughs, bug bounty writeups, personal notes, and red team projects.
+        </p>
+        <p>
+          I'm passionate about understanding how systems work from the inside out, finding vulnerabilities, and learning defensive strategies. Whether it's breaking into machines on HTB or researching real-world security issues, I'm always looking for the next challenge.
+        </p>
+      </section>
+
+      <!-- My Journey -->
+      <section class="about-section">
+        <h2>My Journey</h2>
+        <p>
+          Started with curiosity → Random Searches → Fell in love with security → Exploring CTFs → Now diving deep into Security and Breaking things.
+        </p>
+        <p>
+          I enjoy learning new things and am always happy for projects or knowledge sharing.
+        </p>
+      </section>
+
+      <!-- Let's Connect -->
+      <section class="about-section">
+        <h2>Let's Connect</h2>
+        <p>Interested in collaborations or just a good cyber chat? Reach out to me via:</p>
+        <ul class="contact-list">
+          <li>
+            <i class="fas fa-envelope" aria-hidden="true"></i>
+            <a href="mailto:anant.pandey017@gmail.com">anant.pandey017@gmail.com</a>
+          </li>
+          <li>
+            <i class="fab fa-github" aria-hidden="true"></i>
+            <a href="https://github.com/sh4dowkey" target="_blank" rel="noopener noreferrer">@sh4dowkey</a>
+          </li>
+          <li>
+            <i class="fab fa-linkedin" aria-hidden="true"></i>
+            <a href="https://www.linkedin.com/in/anant-ku-pandey" target="_blank" rel="noopener noreferrer">Anant Kumar Pandey</a>
+          </li>
+        </ul>
+      </section>
     </main>
 
+    <footer>
+      <p>&lt;/&gt; Code, curiosity, and creativity. © 2025 anantsec</p>
+    </footer>
+
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/about.js"></script>
-    <script src="assets/js/loader.js" defer></script>
+    <script src="assets/js/security.js"></script>
   </body>
 </html>

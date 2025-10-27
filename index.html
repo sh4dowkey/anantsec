@@ -3,21 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Cybersecurity portfolio of Anant Pandey, showcasing red teaming, labs, and bug bounty work." />
+    <meta
+      name="description"
+      content="Cybersecurity portfolio of Anant Pandey, showcasing red teaming, labs, and bug bounty work."
+    />
 
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="anantsec – Cybersecurity Portfolio" />
-    <meta property="og:description" content="Cybersecurity enthusiast specializing in Active Directory, Bug Bounty, and Red Teaming" />
+    <meta
+      property="og:description"
+      content="Cybersecurity enthusiast specializing in Active Directory, Bug Bounty, and Red Teaming"
+    />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://anantsec.netlify.app" />
-    <meta property="og:image" content="https://anantsec.netlify.app/assets/img/og-image.png" />
+    <meta property="og:url" content="https://sh4dowkey.github.io" />
+    <meta
+      property="og:image"
+      content="https://sh4dowkey.github.io/assets/img/og-image.png"
+    />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="anantsec – Cybersecurity Portfolio" />
-    <meta name="twitter:description" content="Cybersecurity enthusiast specializing in Active Directory, Bug Bounty, and Red Teaming" />
+    <meta
+      name="twitter:description"
+      content="Cybersecurity enthusiast specializing in Active Directory, Bug Bounty, and Red Teaming"
+    />
 
-    <!-- Preconnect -->
+
+    <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
 
@@ -25,8 +38,83 @@
     <link rel="preload" as="script" href="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js">
     <link rel="preload" as="style" href="assets/css/style.css">
     <link rel="preload" as="style" href="assets/css/index.css">
-    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link rel="preload" as="style" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css" />
+
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" 
+          content="default-src 'self'; 
+                  script-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net 'unsafe-inline'; 
+                  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unicons.iconscout.com; 
+                  img-src 'self' data: https:; 
+                  font-src 'self' https://cdnjs.cloudflare.com https://unicons.iconscout.com;
+                  connect-src 'self' https:;">
+
+    <!-- Add these security headers to ALL HTML files in <head> section -->
+
+    <!-- Content Security Policy - Prevents XSS attacks -->
+    <meta http-equiv="Content-Security-Policy" 
+          content="default-src 'self'; 
+                  script-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net 'unsafe-inline' 'unsafe-eval'; 
+                  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unicons.iconscout.com https://fonts.googleapis.com; 
+                  img-src 'self' data: https: blob:; 
+                  font-src 'self' https://cdnjs.cloudflare.com https://unicons.iconscout.com https://fonts.gstatic.com;
+                  connect-src 'self' https:;
+                  frame-src 'self' https://anantsecbadge.netlify.app;
+                  base-uri 'self';
+                  form-action 'self';
+                  upgrade-insecure-requests;">
+
+    <!-- Permissions Policy - Controls browser features -->
+    <meta http-equiv="Permissions-Policy" 
+          content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=(), gyroscope=(), speaker=(), vibrate=()">
+
+    <!-- Referrer Policy - Controls referrer information -->
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- X-Frame-Options - Prevents clickjacking -->
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+
+    <!-- X-Content-Type-Options - Prevents MIME sniffing -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+
+    <!-- X-XSS-Protection - Legacy XSS protection -->
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+
+    <!-- Strict-Transport-Security will be added via Netlify headers -->
+
+    <!-- DNS Prefetch Control - Disable for privacy -->
+    <meta http-equiv="x-dns-prefetch-control" content="off">
+
+    <!-- Additional Security Meta -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- Resource Integrity for CDN scripts -->
+    <!-- Example for particles.js - add integrity hashes for all CDN resources -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Anant Kumar Pandey",
+      "url": "https://sh4dowkey.github.io",
+      "sameAs": [
+        "https://github.com/sh4dowkey",
+        "https://linkedin.com/in/anant-ku-pandey",
+        "https://twitter.com/"
+      ],
+      "jobTitle": "Cybersecurity Enthusiast",
+      "description": "Cybersecurity enthusiast specializing in Active Directory, Bug Bounty, and Red Teaming",
+      "knowsAbout": ["Cybersecurity", "Penetration Testing", "Bug Bounty", "Active Directory", "Red Teaming"]
+    }
+    </script>
+
+    <!-- Web App Manifest (optional, for PWA) -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#292a2d">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/img/favicon.png" />
@@ -35,10 +123,18 @@
 
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="assets/css/index.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.8/css/line.css"
+    />
 
+    <!-- put this AFTER your other stylesheet links in index.html -->
     <style id="no-grid-override">
+      /* Force-disable the grid pseudo element */
       body::before,
       .animated-grid-bg::before {
         display: none !important;
@@ -52,32 +148,19 @@
   <body id="index-page-body" class="no-grid">
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <!-- Loading Screen -->
-    <div class="page-loader" id="pageLoader">
-      <div class="loader-logo">
-        <div class="loader-ring"></div>
-        <div class="loader-ring"></div>
-        <div class="loader-icon">
-          <i class="fas fa-shield-alt"></i>
-        </div>
-      </div>
-      <div class="loader-text">Loading<span class="dots"></span></div>
-      <div class="loader-progress">
-        <div class="loader-progress-bar"></div>
-      </div>
-      <div class="loader-particles">
-        <div class="loader-particle"></div>
-        <div class="loader-particle"></div>
-        <div class="loader-particle"></div>
-        <div class="loader-particle"></div>
-        <div class="loader-particle"></div>
-      </div>
-    </div>
-
     <div class="page-wrapper">
       <nav class="nav-container">
         <div class="nav-left">
-          <a href="index.html" id="home_page" style="font-family: monospace; display: flex; align-items: center; gap: 6px;">
+          <a
+            href="index.html"
+            id="home_page"
+            style="
+              font-family: monospace;
+              display: flex;
+              align-items: center;
+              gap: 6px;
+            "
+          >
             <span>>anantSec</span>
             <span id="svg-icon" class="flicker"></span>
           </a>
@@ -89,6 +172,7 @@
         <div class="nav-right">
           <a href="about.html">About</a>
           <a href="gallery.html">Gallery</a>
+          <a href="notes.html">Notes</a>
           <a href="resume.html">Resume</a>
           <a href="certificates.html">Certificates</a>
           <a href="writeups.html">Writeups</a>
@@ -103,41 +187,66 @@
           <span class="typed-text"></span><span class="cursor">|</span>
         </h1>
         <p class="hero-subtitle">
-          &gt; A Cybersecurity Enthusiast . Learning Cybersecurity . Experiencing The World
+          &gt; A Cybersecurity Enthusiast . Learning Cybersecurity .
+          Experiencing The World
         </p>
 
         <div class="social-icons">
-          <a href="mailto:anant.pandey017@gmail.com" aria-label="Email" title="Email">
-            <i class="uil uil-envelope"></i>
-          </a>
-          <a href="https://github.com/sh4dowkey" aria-label="GitHub" target="_blank" rel="noopener noreferrer" title="GitHub">
-            <i class="uil uil-github"></i>
-          </a>
-          <a href="https://linkedin.com/in/anant-ku-pandey" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer" title="LinkedIn">
-            <i class="uil uil-linkedin"></i>
-          </a>
-          <a href="https://twitter.com/" aria-label="Twitter" target="_blank" rel="noopener noreferrer" title="Twitter">
-            <i class="uil uil-twitter"></i>
-          </a>
-          <a href="https://discord.com/" aria-label="Discord" target="_blank" rel="noopener noreferrer" title="Discord">
-            <i class="uil uil-discord"></i>
-          </a>
-          <a href="https://youtube.com/" aria-label="YouTube" target="_blank" rel="noopener noreferrer" title="YouTube">
-            <i class="uil uil-youtube"></i>
-          </a>
+          <a href="mailto:anant.pandey017@gmail.com" aria-label="Email"
+            ><i class="uil uil-envelope"></i
+          ></a>
+          <a
+            href="https://github.com/sh4dowkey"
+            aria-label="GitHub"
+            target="_blank"
+            rel="noopener noreferrer"
+            ><i class="uil uil-github"></i
+          ></a>
+          <a
+            href="https://linkedin.com/in/anant-ku-pandey"
+            aria-label="LinkedIn"
+            target="_blank"
+            rel="noopener noreferrer"
+            ><i class="uil uil-linkedin"></i
+          ></a>
+          <a
+            href="https://twitter.com/"
+            aria-label="Twitter"
+            target="_blank"
+            rel="noopener noreferrer"
+            ><i class="uil uil-twitter"></i
+          ></a>
+          <a
+            href="https://discord.com/"
+            aria-label="Discord"
+            target="_blank"
+            rel="noopener noreferrer"
+            ><i class="uil uil-discord"></i
+          ></a>
+          <a
+            href="https://youtube.com/"
+            aria-label="YouTube"
+            target="_blank"
+            rel="noopener noreferrer"
+            ><i class="uil uil-youtube"></i
+          ></a>
         </div>
 
-        <div class="scroll-indicator" onclick="window.location.href='about.html'">
+        <div
+          class="scroll-indicator"
+          onclick="window.location.href='about.html'"
+        >
           <span>Explore</span>
           <i class="uil uil-angle-down"></i>
         </div>
       </main>
     </div>
 
-    <!-- Scripts -->
-    <script src="assets/js/loader.js"></script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js" defer></script>
+    <script src="assets/js/utils.js" type="module"></script>
     <script src="assets/js/index.js" defer></script>
     <script src="assets/js/main.js" defer></script>
+    <script src="assets/js/security.js" defer></script>
   </body>
 </html>

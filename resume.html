@@ -11,10 +11,10 @@
       content="Cybersecurity enthusiast specializing in Active Directory, Bug Bounty, and Red Teaming"
     />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://anantsec.netlify.app" />
+    <meta property="og:url" content="https://sh4dowkey.github.iof" />
     <meta
       property="og:image"
-      content="https://anantsec.netlify.app/assets/img/og-image.png"
+      content="https://sh4dowkey.github.io/assets/img/og-image.png"
     />
 
     <!-- Twitter Card -->
@@ -24,6 +24,27 @@
       name="twitter:description"
       content="Cybersecurity enthusiast specializing in Active Directory, Bug Bounty, and Red Teaming"
     />
+
+        <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" 
+          content="default-src 'self'; 
+                  script-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net 'unsafe-inline' 'unsafe-eval'; 
+                  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unicons.iconscout.com https://fonts.googleapis.com; 
+                  img-src 'self' data: https: blob:; 
+                  font-src 'self' https://cdnjs.cloudflare.com https://unicons.iconscout.com https://fonts.gstatic.com;
+                  connect-src 'self' https:;
+                  frame-src 'self' https://anantsecbadge.netlify.app;
+                  base-uri 'self';
+                  form-action 'self';
+                  upgrade-insecure-requests;">
+
+    <!-- Additional Security -->
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/img/favicon.png" />
@@ -37,37 +58,6 @@
     <link rel="stylesheet" href="assets/css/resume.css" />
   </head>
   <body>
-
-        <!-- LOADING SCREEN HTML  -->
-
-    <div class="page-loader" id="pageLoader">
-      <!-- Animated Logo -->
-      <div class="loader-logo">
-        <div class="loader-ring"></div>
-        <div class="loader-ring"></div>
-        <div class="loader-icon">
-          <i class="fas fa-shield-alt"></i>
-        </div>
-      </div>
-      
-      <!-- Loading Text -->
-      <div class="loader-text">Loading<span class="dots"></span></div>
-      
-      <!-- Progress Bar -->
-      <div class="loader-progress">
-        <div class="loader-progress-bar"></div>
-      </div>
-      
-      <!-- Floating Particles -->
-      <div class="loader-particles">
-        <div class="loader-particle"></div>
-        <div class="loader-particle"></div>
-        <div class="loader-particle"></div>
-        <div class="loader-particle"></div>
-        <div class="loader-particle"></div>
-      </div>
-    </div>
-
     <nav class="nav-container">
       <div class="nav-left">
         <a
@@ -91,6 +81,7 @@
       <div class="nav-right">
         <a href="about.html">About</a>
         <a href="gallery.html">Gallery</a>
+        <a href="notes.html">Notes</a>
         <a href="resume.html">Resume</a>
         <a href="certificates.html">Certificates</a>
         <a href="writeups.html">Writeups</a>
@@ -139,6 +130,9 @@
 
     <script src="assets/js/main.js"></script>
     <script src="assets/js/resume.js"></script>
-    <script src="assets/js/loader.js"></script>
+    <script src="assets/js/security.js" defer></script>
   </body>
 </html>
+
+
+
