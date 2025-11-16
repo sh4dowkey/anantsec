@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>404 - Page Not Found | anantsec</title>
+    
+<style>
+  :root{
+    --bg:#0a0e14; --muted:#8b949e; --muted-2:#6e7681; --text:#c9d1d9;
+    --panel: rgba(10,14,20,0.82);
+    --node-size:80px; --packet-size:12px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family: 'Courier New', monospace;
+    background: radial-gradient(1200px 600px at 10% 10%, rgba(255,255,255,0.02), transparent 8%), var(--bg);
+    color:var(--text);
+    display:flex;align-items:center;justify-content:center;padding:20px;
+  }
+
+  .bg-grid{
+    position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size:48px 48px;
+    animation: gridMove 24s linear infinite;
+    opacity:0.9;mix-blend-mode:overlay;
+  }
+  @keyframes gridMove{to{transform:translate(48px,48px)}}
+
+  .card{
+    position:relative;z-index:1;max-width:1150px;width:100%;
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.25));
+    border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.03);
+    box-shadow:0 10px 40px rgba(0,0,0,0.6);
+    display:grid;grid-template-columns:1fr 420px;gap:20px;align-items:stretch;
+  }
+
+  @media (max-width:980px){ .card{ grid-template-columns:1fr; } }
+
+  .left{ display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:8px; }
+  .error-code{ font-size:clamp(3rem,10vw,7.5rem); color:var(--muted); letter-spacing:0.06em; text-shadow:0 0 20px rgba(139,148,158,0.2); }
+  .error-message{ font-size:clamp(1rem,2.4vw,1.4rem); color:var(--muted-2); margin-top:-6px }
+
+  .network-flow{ width:100%; max-width:900px; height:220px; position:relative; margin-top:8px; }
+  .network-svg{ position:absolute; inset:0; width:100%; height:100%; z-index:0; pointer-events:none; }
+
+  /* nodes are absolutely positioned and updated by JS to match path endpoints */
+  .node{
+    position:absolute; width:var(--node-size); height:var(--node-size); border-radius:12px;
+    display:flex;align-items:center;justify-content:center;font-size:1.6rem; z-index:3;
+    background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+    border:1px solid rgba(255,255,255,0.04); box-shadow:0 6px 20px rgba(0,0,0,0.5);
+    transform:translate(-50%,-50%);
+  }
+
+  /* packets (will be positioned in JS to follow path) */
+  .packet, .return-packet{
+    position:absolute; width:var(--packet-size); height:var(--packet-size); border-radius:50%;
+    z-index:4; transform:translate(-50%,-50%); opacity:0;
+    box-shadow:0 0 12px rgba(201,209,217,0.45);
+    pointer-events:none;
+  }
+  .packet{ background:var(--text); }
+  .return-packet{ background:var(--muted-2); }
+
+  .status-bar{ position:absolute; top:-34px; left:50%; transform:translateX(-50%); color:var(--muted); font-size:0.95rem; z-index:5; white-space:nowrap; }
+
+  /* right column */
+  .right{ display:flex; flex-direction:column; gap:12px; align-items:stretch; }
+  .terminal{ background:var(--panel); border-radius:8px; padding:12px; min-height:130px; box-shadow:0 6px 18px rgba(0,0,0,0.5); overflow:hidden; border:1px solid rgba(255,255,255,0.03); }
+  .terminal-line{ font-size:0.9rem; color:var(--muted); line-height:1.5; opacity:0; animation:fadeIn 0.36s forwards; }
+  .terminal-line .prompt{ color:var(--text); margin-right:6px }
+  .terminal-line:nth-child(1){ animation-delay:0.35s }
+  .terminal-line:nth-child(2){ animation-delay:0.85s }
+  .terminal-line:nth-child(3){ animation-delay:1.35s }
+  .terminal-line:nth-child(4){ animation-delay:1.85s }
+  @keyframes fadeIn{ to{ opacity:1 } }
+
+  .actions{ display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end }
+  .btn{ border:1px solid var(--muted); background:transparent; color:var(--text); padding:8px 12px; border-radius:8px; cursor:pointer; font-family:inherit; display:inline-flex; align-items:center; gap:8px; }
+  .btn.secondary{ border-color:var(--muted-2); color:var(--muted) }
+  .btn.ghost{ border-style:dashed; border-color:rgba(255,255,255,0.03) }
+
+  .meta{ display:flex; gap:8px; align-items:center; justify-content:center; margin-top:6px }
+  .badge{ font-size:0.82rem; padding:5px 8px; border-radius:999px; border:1px solid rgba(255,255,255,0.03); color:var(--muted); background:transparent }
+
+  .help-row{ display:flex; gap:8px; justify-content:center; margin-top:10px }
+  .help-row a{ color:var(--muted); text-decoration:none; font-size:0.95rem }
+
+  .modal{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,0.6); z-index:20 }
+  .modal.open{ display:flex }
+  .modal-panel{ background:var(--panel); padding:12px; border-radius:8px; width:min(720px,92%); border:1px solid rgba(255,255,255,0.03) }
+
+  .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0 }
+
+  /* reduced motion */
+  @media (prefers-reduced-motion:reduce){
+    .bg-grid, .packet, .return-packet{ animation:none !important; transition:none !important }
+  }
+  @media (max-width:480px){
+    :root{ --node-size:64px; }
+    .network-flow{ height:200px }
+  }
+</style>
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <main class="card" role="main" aria-labelledby="title">
+    <section class="left">
+      <div>
+        <h1 id="title" class="error-code" aria-hidden="true">404</h1>
+        <div class="error-message">[ CONNECTION REFUSED ]</div>
+      </div>
+
+      <div class="network-flow" id="flow" role="img" aria-label="Network packet flow visualization showing failed connection">
+        <svg class="network-svg" viewBox="0 0 1000 220" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="lineGrad" x1="0" x2="1">
+              <stop offset="0%" stop-color="#c9d1d9" stop-opacity="0.15"/>
+              <stop offset="100%" stop-color="#6e7681" stop-opacity="0.08"/>
+            </linearGradient>
+          </defs>
+
+          <path id="mainPath" d="M80 110 C 250 20, 750 20, 920 110" stroke="url(#lineGrad)" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="6 8"/>
+          <path d="M80 110 C 250 200, 750 200, 920 110" stroke="url(#lineGrad)" stroke-width="1" fill="none" opacity="0.6"/>
+        </svg>
+
+        <div class="node client" id="clientNode" title="Attacker" aria-hidden="true">🧑‍💻</div>
+        <div class="node server" id="serverNode" title="Server" aria-hidden="true">🗄️</div>
+
+        <div class="packet" data-speed="3600" data-delay="0"></div>
+        <div class="packet" data-speed="4200" data-delay="800"></div>
+        <div class="packet" data-speed="3000" data-delay="1600"></div>
+
+        <div class="return-packet" data-speed="3800" data-delay="400"></div>
+        <div class="return-packet" data-speed="4400" data-delay="1200"></div>
+
+        <div class="status-bar" id="statusBar" aria-hidden="true">→ Sending HTTP Request... &nbsp; ⟲ &nbsp; ← 404 Not Found</div>
+      </div>
+
+      <div class="meta" aria-hidden="true">
+        <span class="badge">anantsec-security</span>
+        <span class="badge">HTTP/2</span>
+        <span class="badge">Simulated</span>
+      </div>
+
+      <div class="help-row">
+        <a href="/index.html" class="btn">← Return Home</a>
+        <a href="/writeups.html" class="btn secondary">Browse Writeups</a>
+        </div>
+    </section>
+
+    <aside class="right" aria-label="Diagnostics panel">
+      <div class="terminal" role="log" aria-live="polite">
+        <div id="line1" class="terminal-line"><span class="prompt">root@anantsec</span><span class="path">:~#</span> <span class="command">curl -I <span id="current-url">/unknown</span></span></div>
+        <div id="line2" class="terminal-line"><span class="error-text">HTTP/2 404 Not Found</span></div>
+        <div id="line3" class="terminal-line"><span class="error-text">Server: anantsec-security</span></div>
+        <div id="line4" class="terminal-line"><span class="error-text" id="status-detail">Status: Resource does not exist on this server</span></div>
+      </div>
+
+      <div class="actions" role="group" aria-label="Actions">
+        <button id="retryBtn" class="btn">↻ Retry Request</button>
+        <button id="copyBtn" class="btn ghost">⧉ Copy curl</button>
+        <button id="reportBtn" class="btn secondary">⚑ Report Issue</button>
+        <button id="motionBtn" class="btn secondary">⚙️ Toggle Motion</button>
+      </div>
+    </aside>
+
+    <div id="modal" class="modal" aria-hidden="true">
+      <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="reportTitle">
+        <h3 id="reportTitle">Report missing resource</h3>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:8px">
+          <input id="reportUrl" style="padding:8px;border-radius:6px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text)" />
+          <textarea id="reportMsg" rows="4" style="padding:8px;border-radius:6px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text)"></textarea>
+        </div>
+        <div style="display:flex;gap:8px;justify-content:flex-end">
+          <button id="sendReport" class="btn">Send</button>
+          <button id="closeModal" class="btn secondary">Close</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+<script>
+/* ------------------------
+   Basic UI wiring
+   ------------------------ */
+const pathStr = window.location.pathname || '/';
+document.getElementById('current-url').textContent = pathStr;
+document.getElementById('reportUrl').value = location.href;
+document.getElementById('reportMsg').value = 'Hi, I found a missing page on anantsec: "' + pathStr + '"';
+
+const retryBtn = document.getElementById('retryBtn');
+const copyBtn = document.getElementById('copyBtn');
+const reportBtn = document.getElementById('reportBtn');
+const modal = document.getElementById('modal');
+const closeModal = document.getElementById('closeModal');
+const sendReport = document.getElementById('sendReport');
+const motionBtn = document.getElementById('motionBtn');
+
+function setTerminal(status, server, detail){
+  document.getElementById('line2').textContent = status;
+  document.getElementById('line3').textContent = server;
+  document.getElementById('line4').textContent = detail;
+}
+
+async function probe(){
+  try{
+    setTerminal('→ Probing...','Server: anantsec-security','Status: Attempting HEAD request');
+    const res = await fetch(pathStr, { method:'HEAD', cache:'no-store' });
+    if(res.ok){
+      setTerminal('HTTP/' + (res.headers.get('x-protocol')||res.type||res.status) + ' ' + res.status + ' ' + (res.statusText||''), 'Server: '+(res.headers.get('server')||'anantsec-security'), 'Status: Resource returned ('+res.status+')');
+    } else {
+      setTerminal('HTTP/' + res.status + ' ' + (res.statusText||''), 'Server: '+(res.headers.get('server')||'anantsec-security'), 'Status: Resource returned ('+res.status+')');
+    }
+  } catch (err) {
+    const msg = err && err.message ? err.message : String(err);
+    if(msg.includes('NetworkError') || msg.includes('Failed to fetch')){
+      setTerminal('✖ Request blocked','Server: anantsec-security','Status: Request failed (possible CORS or network)');
+    } else {
+      setTerminal('✖ Error','Server: anantsec-security','Status: ' + msg);
+    }
+  }
+}
+probe();
+
+retryBtn.addEventListener('click', () => { probe(); retryBtn.disabled = true; setTimeout(()=> retryBtn.disabled = false, 1400); });
+copyBtn.addEventListener('click', async () => {
+  const curl = 'curl -I ' + location.origin + pathStr;
+  try{ await navigator.clipboard.writeText(curl); copyBtn.textContent = '✓ Copied'; setTimeout(()=> copyBtn.textContent = '⧉ Copy curl',1200); } catch(e){ copyBtn.textContent = '✖'; setTimeout(()=> copyBtn.textContent = '⧉ Copy curl',1200); }
+});
+reportBtn.addEventListener('click', ()=>{ modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); });
+closeModal.addEventListener('click', ()=>{ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); });
+sendReport.addEventListener('click', ()=> {
+  const url = document.getElementById('reportUrl').value;
+  const body = document.getElementById('reportMsg').value;
+  const subject = encodeURIComponent('Missing page report');
+  const mailBody = encodeURIComponent(body + '\n\nURL: ' + url);
+  // Use mailto fallback (no unescaped line breaks)
+  const mailto = 'mailto:hello@anantsec.com?subject=' + subject + '&body=' + mailBody;
+  window.location.href = mailto;
+});
+
+/* Motion toggle */
+let motionOn = true;
+motionBtn.addEventListener('click', ()=>{
+  motionOn = !motionOn;
+  motionBtn.textContent = motionOn ? '⚙️ Toggle Motion' : '🚫 Motion Off';
+  // If motion paused, packets will keep being re-positioned but we short-circuit animation step
+});
+
+/* Keyboard shortcuts */
+document.addEventListener('keydown', (e)=>{
+  if((e.key === 'h' || e.key === 'H') && !e.metaKey && !e.ctrlKey) location.href = '/index.html';
+  if(e.key === 'r' || e.key === 'R') probe();
+  if(e.key === 'c' || e.key === 'C') navigator.clipboard?.writeText('curl -I ' + location.origin + pathStr);
+});
+
+/* ------------------------
+   Packet animation along SVG path
+   - positions nodes at path endpoints
+   - positions & animates packet elements by mapping path points to element coordinates
+   ------------------------ */
+(function(){
+  const flow = document.getElementById('flow');
+  const svg = flow.querySelector('.network-svg');
+  const path = svg.querySelector('#mainPath');
+  const clientNode = document.getElementById('clientNode');
+  const serverNode = document.getElementById('serverNode');
+  const packets = Array.from(flow.querySelectorAll('.packet, .return-packet'));
+
+  if(!path) return;
+
+  // get SVG point in pixel coordinates given a point from path.getPointAtLength
+  function svgPointToContainer(px, py){
+    const svgRect = svg.getBoundingClientRect();
+    const flowRect = flow.getBoundingClientRect();
+    // viewBox is 0..1000 x 0..220 as defined above
+    const viewWidth = 1000;
+    const viewHeight = 220;
+    const scaleX = svgRect.width / viewWidth;
+    const scaleY = svgRect.height / viewHeight;
+    const x = (px * scaleX) + (svgRect.left - flowRect.left);
+    const y = (py * scaleY) + (svgRect.top - flowRect.top);
+    return { x, y };
+  }
+
+  // position node at point on path (t between 0 and 1)
+  function placeNodeAt(nodeEl, t){
+    const len = path.getTotalLength();
+    const pt = path.getPointAtLength(Math.max(0, Math.min(len, t * len)));
+    const p = svgPointToContainer(pt.x, pt.y);
+    nodeEl.style.left = p.x + 'px';
+    nodeEl.style.top = p.y + 'px';
+  }
+
+  // initially place nodes at start (t=0) and end (t=1) of path
+  function placeNodes(){
+    placeNodeAt(clientNode, 0.02); // slight offset from absolute end
+    placeNodeAt(serverNode, 0.98);
+  }
+
+  // animate packets
+  function startPackets(){
+    const len = path.getTotalLength();
+
+    packets.forEach(el => {
+      const speed = Number(el.dataset.speed) || 3600; // ms per loop
+      const delay = Number(el.dataset.delay) || 0;
+      const isReturn = el.classList.contains('return-packet');
+
+      let startTime = null;
+
+      function step(ts){
+        if(!startTime) startTime = ts;
+        if(!motionOn){ // if paused, don't advance position but keep loop alive
+          requestAnimationFrame(step);
+          return;
+        }
+        const elapsed = ts - startTime - delay;
+        // allow negative elapsed while waiting for delay
+        if(elapsed < 0){
+          el.style.opacity = 0;
+          requestAnimationFrame(step);
+          return;
+        }
+
+        const t = (elapsed % speed) / speed; // 0..1
+        const frac = isReturn ? (1 - t) : t;
+        const dist = frac * len;
+        const pt = path.getPointAtLength(dist);
+        const p = svgPointToContainer(pt.x, pt.y);
+        el.style.transform = 'translate(' + p.x + 'px, ' + p.y + 'px) translate(-50%, -50%)';
+        el.style.opacity = 1;
+        requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  }
+
+  // on resize, recalc node positions (packets follow path automatically because coords computed each frame)
+  let resizeTimer = null;
+  function onResize(){
+    placeNodes();
+    // restart packets to ensure fresh mapping (they continuously compute against path so usually OK)
+    if(resizeTimer) clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(()=>{ /* no-op for now */ }, 60);
+  }
+
+  // start
+  function init(){
+    // if path length unavailable yet, wait a tick
+    try{
+      const l = path.getTotalLength();
+    } catch(e){
+      // path not ready; try after small delay
+      return setTimeout(init, 50);
+    }
+    placeNodes();
+    startPackets();
+    window.addEventListener('resize', onResize);
+  }
+  init();
+
+  // intersection observer to stop animating when offscreen (helps CPU)
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(en => {
+      if(!en.isIntersecting){
+        motionOn = false;
+      } else {
+        motionOn = true;
+      }
+    });
+  }, { threshold: 0.05 });
+  io.observe(flow);
+})();
+
+/* Accessibility: reveal status bar after load */
+window.addEventListener('load', ()=> {
+  const bar = document.getElementById('statusBar');
+  if(bar) bar.style.opacity = 1;
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,232 @@
+html,
+body {
+  height: 100%;
+  overflow-x: hidden; /* Prevent sideways scroll only */
+}
+
+.page-wrapper {
+  height: calc(var(--vh, 1vh) * 100);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+#particles-js {
+  position: fixed; /* fixed instead of absolute */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0;
+  animation: fadeInParticles 2s ease-in forwards;
+}
+
+@keyframes fadeInParticles {
+  to {
+    opacity: 1;
+  }
+}
+
+.center-screen {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  padding-bottom: calc(2rem + env(safe-area-inset-bottom, 0px));
+}
+
+.hero-title {
+  font-size: clamp(1.4rem, 4vw, 2.3rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #66ccff 0%, #a9a9b3 50%, #66ccff 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 8s ease infinite, fadeInUp 1s ease-out;
+}
+
+body.light .hero-title {
+  background: linear-gradient(135deg, #0066aa 0%, #333 50%, #0066aa 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@keyframes gradientShift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cursor {
+  display: inline-block;
+  width: 3px;
+  background: #66ccff;
+  margin-left: 4px;
+  animation: blink 1s infinite;
+  box-shadow: 0 0 8px rgba(102, 204, 255, 0.5);
+}
+
+body.light .cursor {
+  background: #0066aa;
+  box-shadow: 0 0 8px rgba(0, 102, 170, 0.5);
+}
+
+@keyframes blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.hero-subtitle {
+  font-size: clamp(0.9rem, 2.2vw, 1.15rem);
+  color: #a9a9b3;
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.3s forwards;
+  letter-spacing: 0.5px;
+}
+
+body.light .hero-subtitle {
+  color: #555;
+}
+
+.social-icons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.6s forwards;
+}
+
+.social-icons a {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid rgba(169, 169, 179, 0.2);
+  color: #a9a9b3;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.social-icons a:hover {
+  transform: translateY(-3px);
+  border-color: rgba(102, 204, 255, 0.4);
+  background: rgba(102, 204, 255, 0.05);
+  color: #66ccff;
+}
+
+body.light .social-icons a {
+  border-color: rgba(85, 85, 85, 0.2);
+  color: #555;
+}
+
+body.light .social-icons a:hover {
+  border-color: rgba(0, 102, 170, 0.4);
+  background: rgba(0, 102, 170, 0.05);
+  color: #0066aa;
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: calc(2rem + env(safe-area-inset-bottom, 0px));
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 1s forwards, float 2s ease-in-out infinite;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.scroll-indicator:hover span,
+.scroll-indicator:hover i {
+  background: linear-gradient(45deg, #64c364, #6f8fa1, #6ec4c5, #4b4b4b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text; /* fallback */
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, 10px);
+  }
+}
+
+.scroll-indicator span {
+  font-size: 0.75rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.scroll-indicator i {
+  font-size: 1.5rem;
+  color: #66ccff;
+}
+
+body.light .scroll-indicator i {
+  color: #0066aa;
+}
+
+@media (max-width: 768px) {
+  .social-icons a {
+    width: 38px;
+    height: 38px;
+    font-size: 1.1rem;
+  }
+
+  .hero-title {
+    font-size: 1.3rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .scroll-indicator {
+    bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  }
+}

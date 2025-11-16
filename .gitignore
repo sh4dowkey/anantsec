@@ -1,0 +1,21 @@
+# General
+.DS_Store
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 3D Demo Project (React/Vite)
+3d-demo/node_modules
+3d-demo/dist
+3d-demo/build
+
+# IDE-specific
+.idea/
+.vscode/

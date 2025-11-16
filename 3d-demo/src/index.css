@@ -1,0 +1,145 @@
+:root{
+  --bg:#050508;
+  --panel:#07101a;
+  --muted:rgba(255,255,255,0.55);
+  --accent:#69e1ff;
+  --accent-2:#7ee6ff;
+  --card-border: rgba(255,255,255,0.04);
+  --text: #dfeefc;
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* Reset */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body,#root{height:100%;width:100%;background:var(--bg);color:var(--text)}
+a{color:inherit}
+
+/* MAIN GRID: left badge + right terminal */
+.main-grid{
+  height:100vh;
+  width:100%;
+  display:grid;
+  grid-template-columns: 42% 58%;
+  gap:0;
+  align-items:stretch;
+  overflow:hidden;
+}
+
+/* LEFT: badge should touch edges — no padding */
+.left-panel{
+  padding: 0;               /* IMPORTANT: removed padding */
+  margin: 0;
+  overflow: hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: linear-gradient(180deg, rgba(6,8,10,1), rgba(4,6,8,1));
+}
+
+/* internal wrapper for canvas */
+.left-inner{
+  width:100%;
+  height:100%;
+  max-width:none;
+  display:block;
+  border-radius: 0;
+  overflow:hidden;
+}
+
+/* RIGHT: terminal container */
+.right-panel{
+  padding: 26px;
+  height:100%;
+  overflow:hidden;
+  display:flex;
+  align-items:stretch;
+  justify-content:center;
+  background: linear-gradient(180deg, rgba(8,10,12,0.98), rgba(4,6,8,1));
+}
+
+/* Terminal styling */
+.kali-term{
+  width:100%;
+  max-width:980px;
+  height:100%;
+  background-image: linear-gradient(rgba(3,5,7,0.96), rgba(5,7,9,0.98)), url('/public/assets/kali-dragon.png');
+  background-position: right center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-blend-mode: overlay;
+  border-radius: 10px;
+  border: 1px solid var(--card-border);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  display:flex;
+  flex-direction:column;
+  overflow: hidden;
+}
+
+/* header */
+.term-header{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:10px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.02);
+  background: linear-gradient(180deg, rgba(8,12,16,0.68), rgba(6,8,10,0.52));
+}
+.term-dots{display:flex;gap:8px;align-items:center}
+.dot{width:12px;height:12px;border-radius:50%;display:inline-block;box-shadow:0 1px 0 rgba(0,0,0,0.5)}
+.dot.red{background:#ff5f56}
+.dot.yellow{background:#ffbd2e}
+.dot.green{background:#27c93f}
+.term-title{display:flex;align-items:center;gap:10px;color:var(--accent-2);font-weight:700}
+.term-title-text{font-size:13px}
+
+/* body */
+.term-body{
+  padding:18px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  height:calc(100% - 56px);
+  overflow:auto;
+}
+
+/* output lines */
+.term-output{flex:1;overflow:auto}
+.term-out pre{color:var(--text);margin-bottom:10px;font-family:'Fira Code', monospace}
+.term-inp pre{color:var(--accent-2);font-weight:700;margin-bottom:10px;font-family:'Fira Code', monospace}
+.term-err pre{color:#ff8b8b;margin-bottom:10px;font-family:'Fira Code', monospace}
+
+/* input row */
+.term-input-row{display:flex;align-items:center;gap:12px;padding-top:6px;border-top:1px dashed rgba(255,255,255,0.02)}
+.prompt{color:var(--accent-2);font-weight:700;font-family:'Fira Code', monospace}
+.term-input{
+  background:transparent;
+  border:none;
+  outline:none;
+  color:var(--text);
+  font-family:'Fira Code', monospace;
+  font-size:14px;
+  flex:1;
+  padding:6px 8px;
+  caret-color:var(--accent-2);
+}
+
+/* suggestions */
+.term-sug{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.sug-btn{
+  background: rgba(126,230,255,0.04);
+  border: 1px solid rgba(126,230,255,0.08);
+  color: var(--accent-2);
+  padding:7px 12px;
+  border-radius:8px;
+  cursor:pointer;
+  font-family:'Fira Code', monospace;
+  font-size:13px;
+}
+.sug-btn:hover{transform:translateY(-2px);transition:all .12s}
+
+/* responsive */
+@media (max-width: 900px){
+  .main-grid{grid-template-columns:1fr;grid-template-rows:40vh 1fr}
+  .right-panel{padding:12px}
+  .kali-term{border-radius:8px}
+}
