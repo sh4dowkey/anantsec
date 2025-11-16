@@ -72,7 +72,6 @@ jobs:
         run: |
           echo "### JSON Generation Report" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "- Notes: ${{ steps.notes.outputs.notes_status || 'failed' }}" >> $GITHUB_STEP_SUMMARY
           echo "- Writeups: ${{ steps.writeups.outputs.writeups_status || 'failed' }}" >> $GITHUB_STEP_SUMMARY
           echo "- Certificates: ${{ steps.certificates.outputs.certificates_status || 'skipped' }}" >> $GITHUB_STEP_SUMMARY
           echo "- Changes Detected: ${{ steps.check_changes.outputs.has_changes || 'unknown' }}" >> $GITHUB_STEP_SUMMARY
