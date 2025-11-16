@@ -2,6 +2,12 @@
   publish = "."
   command = "echo 'No build command'"
 
+# Content-Security-Policy and site-wide headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unicons.iconscout.com; font-src 'self' https://cdnjs.cloudflare.com https://unicons.iconscout.com; img-src 'self' data: https://sh4dowkey.github.io; connect-src 'self' https://cdnjs.cloudflare.com https://unicons.iconscout.com; manifest-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
+
 [[headers]]
   for = "/assets/*"
   [headers.values]

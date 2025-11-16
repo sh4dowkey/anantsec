@@ -1,4 +1,4 @@
-// sw.js - Save in root directory
+
 const CACHE_NAME = 'anantsec-v1.0.0';
 const urlsToCache = [
   '/',
@@ -12,56 +12,64 @@ const urlsToCache = [
   '/assets/css/index.css',
   '/assets/css/about.css',
   '/assets/js/main.js',
-  '/assets/js/index.js'
+  '/assets/js/index.js',
+  '/404.html' // make sure this file exists so SW can return a fallback
 ];
 
+// Install - cache same-origin assets
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then(cache => {
-        console.log('✅ Opened cache');
-        return cache.addAll(urlsToCache);
-      })
-      .catch(err => console.error('❌ Cache failed:', err))
-  );
-});
-
-self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        if (response) {
-          return response;
-        }
-        return fetch(event.request).then(response => {
-          if (!response || response.status !== 200 || response.type !== 'basic') {
-            return response;
-          }
-          const responseToCache = response.clone();
-          caches.open(CACHE_NAME).then(cache => {
-            cache.put(event.request, responseToCache);
-          });
-          return response;
-        });
-      })
-      .catch(() => {
-        // Return offline page if available
-        return caches.match('/404.html');
+      .then(cache => cache.addAll(urlsToCache))
+      .then(() => self.skipWaiting())
+      .catch(err => {
+        console.error('SW install/caching failed:', err);
       })
   );
 });
 
+// Activate - clean up old caches
 self.addEventListener('activate', event => {
   const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
-        cacheNames.map(cacheName => {
-          if (cacheWhitelist.indexOf(cacheName) === -1) {
-            return caches.delete(cacheName);
+    caches.keys()
+      .then(names => Promise.all(
+        names.map(name => cacheWhitelist.indexOf(name) === -1 ? caches.delete(name) : null)
+      ))
+      .then(() => self.clients.claim())
+  );
+});
+
+// Fetch - only intercept same-origin requests (do not fetch cross-origin CDNs)
+self.addEventListener('fetch', event => {
+  const req = event.request;
+  const url = new URL(req.url);
+
+  // If request is cross-origin, let the browser handle it (avoid CSP/connect-src issues)
+  if (url.origin !== location.origin) {
+    return; // do not call event.respondWith — browser will fetch normally
+  }
+
+  // For same-origin requests, respond from cache-first, then network (and cache response)
+  event.respondWith(
+    caches.match(req).then(cachedResp => {
+      if (cachedResp) return cachedResp;
+
+      return fetch(req)
+        .then(networkResp => {
+          // Only cache OK responses
+          if (!networkResp || networkResp.status !== 200) {
+            return networkResp;
           }
+          const respToCache = networkResp.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(req, respToCache));
+          return networkResp;
         })
-      );
+        .catch(err => {
+          // If fetch fails, return cached fallback or 404.html if present
+          return caches.match(req) // attempt again
+            .then(r => r || caches.match('/404.html') || new Response('Offline', { status: 503 }));
+        });
     })
   );
 });
