@@ -68,14 +68,10 @@ jobs:
         run: |
           git config --global user.name "GitHub Actions Bot"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git pull  # Add this line to pull remote changes first
           git add data/*.json
           git commit -m "Update JSON files [auto-generated]" || echo "No changes to commit"
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:${{ github.ref }}
-
-      - name: Report Status
-        if: always()
-        run: |
-          echo "### JSON Generation Report" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "- Writeups: ${{ steps.writeups.outputs.writeups_status || 'failed' }}" >> $GITHUB_STEP_SUMMARY
           echo "- Certificates: ${{ steps.certificates.outputs.certificates_status || 'skipped' }}" >> $GITHUB_STEP_SUMMARY
