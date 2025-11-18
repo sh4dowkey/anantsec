@@ -6,7 +6,7 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unicons.iconscout.com; font-src 'self' https://cdnjs.cloudflare.com https://unicons.iconscout.com; img-src 'self' data: https://sh4dowkey.github.io; connect-src 'self' https://cdnjs.cloudflare.com https://unicons.iconscout.com; manifest-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com https://badge-anantsec.netlify.app; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unicons.iconscout.com https://badge-anantsec.netlify.app; font-src 'self' https://cdnjs.cloudflare.com https://unicons.iconscout.com https://badge-anantsec.netlify.app; img-src 'self' data: https://sh4dowkey.github.io https://badge-anantsec.netlify.app; connect-src 'self' https://cdnjs.cloudflare.com https://unicons.iconscout.com https://badge-anantsec.netlify.app; manifest-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
 
 [[headers]]
   for = "/assets/*"
@@ -18,6 +18,20 @@
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
+# Proxy the React badge app (serve it under /about while keeping your domain)
+[[redirects]]
+  from = "/about/*"
+  to = "https://badge-anantsec.netlify.app/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/about"
+  to = "https://badge-anantsec.netlify.app"
+  status = 200
+  force = true
+
+# Fallback: everything else -> 404 page
 [[redirects]]
   from = "/*"
   to = "/404.html"

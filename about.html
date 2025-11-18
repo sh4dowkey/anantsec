@@ -1,61 +1,246 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - anantsec</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>About — Loading…</title>
+<meta name="description" content="Loading interactive about — minimal loader"/>
+<style>
+  :root{
+    --bg: rgba(41, 42, 45, 0.95);
+    --fg: #eaeaea;
+    --muted: #b4b4b4;
+  }
+  html,body{
+    height:100%;margin:0;background:var(--bg);color:var(--fg);
+    font-family: Inter, "Fira Code", system-ui, monospace;
+    -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+  }
 
-        <!-- Favicon -->
-    <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+  /* center */
+  .wrap{
+    min-height:100vh;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:18px;padding:28px;text-align:center;
+  }
 
-    
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html, body {
-            height: 100%;
-            width: 100%;
-            overflow: hidden;
-            background-color: #050508;
-        }
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        .return-button {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #d5d5d5;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-        .return-button:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: scale(1.1);
-        }
-    </style>
+  /* YOUR EXACT LOADER (unchanged) */
+  /* HTML: <div class="loader"></div> */
+  .loader {
+    width: 50px;
+    --b: 8px; 
+    aspect-ratio: 1;
+    border-radius: 50%;
+    padding: 1px;
+    background: conic-gradient(#0000 10%,#f03355) content-box;
+    -webkit-mask:
+      repeating-conic-gradient(#0000 0deg,#000 1deg 20deg,#0000 21deg 36deg),
+      radial-gradient(farthest-side,#0000 calc(100% - var(--b) - 1px),#000 calc(100% - var(--b)));
+    -webkit-mask-composite: destination-in;
+            mask-composite: intersect;
+    animation:l4 1s infinite steps(10);
+  }
+  @keyframes l4 {to{transform: rotate(1turn)}}
+
+  /* main rotating funny message */
+  .funny {
+    max-width:880px;padding:0 16px;font-size:18px;line-height:1.45;font-weight:600;
+    color:var(--fg); opacity:0; transform:translateY(6px);
+    transition:opacity .36s ease, transform .36s ease;
+  }
+  .funny.visible{ opacity:1; transform:translateY(0); }
+
+  /* long-wait message area (single visible, replaced in order) */
+  .long-wrap {
+    max-width:820px;padding:0 16px;font-size:14px;color:var(--muted);min-height:42px;
+    margin-top:6px;
+  }
+  .long-item {
+    opacity:0; transform:translateY(6px); transition:opacity .28s ease, transform .28s ease;
+  }
+  .long-item.visible { opacity:1; transform:translateY(0); }
+
+  @media(max-width:560px){
+    .loader{ width:44px; height:auto }
+    .funny{ font-size:16px }
+    .long-wrap{ font-size:13px }
+  }
+</style>
 </head>
 <body>
-    <a href="index.html" class="return-button" aria-label="Return to home Page">
-        <i class="fas fa-arrow-left"></i>
-    </a>
-    <iframe 
-        src="https://badge-anantsec.netlify.app/" 
-        title="Interactive 3D Badge - anantsec">
-    </iframe>
+  <main class="wrap" role="main" aria-live="polite" aria-atomic="true">
+    <div class="loader" aria-hidden="true"></div>
+
+    <div id="funnyEl" class="funny" aria-hidden="false">Give me a second — I'm fixing my hair. Even digital people like to look presentable.</div>
+
+    <div id="longWrap" class="long-wrap" aria-hidden="true">
+      <!-- one long-wait message will appear here and be replaced in order; the last one stays -->
+    </div>
+  </main>
+
+<script>
+/*
+  Behavior:
+  - FUNNY array loops continuously (readable duration)
+  - LONG_WAIT array appears one-by-one in order, replacing the previous long message (only latest visible)
+    Long-wait sequence starts after LONG_TRIGGER, shows each item every LONG_INTERVAL, and stops after last item.
+  - Background preload attempts to fetch DEST; when ready, finish gracefully and navigate.
+  - If WebGL absent, fallback to BADGE site.
+*/
+
+(function(){
+  const DEST = '/about'; // proxied on Netlify
+  const BADGE = 'https://badge-anantsec.netlify.app';
+
+  // Funny rotating messages (loops)
+  const FUNNY = [
+    "Give me a second — I'm fixing my hair. Even digital people like to look presentable.",
+    "Hang tight — my brain is buffering its personality. It takes longer on weekdays.",
+    "A moment please — I'm entering my ‘charm mode’. It needs a small warm-up.",
+    "I'm generally good except on weekdays… and today feels suspiciously weekday-ish.",
+    "Wait… summoning my divine digital self from the cosmic void… Bzzzz… Bzzzzzz… hold on… got a signal — it says: “Stop being dramatic and load properly.”",
+    "Almost ready — aligning my vibe and adjusting my attitude like a responsible adult."
+  ];
+
+  // Long-wait messages (show in order, replace previous; final one stays)
+  const LONG_WAIT = [
+    "I know this is taking a bit — truly appreciate the patience.",
+    "Still with me? I knew you were an introvert; thanks for waiting.",
+    "You're officially a 'patient visitor' — I owe you something interesting.",
+    "Thanks for sticking around — almost done, I promise this will be worth it."
+  ];
+
+  // Timings
+  const FUNNY_MS = 6000;        // ms each funny message stays
+  const PRELOAD_TICK = 900;     // ms between preload tries
+  const LONG_TRIGGER = 5000;    // ms after start to begin long-wait sequence
+  const LONG_INTERVAL = 5000;   // ms between long-wait replacements
+  const MAX_WAIT = 22000;       // absolute fail-safe
+
+  // DOM
+  const funnyEl = document.getElementById('funnyEl');
+  const longWrap = document.getElementById('longWrap');
+
+  let funnyIndex = 0;
+  let longIndex = 0;
+  let startTime = Date.now();
+  let longStarted = false;
+  let finished = false;
+
+  function haveWebGL(){
+    try {
+      const c = document.createElement('canvas');
+      return !!(c.getContext('webgl') || c.getContext('experimental-webgl'));
+    } catch(e) { return false; }
+  }
+
+  async function tryPreload(){
+    try{
+      const r = await fetch(DEST, { cache: 'no-cache', mode: 'same-origin' });
+      return r.ok;
+    } catch(e){
+      return false;
+    }
+  }
+
+  // show funny (looping)
+  function showFunny(text){
+    funnyEl.classList.remove('visible');
+    return new Promise(res=>{
+      setTimeout(()=>{
+        funnyEl.textContent = text;
+        funnyEl.classList.add('visible');
+        res();
+      }, 120);
+    });
+  }
+
+  // replace the single long-wait message (no stacking)
+  function showLong(text){
+    // clear existing
+    longWrap.innerHTML = '';
+    const el = document.createElement('div');
+    el.className = 'long-item';
+    el.textContent = text;
+    longWrap.appendChild(el);
+    // make visible
+    setTimeout(()=> el.classList.add('visible'), 60);
+    // ensure aria visible
+    longWrap.setAttribute('aria-hidden', 'false');
+  }
+
+  (async function main(){
+    // if no WebGL -> quick fallback
+    if (!haveWebGL()){
+      await showFunny("Your browser doesn't support WebGL — opening a lighter view.");
+      setTimeout(()=> location.replace(BADGE), 900);
+      return;
+    }
+
+    // background preload runner
+    const preloadRunner = setInterval(async () => {
+      const ok = await tryPreload();
+      if (ok && !finished){
+        finished = true;
+        clearInterval(preloadRunner);
+        // graceful final message
+        await showFunny("Finalizing — opening interactive About now.");
+        setTimeout(()=> location.href = DEST, 420);
+      }
+    }, PRELOAD_TICK);
+
+    // start the funny loop (runs until finished)
+    (async function funnyLoop(){
+      while(!finished){
+        await showFunny(FUNNY[funnyIndex % FUNNY.length]);
+        // wait FUNNY_MS in small ticks so we can break early
+        const end = Date.now() + FUNNY_MS;
+        while(Date.now() < end && !finished){
+          await new Promise(r => setTimeout(r, 200));
+        }
+        funnyIndex++;
+      }
+    })();
+
+    // schedule long-wait sequence start after LONG_TRIGGER
+    const longStartTimeout = setTimeout(async () => {
+      if (finished) return;
+      longStarted = true;
+      // show each long-wait message in order, replacing the previous; stop after last
+      while(longIndex < LONG_WAIT.length && !finished){
+        showLong(LONG_WAIT[longIndex]);
+        longIndex++;
+        const end = Date.now() + LONG_INTERVAL;
+        while(Date.now() < end && !finished){
+          await new Promise(r => setTimeout(r, 200));
+        }
+      }
+      // after last long-wait message shown, do not repeat; final message remains visible
+    }, LONG_TRIGGER);
+
+    // safety: force navigation if nothing finished by MAX_WAIT
+    setTimeout(() => {
+      if (!finished){
+        finished = true;
+        clearInterval(preloadRunner);
+        // attempt to go to DEST if webgl else badge
+        if (haveWebGL()) location.href = DEST;
+        else location.replace(BADGE);
+      }
+    }, MAX_WAIT);
+
+  })();
+
+  // absolute final fallback in case something blocks event loop
+  setTimeout(() => {
+    try {
+      if (!finished){
+        if (haveWebGL()) location.href = DEST;
+        else location.replace(BADGE);
+      }
+    } catch(e){}
+  }, MAX_WAIT + 800);
+
+})();
+</script>
 </body>
 </html>
