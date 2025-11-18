@@ -31,6 +31,12 @@
   status = 200
   force = true
 
+[[redirects]]
+  from = "/assets/*"
+  to   = "https://badge-anantsec.netlify.app/assets/:splat"
+  status = 200
+  force = true
+
 # Fallback: everything else -> 404 page
 [[redirects]]
   from = "/*"
