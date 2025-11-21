@@ -3,62 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="anantsec – Cybersecurity Portfolio" />
-    <meta
-      property="og:description"
-      content="Cybersecurity enthusiast specializing in Active Directory, Bug Bounty, and Red Teaming"
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:url"<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <meta property="og:title" content="anantsec – Cybersecurity Portfolio" />
-    <meta
-      property="og:description"
-      content="Cybersecurity enthusiast specializing in Active Directory, Bug Bounty, and Red Teaming"
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://sh4dowkey.github.iof" />
-    <meta
-      property="og:image"
-      content="https://sh4dowkey.github.io/assets/img/og-image.png"
-    />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="anantsec – Cybersecurity Portfolio" />
-    <meta
-      name="twitter:description"
-      content="Cybersecurity enthusiast specializing in Active Directory, Bug Bounty, and Red Teaming"
-    />
-
+    <title>HTB Writeups – anantsec</title>
+    
     <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
-
-    <title>HTB Writeups – anantsec</title>
     <link rel="stylesheet" href="../assets/css/style.css" />
-    <link rel="stylesheet" href="../assets/css/htb.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    <link rel="stylesheet" href="../assets/css//htb_bug.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   </head>
   <body>
     <nav class="nav-container">
       <div class="nav-left">
-        <a
-          href="../index.html"
-          id="home_page"
-          style="
-            font-family: monospace;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-          "
-        >
+        <a href="../index.html" id="home_page" style="font-family: monospace; display: flex; align-items: center; gap: 6px;">
           <span>>anantSec</span>
           <span id="svg-icon" class="flicker"></span>
         </a>
@@ -79,7 +34,44 @@
 
     <main>
       <h1>🧑‍💻 Hack The Box Writeups</h1>
-      <div id="htb-wrapper"></div>
+      
+      <div id="htb-wrapper">
+        
+        <!-- <div class="writeup-entry">
+          <div class="entry-header">
+            <a href="https://medium.com/@yourlink/machine1" target="_blank" class="entry-title">
+              HTB: Machine Name <i class="fas fa-external-link-alt ext-icon"></i>
+            </a>
+            <span class="entry-date">2025-11-16</span>
+          </div>
+          <div class="entry-desc">
+            A hard Linux machine involving SQL injection, lateral movement via SSH tunneling, and a custom kernel exploit for root.
+          </div>
+        </div>
+
+        <div class="writeup-entry">
+          <div class="entry-header">
+            <a href="https://medium.com/@yourlink/machine2" target="_blank" class="entry-title">
+              HTB: Another Machine <i class="fas fa-external-link-alt ext-icon"></i>
+            </a>
+            <span class="entry-date">2025-10-20</span>
+          </div>
+          <div class="entry-desc">
+            Walkthrough of an Active Directory chain focusing on Kerberoasting and AS-REP Roasting attacks.
+          </div>
+        </div> -->
+
+        <div class="writeup-entry" style="opacity: 0.6;">
+          <div class="entry-header">
+            <span class="entry-title" style="cursor: default;">More Coming Soon...</span>
+            <span class="entry-date">TBA</span>
+          </div>
+          <div class="entry-desc">
+            Currently working on new machines. Stay tuned for updates.
+          </div>
+        </div>
+
+      </div>
     </main>
 
     <footer>
@@ -87,99 +79,5 @@
     </footer>
 
     <script src="../assets/js/main.js"></script>
-    <script src="../assets/js/htb.js"></script>
-  </body>
-</html> content="https://sh4dowkey.github.iof" />
-    <meta
-      property="og:image"
-      content="https://sh4dowkey.github.io/assets/img/og-image.png"
-    />
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="anantsec – Cybersecurity Portfolio" />
-    <meta
-      name="twitter:description"
-      content="Cybersecurity enthusiast specializing in Active Directory, Bug Bounty, and Red Teaming"
-    />
-
-        <!-- Content Security Policy -->
-    <meta http-equiv="Content-Security-Policy" 
-          content="default-src 'self'; 
-                  script-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net 'unsafe-inline' 'unsafe-eval'; 
-                  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unicons.iconscout.com https://fonts.googleapis.com; 
-                  img-src 'self' data: https: blob:; 
-                  font-src 'self' https://cdnjs.cloudflare.com https://unicons.iconscout.com https://fonts.gstatic.com;
-                  connect-src 'self' https:;
-                  frame-src 'self' https://anantsecbadge.netlify.app;
-                  base-uri 'self';
-                  form-action 'self';
-                  upgrade-insecure-requests;">
-
-    <!-- Additional Security -->
-    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
-    <meta name="referrer" content="strict-origin-when-cross-origin">
-    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="assets/img/favicon.png" />
-
-    <title>HTB Writeups – anantsec</title>
-    <link rel="stylesheet" href="../assets/css/style.css" />
-    <link rel="stylesheet" href="../assets/css/htb.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-  </head>
-  <body>
-    <!-- ✅ Navigation Bar -->
-    <nav class="nav-container">
-      <div class="nav-left">
-        <a
-          href="../index.html"
-          id="home_page"
-          style="
-            font-family: monospace;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-          "
-        >
-          <span>>anantSec</span>
-          <span id="svg-icon" class="flicker"></span>
-        </a>
-      </div>
-
-      <!-- Hamburger Toggle -->
-      <input type="checkbox" id="menu-toggle" />
-      <label for="menu-toggle" class="menu-icon">&#9776;</label>
-
-      <div class="nav-right">
-        <a href="../about.html">About</a>
-        <a href="../gallery.html">Gallery</a>
-        <a href="../notes.html">Notes</a>
-        <a href="../resume.html">Resume</a>
-        <a href="../certificates.html">Certificates</a>
-        <a href="../writeups.html">Writeups</a>
-        <div class="theme-icon">◐</div>
-      </div>
-    </nav>
-
-    <!-- ✅ HTB Writeups Section -->
-    <main>
-      <h1>🧑‍💻 Hack The Box Writeups</h1>
-      <div id="htb-wrapper"></div>
-    </main>
-
-    <footer>
-      <p>&lt;/&gt; Code, curiosity, and creativity. © 2025 anantsec</p>
-    </footer>
-
-    <script src="../assets/js/main.js"></script>
-    <script src="../assets/js/htb.js"></script>
-    <script src="../assets/js/security.js" defer></script>
   </body>
 </html>
