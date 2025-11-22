@@ -1,4 +1,4 @@
-// === assets/js/certificates.js - COMPLETE REWRITE ===
+// === assets/js/certificates.js - FINALIZED ===
 
 // Show loading state
 function showLoadingState() {
@@ -38,7 +38,7 @@ function showContent() {
   if (loadingState) loadingState.style.display = 'none';
   if (certificatesSection) {
     certificatesSection.style.display = 'block';
-    certificatesSection.style.animation = 'fadeInUp 0.5s ease forwards';
+    certificatesSection.style.animation = 'fadeIn 0.6s ease forwards';
   }
 }
 
@@ -50,37 +50,34 @@ function createCard(item, type) {
   card.setAttribute('role', 'button');
   card.setAttribute('aria-label', `View ${item.title} certificate`);
 
+  // --- 1. Image Section ---
   const imageContainer = document.createElement('div');
   imageContainer.className = 'cert-image-container';
 
   const badge = document.createElement('div');
   badge.className = 'cert-badge';
   badge.textContent = type;
-  badge.setAttribute('aria-label', `Badge type: ${type}`);
   imageContainer.appendChild(badge);
 
   const img = document.createElement('img');
   img.src = `assets/certificates/${item.file}`;
   img.alt = `${item.title} certificate`;
   img.loading = 'lazy';
-  img.setAttribute('decoding', 'async');
-
-  // Error handling for images
+  
   img.onerror = function() {
-    this.src = 'assets/img/placeholder-cert.png';
-    this.alt = 'Certificate image not available';
+    this.src = 'assets/img/placeholder-cert.png'; 
   };
 
-  // Click to view fullscreen
+  // Fullscreen click handler
   const openModal = (e) => {
     e.preventDefault();
     openFullscreenModal(img.src, item.title);
   };
-
+  
   img.addEventListener('click', openModal);
   card.addEventListener('click', openModal);
   
-  // Keyboard support
+  // Keyboard accessibility
   card.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
@@ -91,16 +88,21 @@ function createCard(item, type) {
   imageContainer.appendChild(img);
   card.appendChild(imageContainer);
 
+  // --- 2. Content Section ---
   const content = document.createElement('div');
   content.className = 'cert-content';
 
+  // Title
   const title = document.createElement('h3');
   title.className = 'cert-title';
   title.textContent = item.title || 'Certificate';
+  title.title = item.title; // Tooltip for truncated text
 
-  const issuer = document.createElement('p');
+  // Issuer (Footer)
+  const issuer = document.createElement('div'); 
   issuer.className = 'cert-issuer';
-  issuer.innerHTML = `<i class="fas fa-building" aria-hidden="true"></i> ${item.issuer || 'Unknown'}`;
+  // Structure for CSS targeting
+  issuer.innerHTML = `<i class="fas fa-building" aria-hidden="true"></i> <span>${item.issuer || 'Unknown'}</span>`;
 
   content.appendChild(title);
   content.appendChild(issuer);
@@ -117,6 +119,8 @@ function openFullscreenModal(src, title) {
   const modal = document.getElementById('modal');
   const modalImage = document.getElementById('modal-image');
   
+  if (!modal || !modalImage) return;
+
   focusedElementBeforeModal = document.activeElement;
   
   modalImage.src = src;
@@ -124,16 +128,14 @@ function openFullscreenModal(src, title) {
   modal.classList.add('active');
   document.body.style.overflow = 'hidden';
   
-  // Trap focus in modal
   cleanupFocusTrap = trapFocus(modal);
   
-  // Focus close button
   setTimeout(() => {
-    document.getElementById('modal-close').focus();
-  }, 100);
+    const closeBtn = document.querySelector('.modal-close');
+    if(closeBtn) closeBtn.focus();
+  }, 50);
   
-  // Announce to screen readers
-  announceToScreenReader(`Certificate ${title} opened in fullscreen. Press Escape to close.`);
+  announceToScreenReader(`Certificate ${title} opened in fullscreen.`);
 }
 
 // Close fullscreen modal
@@ -141,17 +143,14 @@ function closeFullscreenModal() {
   const modal = document.getElementById('modal');
   const modalImage = document.getElementById('modal-image');
   
+  if (!modal) return;
+
   modal.classList.remove('active');
-  modalImage.src = '';
+  if (modalImage) modalImage.src = '';
   document.body.style.overflow = '';
   
-  // Remove focus trap
   if (cleanupFocusTrap) cleanupFocusTrap();
-  
-  // Return focus
-  if (focusedElementBeforeModal) {
-    focusedElementBeforeModal.focus();
-  }
+  if (focusedElementBeforeModal) focusedElementBeforeModal.focus();
 }
 
 // Focus trap utility
@@ -181,16 +180,23 @@ function trapFocus(element) {
   return () => element.removeEventListener('keydown', handleKeyDown);
 }
 
-// Announce to screen readers
 function announceToScreenReader(message) {
+  const existing = document.getElementById('sr-announcement');
+  if (existing) existing.remove();
+
   const announcement = document.createElement('div');
+  announcement.id = 'sr-announcement';
   announcement.setAttribute('role', 'status');
   announcement.setAttribute('aria-live', 'polite');
   announcement.className = 'sr-only';
   announcement.textContent = message;
-  
   document.body.appendChild(announcement);
-  setTimeout(() => document.body.removeChild(announcement), 1000);
+  
+  setTimeout(() => {
+    if (document.body.contains(announcement)) {
+      document.body.removeChild(announcement);
+    }
+  }, 1000);
 }
 
 // Load certificates
@@ -199,91 +205,57 @@ async function loadCertificates() {
   
   try {
     const response = await fetch('data/certificates.json');
-    
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     const data = await response.json();
     
-    // Small delay for smooth transition
     setTimeout(() => {
       const certGrid = document.getElementById('certificates-grid');
       const jobsimGrid = document.getElementById('jobsim-grid');
       const badgeGrid = document.getElementById('badges-grid');
       
-      // Clear grids
-      if (certGrid) certGrid.innerHTML = '';
-      if (jobsimGrid) jobsimGrid.innerHTML = '';
-      if (badgeGrid) badgeGrid.innerHTML = '';
-      
-      // Render certificates
-      if (data.certificates && data.certificates.length > 0) {
-        data.certificates.forEach(cert => {
-          if (certGrid) certGrid.appendChild(createCard(cert, 'Certified'));
-        });
-      } else {
-        if (certGrid) certGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #888;">No certificates available</p>';
-      }
-      
-      // Render job simulations
-      if (data.jobsim && data.jobsim.length > 0) {
-        data.jobsim.forEach(jobsim => {
-          if (jobsimGrid) jobsimGrid.appendChild(createCard(jobsim, 'Simulation'));
-        });
-      } else {
-        if (jobsimGrid) jobsimGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #888;">No job simulations available</p>';
-      }
-      
-      // Render badges
-      if (data.badges && data.badges.length > 0) {
-        data.badges.forEach(badge => {
-          if (badgeGrid) badgeGrid.appendChild(createCard(badge, 'Badge'));
-        });
-      } else {
-        if (badgeGrid) badgeGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #888;">No badges available</p>';
-      }
+      const clearAndPopulate = (grid, items, type) => {
+        if (grid) {
+          grid.innerHTML = '';
+          if (items && items.length > 0) {
+            items.forEach(item => grid.appendChild(createCard(item, type)));
+          } else {
+            grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 2rem; color: #666;">No ${type.toLowerCase()}s found.</div>`;
+          }
+        }
+      };
+
+      clearAndPopulate(certGrid, data.certificates, 'Certified');
+      clearAndPopulate(jobsimGrid, data.jobsim, 'Simulation');
+      clearAndPopulate(badgeGrid, data.badges, 'Badge');
       
       showContent();
       
-      // Announce to screen readers
       const totalCount = (data.certificates?.length || 0) + (data.jobsim?.length || 0) + (data.badges?.length || 0);
-      announceToScreenReader(`${totalCount} certificates and achievements loaded`);
+      announceToScreenReader(`${totalCount} certificates loaded`);
       
     }, 300);
     
   } catch (error) {
     console.error('❌ Failed to load certificates:', error);
-    showErrorState('⚠️ Failed to load certificates. Please try again later.');
+    showErrorState('Unable to load certificates. Please try refreshing the page.');
   }
 }
 
-// Modal event listeners
-const modal = document.getElementById('modal');
-const modalClose = document.getElementById('modal-close');
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+  loadCertificates();
 
-if (modalClose) {
-  modalClose.addEventListener('click', closeFullscreenModal);
-}
+  const modal = document.getElementById('modal');
+  const modalClose = document.querySelector('.modal-close') || document.getElementById('modal-close');
 
-if (modal) {
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
+  if (modalClose) modalClose.addEventListener('click', closeFullscreenModal);
+  if (modal) modal.addEventListener('click', (e) => { 
+    if (e.target === modal) closeFullscreenModal(); 
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
       closeFullscreenModal();
     }
   });
-}
-
-// Keyboard shortcuts
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
-    closeFullscreenModal();
-  }
 });
-
-// Initialize on page load
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', loadCertificates);
-} else {
-  loadCertificates();
-}
