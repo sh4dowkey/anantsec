@@ -10,7 +10,7 @@
     # 1. script-src: Added 'unsafe-inline', 'unsafe-eval', and https://cdn.jsdelivr.net
     # 2. style-src: Added https://fonts.googleapis.com
     # 3. font-src: Added https://fonts.gstatic.com
-    1. img-src: Added https://raw.githubusercontent.com to fix stickman animations
+    # 1. img-src: Added https://raw.githubusercontent.com to fix stickman animations
     Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://badge-anantsec.netlify.app https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unicons.iconscout.com https://badge-anantsec.netlify.app https://fonts.googleapis.com; font-src 'self' https://cdnjs.cloudflare.com https://unicons.iconscout.com https://badge-anantsec.netlify.app https://fonts.gstatic.com; img-src 'self' data: https://sh4dowkey.github.io https://badge-anantsec.netlify.app https://raw.githubusercontent.com; connect-src 'self' https://cdnjs.cloudflare.com https://unicons.iconscout.com https://badge-anantsec.netlify.app; manifest-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; frame-src https://badge-anantsec.netlify.app"
 
 [[headers]]
