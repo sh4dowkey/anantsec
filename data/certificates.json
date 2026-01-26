@@ -1,0 +1,80 @@
+{
+  "certificates": [
+    {
+      "file": "CCT-cert.png",
+      "title": "C|CT (Certified Cybersecurity Technician)",
+      "issuer": "EC-Council",
+      "order": 1
+    },
+    {
+      "file": "google-cert.png",
+      "title": "Google Cyber Security Professional",
+      "issuer": "Google",
+      "order": 2
+    },
+     {
+      "file": "teachnook-cert.png",
+      "title": "Cybersecurity Intern",
+      "issuer": "Teachnook",
+      "order": 3
+    },
+     {
+      "file": "edunet-cert.png",
+      "title": "Cybersecurity Intern",
+      "issuer": "Edunet - IBM",
+      "order": 4
+    },
+     {
+      "file": "apisec-cert.png",
+      "title": "OWASP API Security Top 10",
+      "issuer": "APISec University",
+      "order": 5
+    }
+  ],
+  "jobsim": [
+    {
+      "file": "tata-jobsim.png",
+      "title": "TATA Job Simulation Cybersecurity",
+      "issuer": "TATA, Forage",
+      "order": 1
+    },
+    {
+      "file": "mastercard-jobsim.png",
+      "title": "Mastercard Job Simulation Cybersecurity",
+      "issuer": "Mastercard, Forage",
+      "order": 2
+    },
+    {
+      "file": "deloitte-jobsim.png",
+      "title": "Deloitte Job Simulation Cybersecurity",
+      "issuer": "Deloitte, Forage",
+      "order": 3
+    },
+    {
+      "file": "datacom-jobsim.png",
+      "title": "Datacom Job Simulation Cybersecurity",
+      "issuer": "Datacom, Forage",
+      "order": 4
+    }
+  ],
+  "badges": [
+    {
+      "file": "CCT-badge.png",
+      "title": "C|CT (Certified Cybersecurity Technician) Badge",
+      "issuer": "EC-Council",
+      "order": 1
+    },
+    {
+      "file": "apisec-badge.png",
+      "title": "OWASP API Security Top 10",
+      "issuer": "APISec University",
+      "order": 2
+    },
+    {
+      "file": "leetcode-badge.png",
+      "title": "Leetcode 100 Days Badge",
+      "issuer": "Leetcode",
+      "order": 3
+    }
+  ]
+}

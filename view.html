@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta property="og:title" content="anantsec – Cybersecurity Portfolio" />
+    <meta
+      property="og:description"
+      content="Cybersecurity enthusiast specializing in Active Directory, Bug Bounty, and Red Teaming"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://sh4dowkey.github.iof" />
+    <meta
+      property="og:image"
+      content="https://sh4dowkey.github.io/assets/img/og-image.png"
+    />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="anantsec – Cybersecurity Portfolio" />
+    <meta
+      name="twitter:description"
+      content="Cybersecurity enthusiast specializing in Active Directory, Bug Bounty, and Red Teaming"
+    />
+
+    <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+
+    <title>Writeup Viewer – anantsec</title>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/view.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+
+    <div class="reading-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Reading progress">
+    <div class="reading-progress-fill"></div>
+  </div>
+  
+    <nav class="nav-container">
+      <div class="nav-left">
+        <a
+          href="index.html"
+          id="home_page"
+          style="
+            font-family: monospace;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+          "
+        >
+          <span>>anantSec</span>
+          <span id="svg-icon" class="flicker"></span>
+        </a>
+      </div>
+
+      <input type="checkbox" id="menu-toggle" />
+      <label for="menu-toggle" class="menu-icon">&#9776;</label>
+
+      <div class="nav-right">
+        <a href="about.html">About</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="resume.html">Resume</a>
+        <a href="certificates.html">Certificates</a>
+        <a href="writeups.html">Writeups</a>
+        <div class="theme-icon">◐</div>
+      </div>
+    </nav>
+
+    <main>
+      <a
+        href="writeups.html"
+        onclick="goBack(event)"
+        class="back-button"
+        title="Back"
+      >
+        <i class="fas fa-arrow-left"></i>
+      </a>
+
+      <div id="content" class="writeup-content">Loading...</div>
+    </main>
+
+    <footer>
+      <p>&lt;/&gt; Code, curiosity, and creativity. © 2025 anantsec</p>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/view.js"></script>
+  </body>
+</html>

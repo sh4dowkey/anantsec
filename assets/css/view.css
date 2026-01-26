@@ -1,0 +1,161 @@
+body {
+  background-color: #292a2d;
+  color: #a9a9b3;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body.light {
+  background: #f5f5f5;
+  color: #333;
+}
+
+/* Subtle background grid */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.008) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.008) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: gridFloat 30s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body.light::before {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.01) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.01) 1px, transparent 1px);
+}
+
+@keyframes gridFloat {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(50px, 50px);
+  }
+}
+
+main {
+  max-width: 850px;
+  margin: 3rem auto;
+  padding: 0 1.2rem;
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  transform: translateY(15px);
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 🡐 Simple Back Button */
+.back-button {
+  display: inline-block;
+  color: #a9a9b3;
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.back-button:hover {
+  color: #fff;
+}
+
+body.light .back-button {
+  color: #333;
+}
+
+body.light .back-button:hover {
+  color: #000;
+}
+
+/* ✍️ Content Box — Clean & Simple */
+.writeup-content {
+  background: rgba(30, 31, 34, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  line-height: 1.8;
+}
+
+body.light .writeup-content {
+  background: #ffffff;
+  border-color: #ddd;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.writeup-content h1,
+.writeup-content h2,
+.writeup-content h3 {
+  color: #e0e0e0;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+body.light .writeup-content h1,
+body.light .writeup-content h2,
+body.light .writeup-content h3 {
+  color: #1a1a1a;
+}
+
+.writeup-content p,
+.writeup-content li {
+  font-size: 1.05rem;
+  color: #c0c0c0;
+}
+
+body.light .writeup-content p,
+body.light .writeup-content li {
+  color: #444;
+}
+
+.writeup-content img {
+  max-width: 100%;
+  border-radius: 6px;
+  margin: 1.5rem 0;
+}
+
+.writeup-content pre {
+  background: #1e1e1e;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-size: 0.9rem;
+}
+
+body.light .writeup-content pre {
+  background: #f0f0f0;
+  color: #222;
+}
+
+footer {
+  width: 100%;
+  text-align: center;
+  padding: 2rem 0;
+  font-size: 0.9rem;
+  color: #777;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3rem;
+}
+
+footer p {
+  margin: 0;
+}
+
+body.light-theme footer {
+  color: #555;
+}

@@ -1,0 +1,152 @@
+body {
+  font-family: "Segoe UI", sans-serif;
+  background-color: #292a2d;
+  color: #a9a9b3;
+}
+
+body.light-theme {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+main {
+  max-width: 800px;
+  margin: 4rem auto;
+  padding: 0 1.5rem;
+
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s ease forwards;
+}
+
+/* Properly centered and balanced heading */
+h1 {
+  display: block; /* full width for true centering */
+  text-align: center;
+  margin: 0 auto 2.5rem; /* bottom spacing below heading */
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+  max-width: 90%;
+  background: linear-gradient(90deg, #cfcfd6, #a9a9b3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #cfcfd6; /* fallback for non-webkit browsers */
+  position: relative;
+  padding-top: 0.2rem; /* tiny breathing space above */
+  padding-bottom: 0.2rem;
+  opacity: 0.98;
+}
+
+/* Underline effect */
+h1::after {
+  content: "";
+  display: block;
+  margin: 0.8rem auto 0; /* space between text & underline */
+  width: 48%;
+  max-width: 280px;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    rgba(200, 200, 200, 0.25),
+    rgba(200, 200, 200, 0.55)
+  );
+  border-radius: 2px;
+  transition: width 350ms ease;
+  opacity: 0.9;
+}
+
+/* Hover underline widen */
+h1:hover::after,
+h1:focus::after {
+  width: 60%;
+}
+
+/* Dark/Light Theme Support */
+body.light h1,
+body.light-theme h1 {
+  background: linear-gradient(90deg, #2a2a2a, #444);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #222;
+}
+
+body.light h1::after,
+body.light-theme h1::after {
+  background: linear-gradient(
+    90deg,
+    rgba(60, 60, 60, 0.3),
+    rgba(60, 60, 60, 0.6)
+  );
+}
+
+/* Responsive */
+@media (max-width: 520px) {
+  h1 {
+    font-size: 1.5rem;
+    max-width: 95%;
+    margin-bottom: 1.8rem;
+  }
+  h1::after {
+    width: 56%;
+  }
+}
+
+.writeup-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 1rem;
+  border-bottom: 2px dotted #444;
+}
+
+body.light-theme .writeup-entry {
+  border-bottom: 2px dotted #ccc;
+}
+
+.writeup-entry a {
+  color: #ddd;
+  font-size: 1.05rem;
+  text-decoration: none;
+}
+
+.writeup-entry a:hover {
+  color: #fff;
+}
+
+body.light-theme .writeup-entry a {
+  color: #111;
+}
+
+body.light-theme .writeup-entry a:hover {
+  color: #000;
+}
+
+.writeup-date {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.008) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.008) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: gridFloat 30s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body.light::before {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.01) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.01) 1px, transparent 1px);
+}

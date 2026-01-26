@@ -1,0 +1,15 @@
+# robots.txt
+# Save as: robots.txt in root directory
+
+User-agent: *
+Allow: /
+
+# Disallow admin/config areas if any
+Disallow: /scripts/
+Disallow: /.github/
+
+# Sitemap location
+Sitemap: https://anantsec.netlify.app/sitemap.xml
+
+# Crawl delay (optional)
+Crawl-delay: 1

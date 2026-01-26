@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta property="og:title" content="anantsec – Cybersecurity Portfolio" />
+    <meta
+      property="og:description"
+      content="Cybersecurity enthusiast specializing in Active Directory, Bug Bounty, and Red Teaming"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://anantsec.netlify.app.iof" />
+    <meta
+      property="og:image"
+      content="https://anantsec.netlify.app/assets/img/og-image.png"
+    />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="anantsec – Cybersecurity Portfolio" />
+    <meta
+      name="twitter:description"
+      content="Cybersecurity enthusiast specializing in Active Directory, Bug Bounty, and Red Teaming"
+    />
+
+    <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+
+    <title>Writeups – anantsec</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/writeups.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <nav class="nav-container">
+      <div class="nav-left">
+        <a
+          href="index.html"
+          id="home_page"
+          style="
+            font-family: monospace;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+          "
+        >
+          <span>>anantSec</span>
+          <span id="svg-icon" class="flicker"></span>
+        </a>
+      </div>
+
+      <input type="checkbox" id="menu-toggle" />
+      <label for="menu-toggle" class="menu-icon">&#9776;</label>
+
+      <div class="nav-right">
+        <a href="about.html">About</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="blog.html">Blog</a>
+        <a href="resume.html">Resume</a>
+        <a href="certificates.html">Certificates</a>
+        <a href="writeups.html">Writeups</a>
+        <div class="theme-icon">◐</div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="page-header">
+        <h1>Writeups</h1>
+        <p>Security research and penetration testing documentation</p>
+      </div>
+
+      <div class="cards-grid">
+        <a href="blog/htb.html" class="writeup-card">
+          <span class="card-badge">Labs</span>
+          <div class="card-icon"><i class="fas fa-cube"></i></div>
+          <h2 class="card-title">HackTheBox</h2>
+          <p class="card-description">
+            Machine walkthroughs with detailed exploitation techniques and
+            privilege escalation methods.
+          </p>
+        </a>
+
+        <a href="blog/bugbounty.html" class="writeup-card">
+          <span class="card-badge">Live</span>
+          <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+          <h2 class="card-title">Bug Bounty</h2>
+          <p class="card-description">
+            Vulnerability research and responsible disclosure from real-world
+            production systems.
+          </p>
+        </a>
+      </div>
+    </div>
+
+    <footer>
+      <p>&lt;/&gt; Code, curiosity, and creativity. © 2025 anantsec</p>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
